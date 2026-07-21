@@ -1,25 +1,42 @@
 import SwiftUI
-import Playgrounds
 
-@main struct MyApp: App {
+@main
+struct RideItOutApp: App {
+    init() {
+        excludeFromBackup()
+        restoreHapticsDefault()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
-}
 
-struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
+    private func excludeFromBackup() {
+        if var url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
+            var values = URLResourceValues()
+            values.isExcludedFromBackup = true
+            try? url.setResourceValues(values)
+        }
+    }
+
+    private func restoreHapticsDefault() {
+        let key = StorageKey.hapticsEnabled.rawValue
+        if UserDefaults.standard.object(forKey: key) == nil {
+            UserDefaults.standard.set(true, forKey: key)
+        }
     }
 }
 
-#Preview {
-    ContentView()
-}
+struct ContentView: View {
+    @AppStorage("rideItOut_onboardingComplete") var onboardingComplete: Bool = false
 
-#Playground {
-    _ = 1 + 2
+    var body: some View {
+        if onboardingComplete {
+            MainView()
+        } else {
+            WelcomeView()
+        }
+    }
 }
