@@ -6,12 +6,16 @@ struct GroundingMediaView: View {
     let mediaRef: String?
     let videoSound: Bool
     var onAddMedia: () -> Void
+    var showTourButton: Bool = false
+    var onStartTour: (() -> Void)? = nil
 
     @State private var player: AVQueuePlayer?
     @State private var looper: AVPlayerLooper?
+    @State private var imageScale: CGFloat = 1.0
+    @State private var imageOffset: CGSize = .zero
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .bottomTrailing) {
             Color.background
 
             switch mediaType {
@@ -24,6 +28,22 @@ struct GroundingMediaView: View {
             case .none:
                 placeholderView
             }
+
+            if showTourButton, let onStartTour {
+                Button(action: onStartTour) {
+                    Text("Take tour")
+                        .font(.system(size: 12))
+                        .foregroundColor(.textTertiary)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
+                        .background(Color.surfaceRaised.opacity(0.87))
+                        .clipShape(Capsule())
+                        .overlay(
+                            Capsule().stroke(Color.borderColor, lineWidth: 1)
+                        )
+                }
+                .padding(12)
+            }
         }
         .clipped()
     }
@@ -31,13 +51,41 @@ struct GroundingMediaView: View {
     @ViewBuilder
     private var photoView: some View {
         if let ref = mediaRef, let url = URL(string: ref),
-           FileManager.default.fileExists(atPath: url.path) {
+            FileManager.default.fileExists(atPath: url.path) {
             #if os(iOS)
             if let uiImage = UIImage(contentsOfFile: url.path) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
+                GeometryReader { geo in
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .scaleEffect(imageScale)
+                        .offset(imageOffset)
+                        .gesture(
+                            MagnificationGesture()
+                                .onChanged { value in
+                                    imageScale = value
+                                }
+                        )
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    imageOffset = value.translation
+                                }
+                        )
+                        .clipped()
+                        .overlay(
+                            Button("Reset") {
+                                imageScale = 1.0
+                                imageOffset = .zero
+                            }
+                            .padding(8)
+                            .background(Color.black.opacity(0.5))
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                            .padding(), alignment: .topTrailing
+                        )
+                }
             } else {
                 missingMediaView
             }

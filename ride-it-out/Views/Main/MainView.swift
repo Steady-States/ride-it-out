@@ -18,9 +18,15 @@ struct MainView: View {
 
                     VStack(spacing: 0) {
                         // Zone 1 — Breathing (1/6)
-                        BreathingZoneView(vm: breathingVM) {
-                            showSettings = true
-                        }
+                        BreathingZoneView(
+                            vm: breathingVM,
+                            selectedModality: settingsVM.selectedModality,
+                            onSettingsTap: { showSettings = true },
+                            onPatternChange: { modality in
+                                settingsVM.saveModalityID(modality.id)
+                                breathingVM.start(modality: modality)
+                            }
+                        )
                         .frame(height: geometry.size.height / 6)
 
                         // Zone 2 — Grounding Media (3/6)
@@ -28,7 +34,9 @@ struct MainView: View {
                             mediaType: settingsVM.groundingMediaType,
                             mediaRef: settingsVM.groundingMediaRef,
                             videoSound: settingsVM.groundingVideoSound,
-                            onAddMedia: { showSettings = true }
+                            onAddMedia: { showSettings = true },
+                            showTourButton: !guidedTourActive,
+                            onStartTour: { guidedTourActive = true }
                         )
                         .frame(height: geometry.size.height * 3 / 6)
 
@@ -70,4 +78,8 @@ struct MainView: View {
         }
         .preferredColorScheme(.dark)
     }
+}
+
+#Preview {
+    MainView()
 }

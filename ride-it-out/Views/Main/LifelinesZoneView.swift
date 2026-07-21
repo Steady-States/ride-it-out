@@ -6,26 +6,25 @@ struct LifelinesZoneView: View {
     var onCustomize: () -> Void
 
     var body: some View {
-        let filled = vm.filledLifelines
-        if filled.isEmpty {
-            EmptyView()
-        } else {
-            LazyVGrid(
-                columns: [GridItem(.flexible()), GridItem(.flexible())],
-                spacing: 10
-            ) {
-                ForEach(filled) { lifeline in
-                    LifelineButton(lifeline: lifeline, displayMode: vm.displayMode)
-                }
-                if vm.lifeline3 == nil {
-                    EmptySlotButton(label: "Add a Contact", action: onAddContact)
-                }
-                if vm.lifeline4 == nil {
-                    EmptySlotButton(label: "Customize My App", action: onCustomize)
-                }
+        LazyVGrid(
+            columns: [GridItem(.flexible()), GridItem(.flexible())],
+            spacing: 8
+        ) {
+            ForEach(0..<4, id: \.self) { index in
+                cell(at: index)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
+        }
+        .padding(8)
+    }
+
+    @ViewBuilder
+    private func cell(at index: Int) -> some View {
+        if index < vm.lifelines.count {
+            LifelineButton(lifeline: vm.lifelines[index])
+        } else if index == 3 {
+            EmptySlotButton(label: "Customize My App", action: onCustomize)
+        } else {
+            EmptySlotButton(label: "Add a Contact", action: onAddContact)
         }
     }
 }

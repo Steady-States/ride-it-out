@@ -9,34 +9,47 @@ struct WelcomeView: View {
         ZStack {
             Color.background.ignoresSafeArea()
 
-            VStack(spacing: 32) {
+            // Ambient edge glow — subtle hint of what's on the main screen
+            Rectangle()
+                .stroke(Color.accentCyan, lineWidth: 20)
+                .blur(radius: 40)
+                .opacity(0.05)
+                .ignoresSafeArea()
+                .allowsHitTesting(false)
+
+            VStack(spacing: 0) {
                 Spacer()
 
-                VStack(spacing: 8) {
+                // Title + tagline
+                VStack(alignment: .leading, spacing: 10) {
                     Text("Ride It Out")
-                        .font(.system(size: 38, weight: .bold, design: .rounded))
+                        .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.textPrimary)
+                        .tracking(-1.2)
 
-                    Text("Your partner in serenity.")
-                        .font(.system(size: 17, weight: .light))
+                    Text("Your partner in\nserenity.")
+                        .font(.system(size: 20, weight: .regular))
                         .foregroundColor(.textSecondary)
+                        .lineSpacing(4)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 24)
+                .padding(.bottom, 48)
 
-                Spacer()
-
-                VStack(spacing: 14) {
+                // Buttons
+                VStack(spacing: 10) {
                     Button {
                         onboardingComplete = true
                         startWithTour = false
                         navigateToMain = true
                     } label: {
                         Text("Get Help Now")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(.background)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 56)
+                            .frame(height: 54)
                             .background(Color.accentCyan)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
 
                     Button {
@@ -45,26 +58,39 @@ struct WelcomeView: View {
                         navigateToMain = true
                     } label: {
                         Text("Set Up My Fighter")
-                            .font(.system(size: 18, weight: .semibold))
+                            .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(.accentCyan)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 56)
-                            .background(Color.accentCyan.opacity(0.12))
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .frame(height: 54)
+                            .background(Color.clear)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                             .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.accentCyan.opacity(0.4), lineWidth: 1)
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.accentCyan, lineWidth: 1.5)
                             )
                     }
                 }
-                .padding(.horizontal, 28)
+                .padding(.horizontal, 24)
 
-                Text(descriptionText)
-                    .font(.system(size: 13, weight: .regular))
-                    .foregroundColor(.textSecondary)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 28)
-                    .padding(.bottom, 40)
+                // Divider + footer text
+                Color.borderColor
+                    .frame(height: 1)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 16)
+
+                VStack(spacing: 6) {
+                    Text("Breathe. Ground yourself. Call someone.")
+                        .font(.system(size: 14))
+                        .foregroundColor(.textSecondary)
+                        .multilineTextAlignment(.center)
+
+                    Text("* No account required. All data stays on your device.")
+                        .font(.system(size: 12))
+                        .foregroundColor(.textTertiary)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.horizontal, 24)
+                .padding(.bottom, 44)
             }
         }
         .preferredColorScheme(.dark)
@@ -73,10 +99,4 @@ struct WelcomeView: View {
                 .interactiveDismissDisabled(true)
         }
     }
-
-    private let descriptionText = """
-Ride It Out is an action app that helps divert compulsive behavior through immediate access to proven methods of grounding techniques and lifelines. All tools are customizable and it's recommended you spend time before a crisis setting up what works for you. When a crisis comes, opening the app will take you directly to the main screen so you can receive help immediately. The app can also be triggered by various widgets or preset reminder times.
-
-* Please note, the app will ask for permission to access your contacts to set up lifeline calls. All data is stored on your device and erasable at any time.
-"""
 }

@@ -1,105 +1,152 @@
 import SwiftUI
 
+enum TourCardAnchor {
+    case top
+    case bottom
+}
+
 struct TourStop {
-    enum Zone { case breathing, glow, groundingMedia, lifelines, settings }
-    let highlightZone: Zone
+    let title: String
     let text: String
+    // Highlighted zone, expressed as fractions of total height
+    let zoneTop: Double
+    let zoneHeight: Double
+    // Which edge the card is pinned to, and how far from it (fraction of
+    // total height). Stops 2 and 3 share the same bottom anchor — just
+    // above the lifelines zone — so the card never slides down over the
+    // lifelines it's introducing on stop 3.
+    let cardAnchor: TourCardAnchor
+    let cardOffsetFraction: Double
 }
 
 struct TourOverlayView: View {
     @Binding var isActive: Bool
     @State private var currentStop: Int = 0
-    @State private var visible: Bool = false
-    var onNavigateToSettings: (() -> Void)?
+    var onNavigateToSettings: (() -> Void)? = nil
 
-    let stops: [TourStop] = [
-        TourStop(highlightZone: .breathing,
-                 text: "With Box Breathing, you're helping your body regulate intense feelings. Follow the counter to breathe in for four beats, hold for four beats, exhale for four beats, and hold for four beats. Haptic vibrations will guide your inhale and exhale. This starts automatically every time you open the app."),
-        TourStop(highlightZone: .glow,
-                 text: "The edges of your screen glow with your breath. They brighten as you inhale and dim as you exhale. Let the light guide you."),
-        TourStop(highlightZone: .groundingMedia,
-                 text: "Choose an image, video, or words that remind you of stability and clarity. This could be a loved one, a place that calms you, or a saying that resonates. You can set this up in Settings anytime."),
-        TourStop(highlightZone: .lifelines,
-                 text: "These buttons directly call people you trust. One tap — no confirmation screen. Two hotlines are set up for you by default. Add your own contacts in Settings — a sponsor, a friend, a family member. Anyone who helps you stay grounded."),
-        TourStop(highlightZone: .settings,
-                 text: "Everything in Ride It Out is customizable. Tap here anytime to change your breathing style, update your grounding media, or edit your lifeline contacts. We recommend setting things up before a crisis — so when it comes, the app is ready for you."),
+    private let stops: [TourStop] = [
+        TourStop(
+            title: "Breathe with it",
+            text: "The number counts down each beat. Your only job is to follow it. Breathe in as it counts, hold when it says HOLD, let go on EXHALE.",
+            zoneTop: 0,
+            zoneHeight: 1.0 / 6.0,
+            cardAnchor: .top,
+            cardOffsetFraction: 1.0 / 6.0
+        ),
+        TourStop(
+            title: "Your grounding anchor",
+            text: "This is your safe space — a photo, a video, or a phrase that pulls you back to solid ground. Set it up in settings.",
+            zoneTop: 1.0 / 6.0,
+            zoneHeight: 3.0 / 6.0,
+            cardAnchor: .bottom,
+            cardOffsetFraction: 2.0 / 6.0
+        ),
+        TourStop(
+            title: "Your lifelines",
+            text: "These are the people who will pick up. Add them in settings and you can call them directly from here, any time, in seconds.",
+            zoneTop: 4.0 / 6.0,
+            zoneHeight: 2.0 / 6.0,
+            cardAnchor: .bottom,
+            cardOffsetFraction: 2.0 / 6.0
+        ),
     ]
 
     var body: some View {
-        if isActive && visible {
-            ZStack {
-                Color.black.opacity(0.6)
-                    .ignoresSafeArea()
-                    .allowsHitTesting(false)
+        GeometryReader { geo in
+            let stop = stops[currentStop]
+            let topH  = geo.size.height * stop.zoneTop
+            let zoneH = geo.size.height * stop.zoneHeight
+            let cardOffset = geo.size.height * stop.cardOffsetFraction + 12
 
-                VStack {
-                    Spacer()
-                    tourCard
-                        .transition(.move(edge: .bottom).combined(with: .opacity))
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 40)
+            ZStack(alignment: stop.cardAnchor == .top ? .top : .bottom) {
+                // Spotlight: dim bars above and below highlighted zone
+                VStack(spacing: 0) {
+                    Color.black.opacity(0.68).frame(height: topH)
+                    Color.clear.frame(height: zoneH)
+                    Color.black.opacity(0.68)
                 }
+                .ignoresSafeArea()
+
+                // Accent ring around highlighted zone
+                VStack(spacing: 0) {
+                    Color.clear.frame(height: topH)
+                    Rectangle()
+                        .stroke(Color.accentCyan.opacity(0.25), lineWidth: 1)
+                        .frame(height: zoneH)
+                    Color.clear
+                }
+
+                // Floating info card — anchored beside the highlighted zone,
+                // never on top of it
+                card(for: stop)
+                    .padding(.horizontal, 16)
+                    .padding(stop.cardAnchor == .top ? .top : .bottom, cardOffset)
             }
-            .animation(.easeInOut(duration: 0.3), value: currentStop)
+            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStop)
         }
+        .ignoresSafeArea()
     }
 
-    private var tourCard: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text(stops[currentStop].text)
-                .font(.system(size: 16, weight: .regular))
+    @ViewBuilder
+    private func card(for stop: TourStop) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            // Step indicator dots
+            HStack(spacing: 5) {
+                ForEach(0..<stops.count, id: \.self) { i in
+                    RoundedRectangle(cornerRadius: 2)
+                        .fill(i <= currentStop ? Color.accentCyan : Color.borderColor)
+                        .frame(width: i == currentStop ? 20 : 8, height: 3)
+                }
+            }
+            .animation(.easeInOut(duration: 0.25), value: currentStop)
+            .padding(.bottom, 12)
+
+            Text(stop.title)
+                .font(.system(size: 16, weight: .bold))
                 .foregroundColor(.textPrimary)
-                .fixedSize(horizontal: false, vertical: true)
+                .padding(.bottom, 6)
 
-            HStack {
-                if currentStop < stops.count - 1 {
-                    Button("Skip Tour") {
-                        endTour()
-                    }
-                    .font(.system(size: 14))
-                    .foregroundColor(.textSecondary)
+            Text(stop.text)
+                .font(.system(size: 13))
+                .foregroundColor(.textSecondary)
+                .lineSpacing(4)
+                .padding(.bottom, 14)
 
-                    Spacer()
+            HStack(spacing: 10) {
+                Button {
+                    if currentStop < stops.count - 1 {
+                        currentStop += 1
+                    } else {
+                        withAnimation { isActive = false }
+                    }
+                } label: {
+                    Text(currentStop < stops.count - 1 ? "Next" : "Got it")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.background)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 40)
+                        .background(Color.accentCyan)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
 
-                    Button("Next") {
-                        withAnimation { currentStop += 1 }
-                    }
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(.accentCyan)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 10)
-                    .background(Color.accentCyan.opacity(0.15))
-                    .clipShape(Capsule())
-                } else {
-                    Spacer()
-                    Button("Done") {
-                        endTour()
-                    }
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(.accentCyan)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 10)
-                    .background(Color.accentCyan.opacity(0.15))
-                    .clipShape(Capsule())
+                Button {
+                    withAnimation { isActive = false }
+                } label: {
+                    Text("Skip")
+                        .font(.system(size: 13))
+                        .foregroundColor(.textTertiary)
                 }
             }
         }
-        .padding(24)
-        .background(Color.surfaceCard)
-        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .padding(.horizontal, 18)
+        .padding(.top, 16)
+        .padding(.bottom, 14)
+        .background(Color.surfaceRaised)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
         .overlay(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.accentCyan.opacity(0.2), lineWidth: 1)
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.borderColor, lineWidth: 1)
         )
-    }
-
-    private func endTour() {
-        withAnimation { isActive = false }
-    }
-
-    func startDelayed() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            withAnimation { visible = true }
-        }
+        .shadow(color: .black.opacity(0.65), radius: 20, x: 0, y: 8)
     }
 }

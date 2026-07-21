@@ -3,11 +3,11 @@ import Foundation
 
 class KeychainService {
 
-    static func save(_ lifeline: Lifeline, forKey key: KeychainKey) {
-        guard let data = try? JSONEncoder().encode(lifeline) else { return }
+    static func saveLifelines(_ lifelines: [Lifeline]) {
+        guard let data = try? JSONEncoder().encode(lifelines) else { return }
         let query: [String: Any] = [
             kSecClass as String:          kSecClassGenericPassword,
-            kSecAttrAccount as String:    key.rawValue,
+            kSecAttrAccount as String:    KeychainKey.lifelines.rawValue,
             kSecValueData as String:      data,
             kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlockedThisDeviceOnly
         ]
@@ -15,17 +15,18 @@ class KeychainService {
         SecItemAdd(query as CFDictionary, nil)
     }
 
-    static func load(forKey key: KeychainKey) -> Lifeline? {
+    static func loadLifelines() -> [Lifeline] {
         let query: [String: Any] = [
             kSecClass as String:       kSecClassGenericPassword,
-            kSecAttrAccount as String: key.rawValue,
+            kSecAttrAccount as String: KeychainKey.lifelines.rawValue,
             kSecReturnData as String:  true,
             kSecMatchLimit as String:  kSecMatchLimitOne
         ]
         var result: AnyObject?
         SecItemCopyMatching(query as CFDictionary, &result)
-        guard let data = result as? Data else { return nil }
-        return try? JSONDecoder().decode(Lifeline.self, from: data)
+        guard let data = result as? Data,
+              let lifelines = try? JSONDecoder().decode([Lifeline].self, from: data) else { return [] }
+        return lifelines
     }
 
     static func delete(forKey key: KeychainKey) {
@@ -34,9 +35,5 @@ class KeychainService {
             kSecAttrAccount as String: key.rawValue
         ]
         SecItemDelete(query as CFDictionary)
-    }
-
-    static func deleteAll() {
-        KeychainKey.allCases.forEach { delete(forKey: $0) }
     }
 }

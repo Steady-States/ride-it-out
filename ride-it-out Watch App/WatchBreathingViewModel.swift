@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 
-class BreathingViewModel: ObservableObject {
+class WatchBreathingViewModel: ObservableObject {
 
     @Published var currentPhaseIndex: Int = 0
     @Published var currentBeat: Int = 1
@@ -9,15 +9,11 @@ class BreathingViewModel: ObservableObject {
     @Published var glowIntensity: Double = 0.15
     @Published var glowColor: Color = .glowExhale
 
+    var hapticsEnabled: Bool = true
     var currentModality: BreathingModality = BreathingModalities.box
     var currentPhase: BreathingPhase { currentModality.phases[currentPhaseIndex] }
 
     private var beatTimer: Timer?
-    #if os(iOS)
-    private let hapticsService: HapticsService = HapticsService()
-    #endif
-
-    // MARK: - Control
 
     func start(modality: BreathingModality? = nil) {
         if let modality = modality { currentModality = modality }
@@ -31,29 +27,13 @@ class BreathingViewModel: ObservableObject {
         isRunning = false
         beatTimer?.invalidate()
         beatTimer = nil
-        #if os(iOS)
-        hapticsService.stopAll()
-        hapticsService.confirmStop()
-        #endif
     }
-
-    func restart() {
-        stop()
-        currentPhaseIndex = 0
-        glowIntensity = 0.15
-        currentBeat = currentModality.phases[0].beats
-        start()
-    }
-
-    // MARK: - Phase Engine
 
     private func startPhase() {
         let phase = currentPhase
         currentBeat = phase.beats
         triggerGlowAnimation(for: phase)
-        #if os(iOS)
-        hapticsService.playPhase(phase, modality: currentModality)
-        #endif
+        WatchHapticsService.play(for: phase, hapticsEnabled: hapticsEnabled)
         beatTimer?.invalidate()
         beatTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.tick()
@@ -73,8 +53,6 @@ class BreathingViewModel: ObservableObject {
         currentPhaseIndex = (currentPhaseIndex + 1) % currentModality.phases.count
         startPhase()
     }
-
-    // MARK: - Glow
 
     private func triggerGlowAnimation(for phase: BreathingPhase) {
         let duration = Double(phase.beats)

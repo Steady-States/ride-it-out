@@ -2,19 +2,42 @@ import SwiftUI
 
 struct PrivacyView: View {
     var body: some View {
-        ScrollView {
-            Text(privacyText)
-                .font(.system(size: 16, weight: .regular))
-                .foregroundColor(.textSecondary)
-                .padding(24)
-                .frame(maxWidth: .infinity, alignment: .leading)
+        VStack(spacing: 0) {
+            Spacer()
+
+            VStack(spacing: 24) {
+                Image(systemName: "lock.fill")
+                    .font(.system(size: 52))
+                    .foregroundColor(.accentCyan)
+
+                VStack(spacing: 16) {
+                    Text("Ride It Out stores all your data on this device only.")
+                        .font(.system(size: 17))
+                        .foregroundColor(.textPrimary)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
+
+                    Text("No account is required. Nothing you enter — your contacts, your media, your patterns — is ever sent anywhere. When you delete the app, it's gone completely.")
+                        .font(.system(size: 15))
+                        .foregroundColor(.textSecondary)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
+
+                    Text("We don't want your data. We want you to be okay.")
+                        .font(.system(size: 15))
+                        .foregroundColor(.textSecondary)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(4)
+                }
+                .frame(maxWidth: 320)
+            }
+            .padding(.horizontal, 28)
+
+            Spacer()
         }
-        .navigationTitle("Privacy & Data")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background.ignoresSafeArea())
+        .navigationTitle("Privacy & Data")
         .preferredColorScheme(.dark)
     }
-
-    private let privacyText = """
-Ride It Out stores all your data on this device only. Nothing is uploaded, shared, or transmitted. We don't collect analytics, track usage, or know who you are. Your lifeline contacts are encrypted on your device. You can erase everything at any time using Reset Data in Settings.
-"""
 }
