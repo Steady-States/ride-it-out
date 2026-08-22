@@ -4,6 +4,7 @@ import UserNotifications
 struct SettingsView: View {
     @ObservedObject var settingsVM: SettingsViewModel
     @ObservedObject var lifelinesVM: LifelinesViewModel
+    var onStartTour: () -> Void
 
     @State private var showResetStep1 = false
     @State private var showResetStep2 = false
@@ -57,10 +58,8 @@ struct SettingsView: View {
 
                 SectionLabel("HELP")
                 SettingsCard {
-                    NavigationLink {
-                        WelcomeView()
-                    } label: {
-                        SettingsLinkRow(icon: "play.circle", title: "View Welcome Screens")
+                    Button(action: onStartTour) {
+                        SettingsLinkRow(icon: "play.circle", title: "Guided Tour")
                     }
                     Divider().background(Color.borderColor)
                     Button {
@@ -214,7 +213,7 @@ struct SettingsView: View {
     }
 }
 
-private struct SectionLabel: View {
+struct SectionLabel: View {
     let title: String
     init(_ title: String) { self.title = title }
 
@@ -228,7 +227,7 @@ private struct SectionLabel: View {
     }
 }
 
-private struct SettingsCard<Content: View>: View {
+struct SettingsCard<Content: View>: View {
     @ViewBuilder let content: Content
 
     var body: some View {
@@ -242,7 +241,13 @@ private struct SettingsCard<Content: View>: View {
     }
 }
 
-private struct SettingsLinkRow: View {
+#Preview {
+    NavigationStack {
+        SettingsView(settingsVM: SettingsViewModel(), lifelinesVM: LifelinesViewModel(), onStartTour: {})
+    }
+}
+
+struct SettingsLinkRow: View {
     let icon: String
     let title: String
     var subtitle: String? = nil

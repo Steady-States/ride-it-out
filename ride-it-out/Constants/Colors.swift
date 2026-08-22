@@ -32,7 +32,5 @@ extension Color {
     static let glowExhale   = accentCyan                                           // #4FC3F7 cool blue
     static let glowHoldOut  = Color(red: 0.376, green: 0.565, blue: 0.627)        // #6090A0 darker muted
 
-    // Legacy aliases
-    static let breathingGlow = accentCyan
-    static let surfaceCard   = surfaceRaised
+    // Legacy aliases removed
 }

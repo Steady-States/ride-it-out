@@ -8,6 +8,9 @@ class SettingsViewModel: ObservableObject {
     @Published var groundingMediaType: GroundingMediaType
     @Published var groundingMediaRef: String?
     @Published var groundingVideoSound: Bool
+    @Published var groundingMediaScale: CGFloat
+    @Published var groundingMediaOffsetXFraction: CGFloat
+    @Published var groundingMediaOffsetYFraction: CGFloat
     @Published var remindersEnabled: Bool
     @Published var reminderTimes: [DateComponents]
 
@@ -26,6 +29,11 @@ class SettingsViewModel: ObservableObject {
         }
 
         groundingMediaRef = defaults.string(forKey: StorageKey.groundingMediaRef.rawValue)
+
+        let storedScale = defaults.object(forKey: StorageKey.groundingMediaScale.rawValue) as? Double
+        groundingMediaScale = CGFloat(storedScale ?? 1.0)
+        groundingMediaOffsetXFraction = CGFloat(defaults.double(forKey: StorageKey.groundingMediaOffsetX.rawValue))
+        groundingMediaOffsetYFraction = CGFloat(defaults.double(forKey: StorageKey.groundingMediaOffsetY.rawValue))
 
         if let data = defaults.data(forKey: StorageKey.reminderTimes.rawValue),
            let times = try? JSONDecoder().decode([DateComponents].self, from: data) {
@@ -50,6 +58,17 @@ class SettingsViewModel: ObservableObject {
         groundingMediaRef = ref
         UserDefaults.standard.set(type.rawValue, forKey: StorageKey.groundingMediaType.rawValue)
         UserDefaults.standard.set(ref, forKey: StorageKey.groundingMediaRef.rawValue)
+        saveGroundingMediaTransform(scale: 1.0, offsetXFraction: 0, offsetYFraction: 0)
+    }
+
+    func saveGroundingMediaTransform(scale: CGFloat, offsetXFraction: CGFloat, offsetYFraction: CGFloat) {
+        groundingMediaScale = scale
+        groundingMediaOffsetXFraction = offsetXFraction
+        groundingMediaOffsetYFraction = offsetYFraction
+        let defaults = UserDefaults.standard
+        defaults.set(Double(scale), forKey: StorageKey.groundingMediaScale.rawValue)
+        defaults.set(Double(offsetXFraction), forKey: StorageKey.groundingMediaOffsetX.rawValue)
+        defaults.set(Double(offsetYFraction), forKey: StorageKey.groundingMediaOffsetY.rawValue)
     }
 
     func saveGroundingVideoSound(_ enabled: Bool) {

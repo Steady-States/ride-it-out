@@ -3,8 +3,11 @@ import SwiftUI
 @main
 struct RideItOutApp: App {
     init() {
-        excludeFromBackup()
-        restoreHapticsDefault()
+        // Set default haptics enabled if unset
+        let key = StorageKey.hapticsEnabled.rawValue
+        if UserDefaults.standard.object(forKey: key) == nil {
+            UserDefaults.standard.set(true, forKey: key)
+        }
     }
 
     var body: some Scene {
@@ -13,13 +16,7 @@ struct RideItOutApp: App {
         }
     }
 
-    private func excludeFromBackup() {
-        if var url = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-            var values = URLResourceValues()
-            values.isExcludedFromBackup = true
-            try? url.setResourceValues(values)
-        }
-    }
+    // excludeFromBackup() removed
 
     private func restoreHapticsDefault() {
         let key = StorageKey.hapticsEnabled.rawValue
@@ -39,4 +36,7 @@ struct ContentView: View {
             WelcomeView()
         }
     }
+}
+#Preview {
+    ContentView()
 }

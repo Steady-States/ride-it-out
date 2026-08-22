@@ -57,7 +57,7 @@ struct WelcomeView: View {
                         startWithTour = true
                         navigateToMain = true
                     } label: {
-                        Text("Set Up My Fighter")
+                        Text("Set Up My Ride")
                             .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(.accentCyan)
                             .frame(maxWidth: .infinity)
@@ -99,4 +99,7 @@ struct WelcomeView: View {
                 .interactiveDismissDisabled(true)
         }
     }
+}
+#Preview {
+    WelcomeView()
 }

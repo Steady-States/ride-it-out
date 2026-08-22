@@ -11,8 +11,9 @@ class HapticsService {
         prepareEngine()
     }
 
+    private let supportsHaptics = CHHapticEngine.capabilitiesForHardware().supportsHaptics
     private func prepareEngine() {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        guard supportsHaptics else { return }
         do {
             engine = try CHHapticEngine()
             engine?.playsHapticsOnly = true
@@ -29,7 +30,7 @@ class HapticsService {
     }
 
     func playPhase(_ phase: BreathingPhase, modality: BreathingModality) {
-        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        guard supportsHaptics else { return }
         guard UserDefaults.standard.bool(forKey: StorageKey.hapticsEnabled.rawValue) else { return }
 
         stopAll()

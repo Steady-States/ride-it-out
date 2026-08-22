@@ -93,18 +93,14 @@ struct LifelineButton: View {
         return palette[abs(lifeline.name.hashValue) % palette.count]
     }
 
-    private var sanitizedPhone: String {
-        lifeline.phone.filter { $0.isNumber || $0 == "+" }
-    }
-
     private func call() {
-        if let url = URL(string: "tel://\(sanitizedPhone)") {
+        if let url = lifeline.callURL {
             openURL(url)
         }
     }
 
     private func text() {
-        if let url = URL(string: "sms://\(sanitizedPhone)") {
+        if let url = lifeline.textURL {
             openURL(url)
         }
     }

@@ -5,14 +5,14 @@ struct GroundingMediaView: View {
     let mediaType: GroundingMediaType
     let mediaRef: String?
     let videoSound: Bool
+    var transformScale: CGFloat = 1.0
+    var transformOffsetFraction: CGSize = .zero
     var onAddMedia: () -> Void
     var showTourButton: Bool = false
     var onStartTour: (() -> Void)? = nil
 
     @State private var player: AVQueuePlayer?
     @State private var looper: AVPlayerLooper?
-    @State private var imageScale: CGFloat = 1.0
-    @State private var imageOffset: CGSize = .zero
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -59,32 +59,12 @@ struct GroundingMediaView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: geo.size.width, height: geo.size.height)
-                        .scaleEffect(imageScale)
-                        .offset(imageOffset)
-                        .gesture(
-                            MagnificationGesture()
-                                .onChanged { value in
-                                    imageScale = value
-                                }
-                        )
-                        .gesture(
-                            DragGesture()
-                                .onChanged { value in
-                                    imageOffset = value.translation
-                                }
+                        .scaleEffect(transformScale)
+                        .offset(
+                            x: transformOffsetFraction.width * geo.size.width,
+                            y: transformOffsetFraction.height * geo.size.height
                         )
                         .clipped()
-                        .overlay(
-                            Button("Reset") {
-                                imageScale = 1.0
-                                imageOffset = .zero
-                            }
-                            .padding(8)
-                            .background(Color.black.opacity(0.5))
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                            .padding(), alignment: .topTrailing
-                        )
                 }
             } else {
                 missingMediaView
@@ -101,10 +81,18 @@ struct GroundingMediaView: View {
     private var videoView: some View {
         if let ref = mediaRef, let url = URL(string: ref),
            FileManager.default.fileExists(atPath: url.path) {
-            VideoPlayer(player: player)
-                .disabled(true)
-                .onAppear { setupVideoPlayer(url: url) }
-                .onDisappear { teardownVideoPlayer() }
+            GeometryReader { geo in
+                VideoPlayer(player: player)
+                    .disabled(true)
+                    .scaleEffect(transformScale)
+                    .offset(
+                        x: transformOffsetFraction.width * geo.size.width,
+                        y: transformOffsetFraction.height * geo.size.height
+                    )
+                    .clipped()
+                    .onAppear { setupVideoPlayer(url: url) }
+                    .onDisappear { teardownVideoPlayer() }
+            }
         } else {
             missingMediaView
         }

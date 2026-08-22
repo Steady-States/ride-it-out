@@ -21,7 +21,6 @@ struct MainView: View {
                         BreathingZoneView(
                             vm: breathingVM,
                             selectedModality: settingsVM.selectedModality,
-                            onSettingsTap: { showSettings = true },
                             onPatternChange: { modality in
                                 settingsVM.saveModalityID(modality.id)
                                 breathingVM.start(modality: modality)
@@ -34,6 +33,11 @@ struct MainView: View {
                             mediaType: settingsVM.groundingMediaType,
                             mediaRef: settingsVM.groundingMediaRef,
                             videoSound: settingsVM.groundingVideoSound,
+                            transformScale: settingsVM.groundingMediaScale,
+                            transformOffsetFraction: CGSize(
+                                width: settingsVM.groundingMediaOffsetXFraction,
+                                height: settingsVM.groundingMediaOffsetYFraction
+                            ),
                             onAddMedia: { showSettings = true },
                             showTourButton: !guidedTourActive,
                             onStartTour: { guidedTourActive = true }
@@ -54,11 +58,25 @@ struct MainView: View {
                     if guidedTourActive {
                         TourOverlayView(isActive: $guidedTourActive)
                     }
+
+                    Button(action: { showSettings = true }) {
+                        Image(systemName: "gear")
+                            .font(.system(size: 17))
+                            .foregroundColor(.textTertiary)
+                            .frame(width: 44, height: 44)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    .padding(.trailing, 4)
                 }
             }
             .ignoresSafeArea(edges: .bottom)
             .navigationDestination(isPresented: $showSettings) {
-                SettingsView(settingsVM: settingsVM, lifelinesVM: lifelinesVM)
+                SettingsView(settingsVM: settingsVM, lifelinesVM: lifelinesVM, onStartTour: {
+                    showSettings = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        guidedTourActive = true
+                    }
+                })
             }
         }
         .onAppear {
@@ -68,6 +86,8 @@ struct MainView: View {
                     guidedTourActive = true
                 }
             }
+            WatchSyncService.shared.activate()
+            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
         }
         .onOpenURL { url in
             if url.scheme == "rideitout" {
@@ -75,6 +95,21 @@ struct MainView: View {
                     breathingVM.restart()
                 }
             }
+        }
+        .onChange(of: settingsVM.selectedModalityID) {
+            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
+        }
+        .onChange(of: settingsVM.hapticsEnabled) {
+            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
+        }
+        .onChange(of: settingsVM.groundingMediaType) {
+            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
+        }
+        .onChange(of: settingsVM.groundingMediaRef) {
+            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
+        }
+        .onChange(of: lifelinesVM.lifelines) {
+            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
         }
         .preferredColorScheme(.dark)
     }

@@ -3,34 +3,35 @@ import SwiftUI
 struct BreathingZoneView: View {
     @ObservedObject var vm: BreathingViewModel
     var selectedModality: BreathingModality
-    var onSettingsTap: () -> Void
     var onPatternChange: (BreathingModality) -> Void
 
     var body: some View {
         HStack(spacing: 0) {
-            // Left half — settings gear + phase label + beat counter
-            HStack(spacing: 10) {
-                Button(action: onSettingsTap) {
-                    Image(systemName: "gear")
-                        .font(.system(size: 17))
-                        .foregroundColor(.textTertiary)
-                        .frame(width: 44, height: 44)
-                }
-
-                VStack(alignment: .leading, spacing: 3) {
+            // Left half — phase label + play/stop + beat counter
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(spacing: 10) {
                     Text(vm.isRunning ? vm.currentPhase.label : "· · ·")
                         .font(.system(size: 11, weight: .semibold))
                         .foregroundColor(.textSecondary)
                         .tracking(3)
 
-                    Text(vm.isRunning ? "\(vm.currentBeat)" : "—")
-                        .font(.system(size: 72, weight: .thin))
-                        .foregroundColor(.textPrimary)
-                        .opacity(vm.isRunning ? 1 : 0.4)
-                        .monospacedDigit()
-                        .contentTransition(.numericText())
-                        .animation(.easeInOut(duration: 0.2), value: vm.currentBeat)
+                    Button {
+                        vm.isRunning ? vm.stop() : vm.restart()
+                    } label: {
+                        Image(systemName: vm.isRunning ? "stop.fill" : "play.fill")
+                            .font(.system(size: 11))
+                            .foregroundColor(.textSecondary)
+                            .frame(width: 20, height: 20)
+                    }
                 }
+
+                Text(vm.isRunning ? "\(vm.currentBeat)" : "—")
+                    .font(.system(size: 72, weight: .thin))
+                    .foregroundColor(.textPrimary)
+                    .opacity(vm.isRunning ? 1 : 0.4)
+                    .monospacedDigit()
+                    .contentTransition(.numericText())
+                    .animation(.easeInOut(duration: 0.2), value: vm.currentBeat)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading, 14)
@@ -40,7 +41,7 @@ struct BreathingZoneView: View {
                 .frame(width: 1)
                 .padding(.vertical, 12)
 
-            // Right half — breathing method selector + play/stop
+            // Right half — breathing method selector
             VStack(alignment: .leading, spacing: 5) {
                 Text("METHOD")
                     .font(.system(size: 10, weight: .semibold))
@@ -75,16 +76,6 @@ struct BreathingZoneView: View {
                     .foregroundColor(.textTertiary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .overlay(alignment: .bottomTrailing) {
-                Button {
-                    vm.isRunning ? vm.stop() : vm.restart()
-                } label: {
-                    Image(systemName: vm.isRunning ? "stop.fill" : "play.fill")
-                        .font(.system(size: 13))
-                        .foregroundColor(.textSecondary)
-                        .frame(width: 32, height: 32)
-                }
-            }
             .padding(.leading, 16)
             .padding(.trailing, 10)
         }
