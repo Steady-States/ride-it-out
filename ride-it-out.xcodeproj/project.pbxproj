@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96C6C8E030395BFE005F5E8B /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 96C6C8DF30395BFE005F5E8B /* AppIcon.icon */; };
 		96C6C8EE3039D84B005F5E8B /* ride-it-out Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		96C6C8FA3039D84D005F5E8B /* ride-it-out Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 96C6C8E83039D84B005F5E8B /* ride-it-out Watch App.app */; };
+		96C6C9213039F160005F5E8B /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 96C6C9203039F160005F5E8B /* AppIcon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,9 +43,9 @@
 
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* ride-it-out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ride-it-out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		96C6C8DF30395BFE005F5E8B /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; name = AppIcon.icon; path = "ride-it-out/AppIcon.icon"; sourceTree = "<group>"; };
 		96C6C8E83039D84B005F5E8B /* ride-it-out Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ride-it-out Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ride-it-out Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96C6C9203039F160005F5E8B /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -91,7 +91,7 @@
 		000000000000000000000001 = {
 			isa = PBXGroup;
 			children = (
-				96C6C8DF30395BFE005F5E8B /* AppIcon.icon */,
+				96C6C9203039F160005F5E8B /* AppIcon.icon */,
 				000000000000000000000010 /* ride-it-out */,
 				96C6C8F13039D84B005F5E8B /* ride-it-out Watch App */,
 				000000000000000000000020 /* Products */,
@@ -213,8 +213,8 @@
 		000000000000000140000000 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
-				96C6C8E030395BFE005F5E8B /* AppIcon.icon in Resources */,
 				96C6C8FA3039D84D005F5E8B /* ride-it-out Watch App.app in Resources */,
+				96C6C9213039F160005F5E8B /* AppIcon.icon in Resources */,
 			);
 		};
 		96C6C8E63039D84B005F5E8B /* Resources */ = {

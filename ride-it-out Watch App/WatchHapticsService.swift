@@ -5,9 +5,9 @@ enum WatchHapticsService {
         guard hapticsEnabled else { return }
         switch phase.type {
         case .inhale:
-            WKInterfaceDevice.current().play(.start)
+            WKInterfaceDevice.current().play(.directionUp)
         case .exhale:
-            WKInterfaceDevice.current().play(.stop)
+            WKInterfaceDevice.current().play(.directionDown)
         case .holdAfterInhale, .holdAfterExhale:
             WKInterfaceDevice.current().play(.click)
         }

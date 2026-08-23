@@ -35,15 +35,10 @@ class LifelinesViewModel: ObservableObject {
         persist()
     }
 
-    func moveUp(_ lifeline: Lifeline) {
-        guard let index = lifelines.firstIndex(where: { $0.id == lifeline.id }), index > 0 else { return }
-        lifelines.swapAt(index, index - 1)
-        persist()
-    }
-
-    func moveDown(_ lifeline: Lifeline) {
-        guard let index = lifelines.firstIndex(where: { $0.id == lifeline.id }), index < lifelines.count - 1 else { return }
-        lifelines.swapAt(index, index + 1)
+    func move(_ lifeline: Lifeline, to targetIndex: Int) {
+        guard let fromIndex = lifelines.firstIndex(where: { $0.id == lifeline.id }),
+              fromIndex != targetIndex else { return }
+        lifelines.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: targetIndex > fromIndex ? targetIndex + 1 : targetIndex)
         persist()
     }
 

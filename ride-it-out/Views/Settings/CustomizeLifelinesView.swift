@@ -1,11 +1,13 @@
 import SwiftUI
 import Contacts
 import ContactsUI
+import UniformTypeIdentifiers
 
 struct CustomizeLifelinesView: View {
     @ObservedObject var vm: LifelinesViewModel
     @State private var editingLifeline: Lifeline?
     @State private var showAddSheet = false
+    @State private var draggedLifeline: Lifeline?
     @Environment(\.openURL) private var openURL
 
     private let maxLifelines = 4
@@ -23,7 +25,7 @@ struct CustomizeLifelinesView: View {
                     }
                 }
 
-                Text("The top lifeline is #1 and appears first on the home screen. Use the arrows to reorder, tap a lifeline to edit it, or use the call/text icons to reach out right away.")
+                Text("The top lifeline is #1 and appears first on the home screen. Drag the handle to reorder, tap a lifeline to edit it, or use the call/text icons to reach out right away.")
                     .font(.system(size: 12))
                     .foregroundColor(.textSecondary)
                     .padding(.horizontal, 24)
@@ -72,25 +74,10 @@ struct CustomizeLifelinesView: View {
     @ViewBuilder
     private func row(for lifeline: Lifeline, index: Int) -> some View {
         HStack(spacing: 8) {
-            VStack(spacing: 2) {
-                Button {
-                    vm.moveUp(lifeline)
-                } label: {
-                    Image(systemName: "chevron.up")
-                        .font(.system(size: 11, weight: .bold))
-                }
-                .disabled(index == 0)
-
-                Button {
-                    vm.moveDown(lifeline)
-                } label: {
-                    Image(systemName: "chevron.down")
-                        .font(.system(size: 11, weight: .bold))
-                }
-                .disabled(index == vm.lifelines.count - 1)
-            }
-            .foregroundColor(.textTertiary)
-            .frame(width: 20)
+            Image(systemName: "line.3.horizontal")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(.textTertiary)
+                .frame(width: 20)
 
             Button {
                 editingLifeline = lifeline
@@ -140,6 +127,40 @@ struct CustomizeLifelinesView: View {
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
+        .contentShape(Rectangle())
+        .onDrag {
+            draggedLifeline = lifeline
+            return NSItemProvider(object: lifeline.id.uuidString as NSString)
+        }
+        .onDrop(
+            of: [.text],
+            delegate: LifelineDropDelegate(item: lifeline, vm: vm, draggedLifeline: $draggedLifeline)
+        )
+    }
+}
+
+// MARK: - Drag to reorder
+
+private struct LifelineDropDelegate: DropDelegate {
+    let item: Lifeline
+    let vm: LifelinesViewModel
+    @Binding var draggedLifeline: Lifeline?
+
+    func dropEntered(info: DropInfo) {
+        guard let draggedLifeline, draggedLifeline.id != item.id,
+              let targetIndex = vm.lifelines.firstIndex(where: { $0.id == item.id }) else { return }
+        withAnimation {
+            vm.move(draggedLifeline, to: targetIndex)
+        }
+    }
+
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        DropProposal(operation: .move)
+    }
+
+    func performDrop(info: DropInfo) -> Bool {
+        draggedLifeline = nil
+        return true
     }
 }
 
@@ -274,6 +295,11 @@ private struct LifelineEditView: View {
         }
         .navigationTitle(originalLifeline == nil ? "Add Lifeline" : "Edit Lifeline")
         .preferredColorScheme(.dark)
+        .onAppear {
+            if originalLifeline == nil {
+                requestContactsAccess()
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") { dismiss() }
@@ -371,7 +397,6 @@ private struct ContactPicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> CNContactPickerViewController {
         let picker = CNContactPickerViewController()
         picker.delegate = context.coordinator
-        picker.displayedPropertyKeys = [CNContactPhoneNumbersKey]
         return picker
     }
 

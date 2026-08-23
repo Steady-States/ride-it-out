@@ -38,8 +38,8 @@ class HapticsService {
         switch phase.type {
         case .inhale:
             playRamp(duration: Double(phase.beats),
-                     startIntensity: 0.1, endIntensity: 1.0,
-                     startSharpness: 0.1, endSharpness: 0.8)
+                     startIntensity: 0.4, endIntensity: 1.0,
+                     startSharpness: 0.3, endSharpness: 0.8)
         case .exhale:
             playRamp(duration: Double(phase.beats),
                      startIntensity: 1.0, endIntensity: 0.1,

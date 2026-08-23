@@ -21,6 +21,7 @@ struct TourStop {
 
 struct TourOverlayView: View {
     @Binding var isActive: Bool
+    var totalHeight: CGFloat
     @State private var currentStop: Int = 0
     var onNavigateToSettings: (() -> Void)? = nil
 
@@ -52,39 +53,36 @@ struct TourOverlayView: View {
     ]
 
     var body: some View {
-        GeometryReader { geo in
-            let stop = stops[currentStop]
-            let topH  = geo.size.height * stop.zoneTop
-            let zoneH = geo.size.height * stop.zoneHeight
-            let cardOffset = geo.size.height * stop.cardOffsetFraction + 12
+        let stop = stops[currentStop]
+        let topH  = totalHeight * stop.zoneTop
+        let zoneH = totalHeight * stop.zoneHeight
+        let cardOffset = totalHeight * stop.cardOffsetFraction + 12
 
-            ZStack(alignment: stop.cardAnchor == .top ? .top : .bottom) {
-                // Spotlight: dim bars above and below highlighted zone
-                VStack(spacing: 0) {
-                    Color.black.opacity(0.68).frame(height: topH)
-                    Color.clear.frame(height: zoneH)
-                    Color.black.opacity(0.68)
-                }
-                .ignoresSafeArea()
-
-                // Accent ring around highlighted zone
-                VStack(spacing: 0) {
-                    Color.clear.frame(height: topH)
-                    Rectangle()
-                        .stroke(Color.accentCyan.opacity(0.25), lineWidth: 1)
-                        .frame(height: zoneH)
-                    Color.clear
-                }
-
-                // Floating info card — anchored beside the highlighted zone,
-                // never on top of it
-                card(for: stop)
-                    .padding(.horizontal, 16)
-                    .padding(stop.cardAnchor == .top ? .top : .bottom, cardOffset)
+        ZStack(alignment: stop.cardAnchor == .top ? .top : .bottom) {
+            // Spotlight: dim bars above and below highlighted zone
+            VStack(spacing: 0) {
+                Color.black.opacity(0.68).frame(height: topH)
+                Color.clear.frame(height: zoneH)
+                Color.black.opacity(0.68)
             }
-            .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStop)
+
+            // Accent ring around highlighted zone
+            VStack(spacing: 0) {
+                Color.clear.frame(height: topH)
+                Rectangle()
+                    .stroke(Color.accentCyan.opacity(0.25), lineWidth: 1)
+                    .frame(height: zoneH)
+                Color.clear
+            }
+
+            // Floating info card — anchored beside the highlighted zone,
+            // never on top of it
+            card(for: stop)
+                .padding(.horizontal, 16)
+                .padding(stop.cardAnchor == .top ? .top : .bottom, cardOffset)
         }
-        .ignoresSafeArea()
+        .frame(height: totalHeight)
+        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: currentStop)
     }
 
     @ViewBuilder

@@ -56,7 +56,7 @@ struct MainView: View {
                     GlowAnimationView(breathingVM: breathingVM)
 
                     if guidedTourActive {
-                        TourOverlayView(isActive: $guidedTourActive)
+                        TourOverlayView(isActive: $guidedTourActive, totalHeight: geometry.size.height)
                     }
 
                     Button(action: { showSettings = true }) {
