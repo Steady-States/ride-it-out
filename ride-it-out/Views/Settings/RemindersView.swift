@@ -7,37 +7,55 @@ struct RemindersView: View {
     @State private var times: [Date] = []
 
     var body: some View {
-        List {
-            Section {
-                Toggle("Daily Reminders", isOn: Binding(
-                    get: { settingsVM.remindersEnabled },
-                    set: { newVal in toggleReminders(newVal) }
-                ))
-                .tint(.accentCyan)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 10) {
+                SectionLabel("REMINDERS")
+                    .padding(.bottom, 0)
 
-                if settingsVM.remindersEnabled {
-                    Text("Ride It Out would like to send you gentle reminders to check in. You control when and how often.")
-                        .font(.system(size: 13))
+                VStack(alignment: .leading, spacing: 8) {
+                    Toggle("Daily check-ins", isOn: Binding(
+                        get: { settingsVM.remindersEnabled },
+                        set: { newVal in toggleReminders(newVal) }
+                    ))
+                    .tint(.accent)
+                    .foregroundColor(.textPrimary)
+                    .font(.system(size: 16, weight: .medium))
+
+                    Text("A gentle nudge to breathe before you need to. You choose when, and how often — up to three a day.")
+                        .font(.system(size: 12))
                         .foregroundColor(.textSecondary)
                 }
-            }
+                .padding(16)
+                .background(Color.surfaceRaised)
+                .clipShape(RoundedRectangle(cornerRadius: 24))
 
-            if settingsVM.remindersEnabled {
-                Section("Reminder Times") {
+                if settingsVM.remindersEnabled {
                     ForEach(times.indices, id: \.self) { i in
                         HStack {
                             DatePicker("", selection: $times[i], displayedComponents: .hourAndMinute)
                                 .labelsHidden()
+                                .datePickerStyle(.compact)
+                                .tint(.accent)
                                 .onChange(of: times[i]) { _, _ in saveReminders() }
+
                             Spacer()
+
                             Button {
                                 times.remove(at: i)
                                 saveReminders()
                             } label: {
-                                Image(systemName: "minus.circle.fill")
-                                    .foregroundColor(.destructiveRed)
+                                Image(systemName: "minus")
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(.destructive)
+                                    .frame(width: 38, height: 38)
+                                    .background(Color.destructiveFill)
+                                    .clipShape(Circle())
                             }
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Color.surfaceRaised)
+                        .clipShape(RoundedRectangle(cornerRadius: 24))
                     }
 
                     if times.count < 3 {
@@ -45,15 +63,25 @@ struct RemindersView: View {
                             times.append(Date())
                             saveReminders()
                         } label: {
-                            Label("Add Reminder", systemImage: "plus.circle")
-                                .foregroundColor(.accentCyan)
+                            Text("Add a time")
+                                .font(.system(size: 15, weight: .medium))
+                                .foregroundColor(.accentText)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 54)
                         }
+                        .background(
+                            RoundedRectangle(cornerRadius: 24)
+                                .strokeBorder(style: StrokeStyle(lineWidth: 1.5, dash: [6]))
+                                .foregroundColor(.borderColor)
+                        )
                     }
                 }
             }
+            .padding(.horizontal, 14)
+            .padding(.top, 12)
         }
+        .background(Color.background.ignoresSafeArea())
         .navigationTitle("Reminders")
-        .preferredColorScheme(.dark)
         .onAppear { loadTimes() }
         .sheet(isPresented: $showPermissionExplanation) {
             permissionSheet
@@ -65,7 +93,7 @@ struct RemindersView: View {
             Spacer()
             Image(systemName: "bell.badge")
                 .font(.system(size: 48))
-                .foregroundColor(.accentCyan)
+                .foregroundColor(.accentText)
             Text("Enable Reminders")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.textPrimary)
@@ -83,10 +111,10 @@ struct RemindersView: View {
                 }
             }
             .font(.system(size: 17, weight: .semibold))
-            .foregroundColor(.background)
+            .foregroundColor(.accentOn)
             .frame(maxWidth: .infinity)
             .frame(height: 52)
-            .background(Color.accentCyan)
+            .background(Color.accent)
             .clipShape(RoundedRectangle(cornerRadius: 14))
             .padding(.horizontal, 32)
             Button("Not Now") { showPermissionExplanation = false }
@@ -94,7 +122,6 @@ struct RemindersView: View {
             Spacer()
         }
         .background(Color.background.ignoresSafeArea())
-        .preferredColorScheme(.dark)
     }
 
     private func toggleReminders(_ enabled: Bool) {

@@ -6,8 +6,9 @@ class WatchBreathingViewModel: ObservableObject {
     @Published var currentPhaseIndex: Int = 0
     @Published var currentBeat: Int = 1
     @Published var isRunning: Bool = false
-    @Published var glowIntensity: Double = 0.15
-    @Published var glowColor: Color = .glowExhale
+    @Published var bandColor: Color = PhaseType.holdAfterExhale.bandColor
+    @Published var troughTarget: CGFloat = 0.1
+    var troughDuration: Double = 0.4
 
     var hapticsEnabled: Bool = true
     var currentModality: BreathingModality = BreathingModalities.box
@@ -32,7 +33,7 @@ class WatchBreathingViewModel: ObservableObject {
     private func startPhase() {
         let phase = currentPhase
         currentBeat = phase.beats
-        triggerGlowAnimation(for: phase)
+        updatePhaseTargets(for: phase)
         WatchHapticsService.play(for: phase, hapticsEnabled: hapticsEnabled)
         beatTimer?.invalidate()
         beatTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
@@ -54,29 +55,21 @@ class WatchBreathingViewModel: ObservableObject {
         startPhase()
     }
 
-    private func triggerGlowAnimation(for phase: BreathingPhase) {
-        let duration = Double(phase.beats)
+    private func updatePhaseTargets(for phase: BreathingPhase) {
+        bandColor = phase.type.bandColor
         switch phase.type {
         case .inhale:
-            glowColor = .glowInhale
-            withAnimation(.linear(duration: duration)) {
-                glowIntensity = 0.82
-            }
+            troughDuration = Double(phase.beats)
+            troughTarget = 1.0
         case .holdAfterInhale:
-            withAnimation(.linear(duration: 0.6)) {
-                glowColor = .glowHoldIn
-                glowIntensity = 0.42
-            }
+            troughDuration = 0.4
+            troughTarget = 1.0
         case .exhale:
-            glowColor = .glowExhale
-            withAnimation(.linear(duration: duration)) {
-                glowIntensity = 0.68
-            }
+            troughDuration = Double(phase.beats)
+            troughTarget = 0.1
         case .holdAfterExhale:
-            withAnimation(.linear(duration: 0.6)) {
-                glowColor = .glowHoldOut
-                glowIntensity = 0.22
-            }
+            troughDuration = 0.4
+            troughTarget = 0.1
         }
     }
 }

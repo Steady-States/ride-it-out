@@ -8,7 +8,7 @@ struct PrivacyView: View {
             VStack(spacing: 24) {
                 Image(systemName: "lock.fill")
                     .font(.system(size: 52))
-                    .foregroundColor(.accentCyan)
+                    .foregroundColor(.accentText)
 
                 VStack(spacing: 16) {
                     Text("Ride It Out stores all your data on this device only.")
@@ -38,6 +38,5 @@ struct PrivacyView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.background.ignoresSafeArea())
         .navigationTitle("Privacy & Data")
-        .preferredColorScheme(.dark)
     }
 }

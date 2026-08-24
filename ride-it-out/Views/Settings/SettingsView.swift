@@ -17,11 +17,23 @@ struct SettingsView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 Text("Settings")
-                    .font(.system(size: 30, weight: .heavy))
+                    .font(.displaySerif(size: 34))
                     .foregroundColor(.textPrimary)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, 22)
                     .padding(.top, 10)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 8)
+
+                SectionLabel("APPEARANCE")
+                SegmentedPicker(
+                    options: Appearance.allCases,
+                    selection: Binding(
+                        get: { settingsVM.appearance },
+                        set: { settingsVM.saveAppearance($0) }
+                    ),
+                    label: \.label
+                )
+                .padding(.horizontal, 14)
+                .padding(.bottom, 13)
 
                 SectionLabel("CUSTOMIZE")
                 SettingsCard {
@@ -59,7 +71,7 @@ struct SettingsView: View {
                 SectionLabel("HELP")
                 SettingsCard {
                     Button(action: onStartTour) {
-                        SettingsLinkRow(icon: "play.circle", title: "Guided Tour")
+                        SettingsLinkRow(icon: "play.circle", title: "Guided Tour", tint: .sage)
                     }
                     Divider().background(Color.borderColor)
                     Button {
@@ -68,7 +80,8 @@ struct SettingsView: View {
                         SettingsLinkRow(
                             icon: "envelope",
                             title: "Send Feedback",
-                            subtitle: "Feedback is always welcome!"
+                            subtitle: "Feedback is always welcome",
+                            tint: .sage
                         )
                     }
                     Divider().background(Color.borderColor)
@@ -80,7 +93,8 @@ struct SettingsView: View {
                         SettingsLinkRow(
                             icon: "bubble.left.and.bubble.right.fill",
                             title: "Join our Discord",
-                            subtitle: "Community, support & updates"
+                            subtitle: "Community, support and updates",
+                            tint: .sage
                         )
                     }
                 }
@@ -90,13 +104,13 @@ struct SettingsView: View {
                     NavigationLink {
                         PrivacyView()
                     } label: {
-                        SettingsLinkRow(icon: "lock.fill", title: "Privacy & Data")
+                        SettingsLinkRow(icon: "lock.fill", title: "Privacy and data")
                     }
                     Divider().background(Color.borderColor)
                     Button {
                         showResetStep1 = true
                     } label: {
-                        SettingsLinkRow(icon: "trash", title: "Reset all data", tint: .destructiveRed)
+                        SettingsLinkRow(icon: "trash", title: "Erase everything", tint: .destructive, showChevron: false)
                     }
                 }
 
@@ -105,28 +119,31 @@ struct SettingsView: View {
                     .foregroundColor(.textSecondary)
                     .padding(.horizontal, 24)
                     .padding(.top, 4)
-                    .padding(.bottom, 8)
+                    .padding(.bottom, 9)
 
                 SectionLabel("SUPPORT")
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("This app will always be fully-functional, free, and private. Support development with an optional one-time tip.")
-                        .font(.system(size: 12))
+                HStack(spacing: 12) {
+                    Text("Free, complete and private. Always.")
+                        .font(.system(size: 13))
                         .foregroundColor(.textSecondary)
 
+                    Spacer(minLength: 8)
+
                     // Phase 2: StoreKit in-app purchase (com.steadystates.rideitout.support)
-                    Button("Support Ride It Out") {}
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundColor(.background)
-                        .frame(maxWidth: .infinity)
-                        .frame(minHeight: 36)
-                        .background(Color.accentCyan)
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    Button("Leave a tip") {}
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(.sageOn)
+                        .padding(.horizontal, 16)
+                        .frame(height: 34)
+                        .background(Color.sageDeep)
+                        .clipShape(Capsule())
                 }
-                .padding(10)
-                .background(Color.surfaceRaised)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .padding(.horizontal, 12)
-                .padding(.bottom, 8)
+                .padding(.vertical, 12)
+                .padding(.horizontal, 16)
+                .background(Color.sageFill)
+                .clipShape(RoundedRectangle(cornerRadius: 24))
+                .padding(.horizontal, 14)
+                .padding(.bottom, 9)
 
                 VStack(spacing: 2) {
                     Text("Ride It Out \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0")")
@@ -144,7 +161,6 @@ struct SettingsView: View {
         .background(Color.background.ignoresSafeArea())
         .navigationTitle("")
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(.dark)
         .alert("Reset Everything?", isPresented: $showResetStep1) {
             Button("Reset Everything", role: .destructive) { showResetStep2 = true }
             Button("Cancel", role: .cancel) {}
@@ -172,10 +188,10 @@ struct SettingsView: View {
             if showMailCopied {
                 Text("Copied to clipboard")
                     .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(.background)
+                    .foregroundColor(.accentOn)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .background(Color.accentCyan)
+                    .background(Color.accent)
                     .clipShape(Capsule())
                     .padding(.bottom, 40)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
@@ -220,10 +236,10 @@ struct SectionLabel: View {
     var body: some View {
         Text(title)
             .font(.system(size: 11, weight: .bold))
-            .tracking(1)
+            .tracking(1.4)
             .foregroundColor(.textTertiary)
-            .padding(.horizontal, 20)
-            .padding(.bottom, 4)
+            .padding(.horizontal, 22)
+            .padding(.bottom, 7)
     }
 }
 
@@ -235,9 +251,9 @@ struct SettingsCard<Content: View>: View {
             content
         }
         .background(Color.surfaceRaised)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding(.horizontal, 12)
-        .padding(.bottom, 8)
+        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .padding(.horizontal, 14)
+        .padding(.bottom, 9)
     }
 }
 
@@ -247,38 +263,66 @@ struct SettingsCard<Content: View>: View {
     }
 }
 
+enum SettingsRowTint {
+    case accent, sage, destructive
+
+    var circleFill: Color {
+        switch self {
+        case .accent: return .accentFill
+        case .sage: return .sageFill
+        case .destructive: return .destructiveFill
+        }
+    }
+
+    var iconColor: Color {
+        switch self {
+        case .accent: return .accentText
+        case .sage: return .sageText
+        case .destructive: return .destructive
+        }
+    }
+}
+
 struct SettingsLinkRow: View {
     let icon: String
     let title: String
     var subtitle: String? = nil
-    var tint: Color = .accentCyan
+    var tint: SettingsRowTint = .accent
+    var showChevron: Bool = true
 
     var body: some View {
-        HStack(spacing: 10) {
-            Image(systemName: icon)
-                .font(.system(size: 18))
-                .foregroundColor(tint)
-                .frame(width: 22)
+        HStack(spacing: 14) {
+            Circle()
+                .fill(tint.circleFill)
+                .frame(width: 34, height: 34)
+                .overlay(
+                    Image(systemName: icon)
+                        .symbolRenderingMode(.monochrome)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(tint.iconColor)
+                )
 
-            VStack(alignment: .leading, spacing: 1) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(tint)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(tint == .destructive ? .destructive : .textPrimary)
                 if let subtitle {
                     Text(subtitle)
-                        .font(.system(size: 11))
-                        .foregroundColor(.textTertiary)
+                        .font(.system(size: 12))
+                        .foregroundColor(.textSecondary)
                 }
             }
 
             Spacer()
 
-            Image(systemName: "chevron.forward")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(tint == .destructiveRed ? tint : .textTertiary)
+            if showChevron {
+                Image(systemName: "chevron.forward")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.textTertiary)
+            }
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 9)
+        .padding(.horizontal, 18)
+        .padding(.vertical, subtitle != nil ? 10 : 12)
         .contentShape(Rectangle())
     }
 }

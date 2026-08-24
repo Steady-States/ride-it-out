@@ -1,8 +1,30 @@
 import SwiftUI
 import Combine
 
+enum Appearance: String, CaseIterable, Identifiable, Equatable {
+    case system, light, dark
+    var id: String { rawValue }
+
+    var label: String {
+        switch self {
+        case .system: return "System"
+        case .light: return "Light"
+        case .dark: return "Dark"
+        }
+    }
+
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
+}
+
 class SettingsViewModel: ObservableObject {
 
+    @Published var appearance: Appearance
     @Published var selectedModalityID: String
     @Published var hapticsEnabled: Bool
     @Published var groundingMediaType: GroundingMediaType
@@ -16,6 +38,11 @@ class SettingsViewModel: ObservableObject {
 
     init() {
         let defaults = UserDefaults.standard
+        if let raw = defaults.string(forKey: StorageKey.appearance.rawValue), let value = Appearance(rawValue: raw) {
+            appearance = value
+        } else {
+            appearance = .system
+        }
         selectedModalityID = defaults.string(forKey: StorageKey.breathingModalityID.rawValue) ?? BreathingModalities.box.id
         hapticsEnabled = defaults.object(forKey: StorageKey.hapticsEnabled.rawValue) as? Bool ?? true
         groundingVideoSound = defaults.bool(forKey: StorageKey.groundingVideoSound.rawValue)
@@ -41,6 +68,11 @@ class SettingsViewModel: ObservableObject {
         } else {
             reminderTimes = []
         }
+    }
+
+    func saveAppearance(_ value: Appearance) {
+        appearance = value
+        UserDefaults.standard.set(value.rawValue, forKey: StorageKey.appearance.rawValue)
     }
 
     func saveModalityID(_ id: String) {

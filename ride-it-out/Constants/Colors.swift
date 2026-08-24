@@ -1,36 +1,81 @@
 import SwiftUI
 
 extension Color {
+    init(hex: UInt32, alpha: Double = 1) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xFF) / 255,
+            green: Double((hex >> 8) & 0xFF) / 255,
+            blue: Double(hex & 0xFF) / 255,
+            opacity: alpha
+        )
+    }
+
+    static func scheme(_ light: Color, _ dark: Color) -> Color {
+        Color(UIColor { $0.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light) })
+    }
+
     // Core backgrounds
-    static let background    = Color(red: 0.051, green: 0.059, blue: 0.102) // #0D0F1A
-    static let surface       = Color(red: 0.078, green: 0.090, blue: 0.161) // #141729
-    static let surfaceRaised = Color(red: 0.110, green: 0.125, blue: 0.220) // #1C2038
-    static let borderColor   = Color(red: 0.165, green: 0.176, blue: 0.271) // #2A2D45
+    static let background    = scheme(Color(hex: 0xF5EAD8), Color(hex: 0x17130F))
+    static let surface       = scheme(Color(hex: 0xEBDDC5), Color(hex: 0x221C17))
+    static let surfaceRaised = scheme(Color(hex: 0xF9F4ED), Color(hex: 0x2C251E))
+    static let tint          = scheme(Color(hex: 0xEEE7DB), Color(hex: 0x3A3129))
+    static let borderColor   = scheme(Color(hex: 0x201E1D, alpha: 0.14), Color(hex: 0xF5EAD8, alpha: 0.14))
 
     // Text
-    static let textPrimary   = Color(red: 0.941, green: 0.949, blue: 1.000) // #F0F2FF
-    static let textSecondary = Color(red: 0.541, green: 0.561, blue: 0.678) // #8A8FAD
-    static let textTertiary  = Color(red: 0.333, green: 0.345, blue: 0.459) // #555875
+    static let textPrimary   = scheme(Color(hex: 0x201E1D), Color(hex: 0xF5EAD8))
+    static let textSecondary = scheme(Color(hex: 0x645C50), Color(hex: 0xA19786))
+    static let textTertiary  = scheme(Color(hex: 0x82796A), Color(hex: 0x82796A))
 
     // Accent
-    static let accentCyan    = Color(red: 0.310, green: 0.765, blue: 0.969) // #4FC3F7
-    static let accentWarm    = Color(red: 1.000, green: 0.702, blue: 0.278) // #FFB347
+    static let accent        = scheme(Color(hex: 0xC67139), Color(hex: 0xF6A06B))
+    static let accentOn      = scheme(Color(hex: 0xF9F4ED), Color(hex: 0x2E2B25))
+    static let accentText    = scheme(Color(hex: 0x8C491A), Color(hex: 0xF6A06B))
+    static let accentFill    = scheme(Color(hex: 0xFFE1D0), Color(hex: 0x4A3325))
 
-    // Lifelines
-    static let lifeline      = Color(red: 0.180, green: 0.490, blue: 0.549) // #2E7D8C
-    static let lifelineEmpty = Color(red: 0.110, green: 0.165, blue: 0.188) // #1C2A30
+    // Sage — lifelines
+    static let sageFill      = scheme(Color(hex: 0xE1EECC), Color(hex: 0x333A28))
+    static let sageDeep      = scheme(Color(hex: 0x56633F), Color(hex: 0xAEBF92))
+    static let sageOn        = scheme(Color(hex: 0xF0FAE1), Color(hex: 0x272E1B))
+    static let sageText      = scheme(Color(hex: 0x3D472B), Color(hex: 0xCCDBB2))
 
     // Status
-    static let destructiveRed = Color(red: 0.878, green: 0.322, blue: 0.322) // #E05252
+    static let destructive     = scheme(Color(hex: 0x9C3B28), Color(hex: 0xE0836F))
+    static let destructiveFill = scheme(Color(hex: 0xF7DDD6), Color(hex: 0x48281F))
 
-    // Grounding zone background
-    static let groundingBackground = Color(red: 0.059, green: 0.071, blue: 0.125) // #0F1220
+    // Overlays
+    static let scrim      = scheme(Color(hex: 0xF9F4ED, alpha: 0.86), Color(hex: 0x2C251E, alpha: 0.88))
+    static let scrimHeavy = scheme(Color(hex: 0x2E2B25, alpha: 0.58), Color(hex: 0x0A0806, alpha: 0.68))
+    static let mediaWash  = scheme(Color(hex: 0xF5EAD8, alpha: 0.22), Color(hex: 0x17130F, alpha: 0.34))
+    static let onMedia    = scheme(Color(hex: 0xF9F4ED), Color(hex: 0xF5EAD8))
+}
 
-    // Glow — per breathing phase
-    static let glowInhale   = accentWarm                                           // #FFB347 warm amber
-    static let glowHoldIn   = Color(red: 0.627, green: 0.745, blue: 0.784)        // #A0BEC8 muted blue
-    static let glowExhale   = accentCyan                                           // #4FC3F7 cool blue
-    static let glowHoldOut  = Color(red: 0.376, green: 0.565, blue: 0.627)        // #6090A0 darker muted
+/// Breath-phase colors — band (solid edge/crest), fill (soft trough), label (phase text).
+extension PhaseType {
+    var bandColor: Color {
+        switch self {
+        case .inhale:          return .scheme(Color(hex: 0xC67139), Color(hex: 0xF6A06B))
+        case .holdAfterInhale: return .scheme(Color(hex: 0x8FA073), Color(hex: 0xAEBF92))
+        case .exhale:          return .scheme(Color(hex: 0x4A6F82), Color(hex: 0x8FB3C4))
+        case .holdAfterExhale: return .scheme(Color(hex: 0xA19786), Color(hex: 0x82796A))
+        }
+    }
 
-    // Legacy aliases removed
+    var fillColor: Color {
+        switch self {
+        case .inhale:          return .scheme(Color(hex: 0xFFE1D0), Color(hex: 0x3F2C1F))
+        case .holdAfterInhale: return .scheme(Color(hex: 0xE1EECC), Color(hex: 0x2F3626))
+        case .exhale:          return .scheme(Color(hex: 0xDBE6EC), Color(hex: 0x26333A))
+        case .holdAfterExhale: return .scheme(Color(hex: 0xEEE7DB), Color(hex: 0x3A3129))
+        }
+    }
+
+    var labelColor: Color {
+        switch self {
+        case .inhale:          return .scheme(Color(hex: 0x8C491A), Color(hex: 0xF6A06B))
+        case .holdAfterInhale: return .scheme(Color(hex: 0x56633F), Color(hex: 0xCCDBB2))
+        case .exhale:          return .scheme(Color(hex: 0x33566A), Color(hex: 0xA9CAD8))
+        case .holdAfterExhale: return .scheme(Color(hex: 0x645C50), Color(hex: 0xA19786))
+        }
+    }
 }

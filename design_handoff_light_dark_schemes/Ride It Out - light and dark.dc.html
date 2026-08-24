@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="_ds/organic-728c4de7-95f9-4cca-8752-80e9290bbf1c/styles.css">
+<script src="_ds/organic-728c4de7-95f9-4cca-8752-80e9290bbf1c/_ds_bundle.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caprasimo&family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Petrona:wght@400..700&family=Figtree:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#eee7db;font-family:"Figtree",system-ui,sans-serif}
+a{color:#8c491a}a:hover{color:#b2622d}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style></helmet>
+
+<div style="padding:44px 48px 72px">
+
+<div style="max-width:780px;margin-bottom:34px">
+<div style="font:600 11px ui-monospace,Menlo,monospace;letter-spacing:1.6px;color:#8c491a;margin-bottom:12px">PROPOSAL · LIGHT + DARK</div>
+<h1 style="font:var(--fhw,400) 40px/1.1 var(--fh,Georgia,serif);color:#201e1d;margin:0 0 16px">Same bones, warmer ground</h1>
+<p style="font:400 15px/1.65 Figtree,system-ui,sans-serif;color:#474238;margin:0 0 12px;max-width:64ch;text-wrap:pretty">The zone split stays: breath on top, your anchor in the middle, the people who pick up at the bottom. What changes is everything that was fighting the moment — the navy void, the cyan, the blurred glow crawling around the edge of a screen you're staring at while white-knuckling it.</p>
+<p style="font:400 15px/1.65 Figtree,system-ui,sans-serif;color:#474238;margin:0 0 12px;max-width:64ch;text-wrap:pretty">Light is warm paper. Dark is the same room with the lights off — warm ink, not blue-black — so switching at 3am doesn't feel like switching apps. The glow becomes a solid tinted band at the screen edge, one flat colour per phase, no bloom. And the beat counter now sits in a wave trough that fills as you breathe in and drains as you let go, so the pattern is visible before you've read a word.</p>
+<p style="font:400 13px/1.6 Figtree,system-ui,sans-serif;color:#645c50;margin:0;max-width:64ch">Every screen below is live and running the real box-breathing timing. Left column light, right column dark.</p>
+</div>
+
+<div style="margin-bottom:40px">
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Headline face — three ways off the beach</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:60ch">Pick one and the whole document below re-renders in it. Body copy stays Figtree in all three.</div>
+<div style="display:flex;gap:18px;flex-wrap:wrap">
+<sc-for list="{{ fontOptions }}" as="f" hint-placeholder-count="3">
+<button onClick="{{ f.pick }}" style="text-align:left;cursor:pointer;width:300px;background:#f9f4ed;border:2px solid {{ f.ring }};border-radius:28px;padding:20px 22px 18px;display:flex;flex-direction:column;gap:14px" style-hover="border-color:#c67139">
+<div style="display:flex;align-items:center;gap:9px">
+<span style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 8px;border-radius:999px;background:{{ f.badgeBg }};color:{{ f.badgeFg }}">{{ f.id }}</span>
+<span style="font:600 12px Figtree,system-ui;color:#645c50">{{ f.name }}</span>
+</div>
+<div style="font:{{ f.weight }} 40px/1.05 {{ f.family }};color:#201e1d">Ride It Out</div>
+<div style="font:{{ f.weight }} 22px {{ f.family }};color:#474238">Your lifelines</div>
+<div style="font:400 12.5px/1.5 Figtree,system-ui;color:#645c50">{{ f.note }}</div>
+</button>
+</sc-for>
+</div>
+</div>
+
+<div style="margin-bottom:44px">
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">The mark</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:60ch">Parked for now — the Hokusai icon stays as it is, and it is what the Welcome screen below uses. Keeping the sketch here so it is easy to pick back up.</div>
+<div style="display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start">
+
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;align-items:center;gap:9px">
+<span style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 8px;border-radius:999px;background:#c67139;color:#f9f4ed">3a</span>
+<span style="font:600 12px Figtree,system-ui;color:#645c50">One step ahead of the break — parked</span>
+</div>
+<div style="display:flex;align-items:flex-end;gap:16px">
+<svg width="112" height="112" viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#f9f4ed"/><path d="M2 116C4 62 20 12 58 12c31 0 49 23 45 53-4-22-19-33-34-26 13 10 16 25 5 39-11-20-35-16-47 10-7 14-10 24-12 28z" fill="#c67139"/><path d="M2 118c24-5 41-15 52-27" stroke="#8fa073" stroke-width="6" fill="none" stroke-linecap="round"/><g stroke="#201e1d" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M32 96l46-15"/><path d="M44 92l10-13M62 86l-8-7"/><path d="M54 79l4-11"/><path d="M57 72l-15-5M57 72l16 3"/></g><circle cx="59" cy="61" r="5.4" fill="#201e1d"/></svg>
+<svg width="112" height="112" viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#221c17"/><path d="M2 116C4 62 20 12 58 12c31 0 49 23 45 53-4-22-19-33-34-26 13 10 16 25 5 39-11-20-35-16-47 10-7 14-10 24-12 28z" fill="#f6a06b"/><path d="M2 118c24-5 41-15 52-27" stroke="#aebf92" stroke-width="6" fill="none" stroke-linecap="round"/><g stroke="#f5ead8" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M32 96l46-15"/><path d="M44 92l10-13M62 86l-8-7"/><path d="M54 79l4-11"/><path d="M57 72l-15-5M57 72l16 3"/></g><circle cx="59" cy="61" r="5.4" fill="#f5ead8"/></svg>
+<svg width="52" height="52" viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#f9f4ed"/><path d="M2 116C4 62 20 12 58 12c31 0 49 23 45 53-4-22-19-33-34-26 13 10 16 25 5 39-11-20-35-16-47 10-7 14-10 24-12 28z" fill="#c67139"/><path d="M2 118c24-5 41-15 52-27" stroke="#8fa073" stroke-width="6" fill="none" stroke-linecap="round"/><g stroke="#201e1d" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M32 96l46-15"/><path d="M44 92l10-13M62 86l-8-7"/><path d="M54 79l4-11"/><path d="M57 72l-15-5M57 72l16 3"/></g><circle cx="59" cy="61" r="5.4" fill="#201e1d"/></svg>
+<svg width="30" height="30" viewBox="0 0 120 120"><rect width="120" height="120" rx="28" fill="#f9f4ed"/><path d="M2 116C4 62 20 12 58 12c31 0 49 23 45 53-4-22-19-33-34-26 13 10 16 25 5 39-11-20-35-16-47 10-7 14-10 24-12 28z" fill="#c67139"/><path d="M2 118c24-5 41-15 52-27" stroke="#8fa073" stroke-width="6" fill="none" stroke-linecap="round"/><g stroke="#201e1d" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M32 96l46-15"/><path d="M44 92l10-13M62 86l-8-7"/><path d="M54 79l4-11"/><path d="M57 72l-15-5M57 72l16 3"/></g><circle cx="59" cy="61" r="5.4" fill="#201e1d"/></svg>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="font:600 12px Figtree,system-ui;color:#82796a">In use</div>
+<img src="uploads/assets-1787537623130-hjqc.png" alt="Current app icon" style="width:112px;height:112px;border-radius:28px;display:block;filter:saturate(.9)">
+</div>
+
+</div>
+</div>
+
+<div style="display:flex;align-items:center;gap:14px;padding:14px 18px;background:#f9f4ed;border-radius:999px;box-shadow:0 1px 2px rgba(46,43,37,.14);margin-bottom:38px;width:fit-content">
+<div style="font:600 11px Figtree,system-ui;letter-spacing:1.4px;color:#82796a">PATTERN</div>
+<sc-for list="{{ methods }}" as="m" hint-placeholder-count="4">
+<button onClick="{{ m.pick }}" style="border:0;cursor:pointer;font:600 13px Figtree,system-ui;padding:8px 15px;border-radius:999px;background:{{ m.bg }};color:{{ m.fg }}" style-hover="filter:brightness(.94)">{{ m.label }}</button>
+</sc-for>
+<div style="width:1px;height:22px;background:rgba(32,30,29,.14)"></div>
+<button onClick="{{ toggleRun }}" style="border:1px solid rgba(32,30,29,.18);cursor:pointer;font:600 13px Figtree,system-ui;padding:8px 16px;border-radius:999px;background:transparent;color:#201e1d" style-hover="background:rgba(198,113,57,.1)">{{ runLabel }}</button>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:56px">
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Welcome</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">The new mark and the wordmark, at the one moment the app is allowed to introduce itself.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="width:390px;height:844px;background:var(--bg,#f5ead8);border-radius:40px;overflow:hidden;position:relative;box-shadow:0 12px 32px rgba(46,43,37,.22);display:flex;flex-direction:column;justify-content:flex-end">
+<div style="position:absolute;top:-120px;right:-100px;width:340px;height:340px;border-radius:50%;background:var(--tint,#eee7db)"></div>
+<div style="position:relative;padding:0 28px 40px">
+<div style="width:100px;height:100px;border-radius:24px;background:var(--iconImg) center/cover;margin-bottom:28px;box-shadow:0 3px 10px rgba(46,43,37,.16)"></div>
+<div style="font:var(--fhw,400) 46px/1 var(--fh,Georgia,serif);color:var(--tp,#201e1d);margin-bottom:14px">Ride It Out</div>
+<div style="font:400 20px/1.4 Figtree,system-ui;color:var(--ts,#645c50);max-width:15ch">You don't have to fight the wave. You just have to stay on it.</div>
+</div>
+<div style="position:relative;display:flex;flex-direction:column;gap:12px;padding:0 28px">
+<div style="height:60px;background:var(--acc,#c67139);border-radius:999px;display:flex;align-items:center;justify-content:center;font:700 18px Figtree,system-ui;color:var(--accOn,#f9f4ed)">I need help right now</div>
+<div style="height:60px;border:1.5px solid var(--acc,#c67139);border-radius:999px;display:flex;align-items:center;justify-content:center;font:600 17px Figtree,system-ui;color:var(--accText,#8c491a)">Set up my ride</div>
+</div>
+<div style="position:relative;padding:26px 28px 46px;text-align:center;display:flex;flex-direction:column;gap:7px">
+<div style="font:500 14px Figtree,system-ui;color:var(--ts,#645c50)">Breathe. Ground yourself. Call someone.</div>
+<div style="font:400 12px Figtree,system-ui;color:var(--tt,#82796a)">No account. Nothing ever leaves this phone.</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Home</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">The trough fills through the inhale, holds, then drains through the exhale. The edge band is one flat colour per phase — no blur, no pulse to chase.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="width:390px;height:844px;background:var(--bg,#f5ead8);border-radius:40px;overflow:hidden;position:relative;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+
+<div style="height:141px;background:var(--surface,#ebddc5);display:flex;align-items:center;gap:14px;padding:0 18px;box-sizing:border-box">
+<div style="width:132px;height:104px;border-radius:24px;background:var(--raised,#f9f4ed);position:relative;overflow:hidden;flex:none">
+<div style="position:absolute;left:0;right:0;bottom:0;height:{{ fillH }};background:var(--phaseSoft,#eaddcd);transition:height var(--fillDur,1s) linear">
+<svg viewBox="0 0 240 20" preserveAspectRatio="none" style="position:absolute;top:-11px;left:0;width:200%;height:12px;animation:drift 5s linear infinite"><path d="M0 20 V10 C15 2 30 2 45 10 S75 18 90 10 S120 2 135 10 S165 18 180 10 S210 2 225 10 L240 14 V20 Z" fill="var(--phase,#c67139)" opacity=".55"/></svg>
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--phase,#c67139);opacity:.8"></div>
+</div>
+<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:300 54px Figtree,system-ui;color:var(--tp,#201e1d);font-variant-numeric:tabular-nums">{{ beat }}</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:6px;min-width:0">
+<div style="font:700 11px Figtree,system-ui;letter-spacing:3px;color:var(--phaseText,#8c491a)">{{ phaseLabel }}</div>
+<div style="display:flex;align-items:center;gap:7px">
+<div style="font:600 17px Figtree,system-ui;color:var(--tp,#201e1d)">{{ methodLabel }}</div>
+<svg width="11" height="7" viewBox="0 0 10 7"><path d="M1 1l4 4 4-4" stroke="var(--tt,#82796a)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+</div>
+<div style="font:400 12px Figtree,system-ui;color:var(--tt,#82796a)">{{ methodHint }}</div>
+</div>
+<button onClick="{{ toggleRun }}" style="flex:none;width:48px;height:48px;border-radius:50%;border:1px solid var(--line,rgba(32,30,29,.14));background:var(--raised,#f9f4ed);cursor:pointer;display:flex;align-items:center;justify-content:center" style-hover="background:var(--tint,#eee7db)">
+<div style="width:13px;height:13px;border-radius:2px;background:var(--tp,#201e1d)"></div>
+</button>
+</div>
+
+<div style="height:422px;background:var(--bg,#f5ead8);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden">
+<img src="assets/photo.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.62) contrast(.92);opacity:.9">
+<div style="position:absolute;inset:0;background:var(--wash,rgba(245,234,216,.25))"></div>
+<div style="position:absolute;left:24px;bottom:26px;right:24px;font:400 23px/1.35 Figtree,system-ui;color:var(--onMedia,#f9f4ed);text-shadow:0 1px 12px rgba(20,16,12,.55)">You have done this before. It ends.</div>
+<div style="position:absolute;right:14px;top:14px;padding:7px 15px;background:var(--scrim,rgba(249,244,237,.86));border-radius:999px;font:500 12px Figtree,system-ui;color:var(--ts,#645c50)">Take the tour</div>
+</div>
+
+<div style="height:281px;padding:10px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<sc-for list="{{ lifelines }}" as="l" hint-placeholder-count="2">
+<div style="background:var(--sageFill,#e1eecc);border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:12px">
+<div style="width:46px;height:46px;border-radius:50%;background:var(--sageDeep,#56633f);display:flex;align-items:center;justify-content:center;font:700 17px Figtree,system-ui;color:var(--sageOn,#f0fae1)">{{ l.initials }}</div>
+<div style="font:600 15px Figtree,system-ui;color:var(--sageText,#3d472b)">{{ l.name }}</div>
+</div>
+</sc-for>
+<div style="border:1.5px dashed var(--line,rgba(32,30,29,.18));border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px">
+<div style="font:300 26px Figtree,system-ui;color:var(--tt,#82796a);line-height:1">+</div>
+<div style="font:500 13px Figtree,system-ui;color:var(--tt,#82796a)">Add someone</div>
+</div>
+<div style="border:1.5px dashed var(--line,rgba(32,30,29,.18));border-radius:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px">
+<div style="font:300 26px Figtree,system-ui;color:var(--tt,#82796a);line-height:1">+</div>
+<div style="font:500 13px Figtree,system-ui;color:var(--tt,#82796a)">Make it mine</div>
+</div>
+</div>
+
+<div style="position:absolute;inset:0;border:7px solid var(--phase,#c67139);border-radius:40px;pointer-events:none;transition:border-color .5s linear"></div>
+<div style="position:absolute;inset:7px;border:1.5px solid var(--phase,#c67139);border-radius:33px;opacity:.35;pointer-events:none"></div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Guided tour</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">Same three-stop spotlight. On light the scrim is a warm dim rather than black, so the page underneath still reads as paper.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="width:390px;height:844px;background:var(--bg,#f5ead8);border-radius:40px;overflow:hidden;position:relative;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="height:141px;background:var(--surface,#ebddc5)"></div>
+<div style="height:422px;background:var(--tint,#eee7db)"></div>
+<div style="height:281px;padding:10px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="background:var(--sageFill,#e1eecc);border-radius:24px"></div>
+<div style="background:var(--sageFill,#e1eecc);border-radius:24px"></div>
+<div style="border:1.5px dashed var(--line,rgba(32,30,29,.18));border-radius:24px"></div>
+<div style="border:1.5px dashed var(--line,rgba(32,30,29,.18));border-radius:24px"></div>
+</div>
+<div style="position:absolute;top:0;left:0;right:0;height:563px;background:var(--scrimHeavy,rgba(46,43,37,.62))"></div>
+<div style="position:absolute;top:563px;left:0;right:0;bottom:0;border:2px solid var(--acc,#c67139);border-radius:28px;box-sizing:border-box;opacity:.5"></div>
+<div style="position:absolute;left:18px;right:18px;bottom:300px;background:var(--raised,#f9f4ed);border-radius:28px;padding:20px 22px 18px;box-shadow:0 12px 32px rgba(46,43,37,.32)">
+<div style="display:flex;gap:5px;margin-bottom:14px">
+<div style="width:9px;height:4px;border-radius:999px;background:var(--acc,#c67139)"></div>
+<div style="width:9px;height:4px;border-radius:999px;background:var(--acc,#c67139)"></div>
+<div style="width:24px;height:4px;border-radius:999px;background:var(--acc,#c67139)"></div>
+</div>
+<div style="font:var(--fhw,400) 22px var(--fh,Georgia,serif);color:var(--tp,#201e1d);margin-bottom:8px">Your lifelines</div>
+<div style="font:400 14px/1.5 Figtree,system-ui;color:var(--ts,#645c50);margin-bottom:18px">Four people who will pick up. Put them here once and you can reach them in two taps, without thinking, on the worst night.</div>
+<div style="display:flex;align-items:center;gap:12px">
+<div style="flex:1;height:46px;background:var(--acc,#c67139);border-radius:999px;display:flex;align-items:center;justify-content:center;font:600 15px Figtree,system-ui;color:var(--accOn,#f9f4ed)">Got it</div>
+<div style="font:500 14px Figtree,system-ui;color:var(--tt,#82796a);padding:0 6px">Skip</div>
+</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Settings</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">Appearance sits at the top: System by default, with a manual override. Rows keep the 16px rhythm but drop the all-cyan treatment — icons carry the accent, labels stay ink, so the destructive row is the only coloured label on the screen.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="width:390px;height:844px;background:var(--bg,#f5ead8);border-radius:40px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:22px;box-sizing:border-box">
+<div style="font:var(--fhw,400) 34px var(--fh,Georgia,serif);color:var(--tp,#201e1d);padding:0 22px 8px">Settings</div>
+
+<div style="font:700 11px Figtree,system-ui;letter-spacing:1.4px;color:var(--tt,#82796a);padding:0 24px 7px">APPEARANCE</div>
+<div style="margin:0 14px 10px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--tint,#eee7db);border-radius:999px;padding:4px">
+<div style="text-align:center;padding:9px 0;border-radius:999px;background:var(--acc,#c67139);font:600 14px Figtree,system-ui;color:var(--accOn,#f9f4ed)">System</div>
+<div style="text-align:center;padding:9px 0;font:500 14px Figtree,system-ui;color:var(--ts,#645c50)">Light</div>
+<div style="text-align:center;padding:9px 0;font:500 14px Figtree,system-ui;color:var(--ts,#645c50)">Dark</div>
+</div>
+
+<div style="font:700 11px Figtree,system-ui;letter-spacing:1.4px;color:var(--tt,#82796a);padding:0 24px 7px">CUSTOMIZE</div>
+
+<div style="margin:0 14px 9px;background:var(--raised,#f9f4ed);border-radius:24px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:14px;padding:12px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--accFill,#ffe1d0);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accText,#8c491a)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg></div>
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Customize Breathing</div>
+<svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="var(--tt,#82796a)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</div>
+<div style="height:1px;background:var(--line,rgba(32,30,29,.12))"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:12px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--accFill,#ffe1d0);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accText,#8c491a)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg></div>
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Grounding Media</div>
+<svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="var(--tt,#82796a)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</div>
+<div style="height:1px;background:var(--line,rgba(32,30,29,.12))"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:12px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--accFill,#ffe1d0);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accText,#8c491a)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Customize Lifelines</div>
+<svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="var(--tt,#82796a)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</div>
+</div>
+
+<div style="font:700 11px Figtree,system-ui;letter-spacing:1.4px;color:var(--tt,#82796a);padding:0 24px 7px">REMINDERS</div>
+
+<div style="margin:0 14px 9px;background:var(--raised,#f9f4ed);border-radius:24px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:14px;padding:12px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--accFill,#ffe1d0);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accText,#8c491a)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></div>
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Reminders</div>
+<svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="var(--tt,#82796a)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</div>
+</div>
+
+<div style="font:700 11px Figtree,system-ui;letter-spacing:1.4px;color:var(--tt,#82796a);padding:0 24px 7px">HELP</div>
+
+<div style="margin:0 14px 9px;background:var(--raised,#f9f4ed);border-radius:24px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:14px;padding:12px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--accFill,#ffe1d0);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accText,#8c491a)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></svg></div>
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Guided Tour</div>
+<svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="var(--tt,#82796a)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</div>
+<div style="height:1px;background:var(--line,rgba(32,30,29,.12))"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:10px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--sageFill,#e1eecc);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sageText,#3d472b)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-9 5.7a1.9 1.9 0 0 1-2 0L2 7"/></svg></div>
+<div style="flex:1"><div style="font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Send Feedback</div><div style="font:400 12px Figtree,system-ui;color:var(--ts,#645c50)">Feedback is always welcome</div></div>
+<svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="var(--tt,#82796a)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</div>
+<div style="height:1px;background:var(--line,rgba(32,30,29,.12))"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:10px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--sageFill,#e1eecc);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sageText,#3d472b)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></div>
+<div style="flex:1"><div style="font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Join our Discord</div><div style="font:400 12px Figtree,system-ui;color:var(--ts,#645c50)">Community, support and updates</div></div>
+<svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="var(--tt,#82796a)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</div>
+</div>
+
+<div style="font:700 11px Figtree,system-ui;letter-spacing:1.4px;color:var(--tt,#82796a);padding:0 24px 7px">DATA</div>
+
+<div style="margin:0 14px 9px;background:var(--raised,#f9f4ed);border-radius:24px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:14px;padding:12px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--accFill,#ffe1d0);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accText,#8c491a)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Privacy and data</div>
+<svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="var(--tt,#82796a)" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>
+</div>
+<div style="height:1px;background:var(--line,rgba(32,30,29,.12))"></div>
+<div style="display:flex;align-items:center;gap:14px;padding:12px 18px">
+<div style="width:34px;height:34px;border-radius:50%;background:var(--dangerFill,#f7ddd6);display:flex;align-items:center;justify-content:center;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--danger,#9c3b28)" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M10 11v6M14 11v6"/></svg></div>
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--danger,#9c3b28)">Erase everything</div>
+
+</div>
+</div>
+
+<div style="margin:0 14px;background:var(--sageFill,#e1eecc);border-radius:24px;padding:12px 16px;display:flex;align-items:center;gap:12px">
+<div style="flex:1;font:400 13px/1.35 Figtree,system-ui;color:var(--sageText,#3d472b)">Free, complete and private. Always.</div>
+<div style="padding:9px 16px;border-radius:999px;background:var(--sageDeep,#56633f);font:600 13px Figtree,system-ui;color:var(--sageOn,#f0fae1);flex:none">Leave a tip</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Breathing patterns</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">The beat chips now read as a timeline of the pattern rather than four loose pills — width tracks duration, so 4-7-8 looks like 4-7-8 at a glance.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="width:390px;height:844px;background:var(--bg,#f5ead8);border-radius:40px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:22px;box-sizing:border-box">
+<div style="font:var(--fhw,400) 30px var(--fh,Georgia,serif);color:var(--tp,#201e1d);padding:0 22px 16px">Breathing</div>
+<div style="margin:0 14px 18px;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ modalities }}" as="m" hint-placeholder-count="4">
+<div style="background:var(--raised,#f9f4ed);border-radius:24px;padding:16px 18px;border:1.5px solid {{ m.ring }}">
+<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:8px">
+<div style="flex:1;font:600 17px Figtree,system-ui;color:var(--tp,#201e1d)">{{ m.label }}</div>
+<div style="width:22px;height:22px;border-radius:50%;background:{{ m.dotBg }};display:flex;align-items:center;justify-content:center;flex:none">
+<svg width="12" height="9" viewBox="0 0 12 9"><path d="M1 4.6l3.4 3.2L11 1.2" stroke="{{ m.dotFg }}" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+</div>
+</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:var(--ts,#645c50);margin-bottom:14px">{{ m.description }}</div>
+<div style="display:flex;gap:3px;height:26px">
+<sc-for list="{{ m.bars }}" as="b" hint-placeholder-count="4">
+<div style="flex:{{ b.flex }};background:{{ b.bg }};border-radius:8px;display:flex;align-items:center;justify-content:center;font:600 11px Figtree,system-ui;color:{{ b.fg }}">{{ b.n }}</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="margin:0 14px;background:var(--raised,#f9f4ed);border-radius:24px;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;gap:14px">
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Haptics</div>
+<div style="width:54px;height:32px;border-radius:999px;background:var(--acc,#c67139);position:relative;flex:none"><div style="position:absolute;top:3px;right:3px;width:26px;height:26px;border-radius:50%;background:#fff"></div></div>
+</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:var(--ts,#645c50)">A soft pulse on every beat, so you can follow the pattern with the phone in your pocket or face-down.</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Grounding anchor</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">The placement box previews at the real 390:422 zone ratio, and the photo is washed the way the system treats every image.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="width:390px;height:844px;background:var(--bg,#f5ead8);border-radius:40px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:22px;box-sizing:border-box">
+<div style="font:var(--fhw,400) 30px/1.15 var(--fh,Georgia,serif);color:var(--tp,#201e1d);padding:0 22px 6px">Your anchor</div>
+<div style="font:400 14px/1.5 Figtree,system-ui;color:var(--ts,#645c50);padding:0 22px 18px">One thing that pulls you back. A face, a place, or a sentence you need to hear.</div>
+<div style="margin:0 14px 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--tint,#eee7db);border-radius:999px;padding:4px">
+<div style="text-align:center;padding:10px 0;border-radius:999px;background:var(--acc,#c67139);font:600 13px Figtree,system-ui;color:var(--accOn,#f9f4ed)">Photo</div>
+<div style="text-align:center;padding:10px 0;font:500 13px Figtree,system-ui;color:var(--ts,#645c50)">Video</div>
+<div style="text-align:center;padding:10px 0;font:500 13px Figtree,system-ui;color:var(--ts,#645c50)">Words</div>
+<div style="text-align:center;padding:10px 0;font:500 13px Figtree,system-ui;color:var(--ts,#645c50)">None</div>
+</div>
+<div style="margin:0 14px 14px;background:var(--raised,#f9f4ed);border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="font:400 13px/1.5 Figtree,system-ui;color:var(--ts,#645c50)">Pinch to scale, drag to move. This is exactly how it will sit on your home screen.</div>
+<div style="aspect-ratio:390/422;border-radius:20px;overflow:hidden;position:relative;background:var(--tint,#eee7db)">
+<img src="assets/photo.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.62) contrast(.92)">
+<div style="position:absolute;inset:0;border:1.5px dashed var(--onMediaLine,rgba(249,244,237,.7));border-radius:20px"></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div style="font:600 14px Figtree,system-ui;color:var(--accText,#8c491a)">Reset placement</div>
+<div style="padding:9px 18px;border-radius:999px;background:var(--accFill,#ffe1d0);font:600 14px Figtree,system-ui;color:var(--accText,#8c491a)">Change</div>
+</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Lifelines</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">Reordering is tap-and-drag on the grip, not arrows — try it, both columns move together. Call and text are filled 44px circles rather than bare glyphs, because this is the row you use when your hands are shaking.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="width:390px;height:844px;background:var(--bg,#f5ead8);border-radius:40px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:22px;box-sizing:border-box">
+<div style="font:var(--fhw,400) 30px var(--fh,Georgia,serif);color:var(--tp,#201e1d);padding:0 22px 6px">Lifelines</div>
+<div style="font:400 14px/1.5 Figtree,system-ui;color:var(--ts,#645c50);padding:0 22px 18px">Up to four. The top one shows first at home.</div>
+<div style="margin:0 14px 14px;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ lifelineRows }}" as="l" hint-placeholder-count="3">
+<div draggable="{{ true }}" onDragStart="{{ l.dragStart }}" onDragEnter="{{ l.dragEnter }}" onDragOver="{{ allowDrop }}" onDragEnd="{{ dragEnd }}" style="background:var(--raised,#f9f4ed);border-radius:24px;padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:grab;opacity:{{ l.opacity }};box-shadow:{{ l.shadow }};transition:box-shadow .15s ease">
+<div style="display:grid;grid-template-columns:4px 4px;gap:4px;color:var(--tt,#82796a);padding:2px 4px 2px 0;flex:none">
+<div style="width:4px;height:4px;border-radius:50%;background:currentColor"></div>
+<div style="width:4px;height:4px;border-radius:50%;background:currentColor"></div>
+<div style="width:4px;height:4px;border-radius:50%;background:currentColor"></div>
+<div style="width:4px;height:4px;border-radius:50%;background:currentColor"></div>
+<div style="width:4px;height:4px;border-radius:50%;background:currentColor"></div>
+<div style="width:4px;height:4px;border-radius:50%;background:currentColor"></div>
+</div>
+<div style="width:46px;height:46px;border-radius:50%;background:var(--sageDeep,#56633f);display:flex;align-items:center;justify-content:center;font:700 16px Figtree,system-ui;color:var(--sageOn,#f0fae1);flex:none">{{ l.initials }}</div>
+<div style="flex:1;min-width:0">
+<div style="font:600 16px Figtree,system-ui;color:var(--tp,#201e1d)">{{ l.name }}</div>
+<div style="font:400 13px Figtree,system-ui;color:var(--tt,#82796a)">{{ l.phone }}</div>
+</div>
+<div style="width:44px;height:44px;border-radius:50%;background:var(--acc,#c67139);display:flex;align-items:center;justify-content:center;flex:none">
+<svg width="18" height="18" viewBox="0 0 15 15"><path d="M2 3.2c0 5.4 4.4 9.8 9.8 9.8l1.4-2.6-3-1.4-1.3 1.3a9 9 0 01-3.4-3.4l1.3-1.3-1.4-3z" fill="var(--accOn,#f9f4ed)"/></svg>
+</div>
+<div style="width:44px;height:44px;border-radius:50%;background:var(--accFill,#ffe1d0);display:flex;align-items:center;justify-content:center;flex:none">
+<svg width="18" height="18" viewBox="0 0 15 15"><path d="M1.4 6.6C1.4 3.9 4.1 2 7.5 2s6.1 1.9 6.1 4.6-2.7 4.6-6.1 4.6c-.7 0-1.4-.1-2-.2L2.3 12.5l.7-2.3a4.6 4.6 0 01-1.6-3.6z" fill="var(--accText,#8c491a)"/></svg>
+</div>
+</div>
+</sc-for>
+<div style="border:1.5px dashed var(--line,rgba(32,30,29,.18));border-radius:24px;padding:16px;display:flex;align-items:center;justify-content:center;gap:8px;font:600 15px Figtree,system-ui;color:var(--accText,#8c491a)">
+<span style="font-weight:300;font-size:22px;line-height:1">+</span> Add a lifeline
+</div>
+</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:var(--ts,#645c50);padding:0 22px">Press and hold a row, then drag it into the order you'd actually reach for. Tap a name to edit, or call and text straight from here.</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Reminders</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">Times become large tappable pills instead of iOS list rows — the same control, sized for the rest of the app.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="width:390px;height:844px;background:var(--bg,#f5ead8);border-radius:40px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:22px;box-sizing:border-box">
+<div style="font:var(--fhw,400) 30px var(--fh,Georgia,serif);color:var(--tp,#201e1d);padding:0 22px 16px">Reminders</div>
+<div style="margin:0 14px 18px;background:var(--raised,#f9f4ed);border-radius:24px;padding:16px 18px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;align-items:center;gap:14px">
+<div style="flex:1;font:500 16px Figtree,system-ui;color:var(--tp,#201e1d)">Daily check-ins</div>
+<div style="width:54px;height:32px;border-radius:999px;background:var(--acc,#c67139);position:relative;flex:none"><div style="position:absolute;top:3px;right:3px;width:26px;height:26px;border-radius:50%;background:#fff"></div></div>
+</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:var(--ts,#645c50)">A gentle nudge to breathe before you need to. You choose when, and how often — up to three a day.</div>
+</div>
+<div style="font:700 11px Figtree,system-ui;letter-spacing:1.4px;color:var(--tt,#82796a);padding:0 24px 7px">TIMES</div>
+<div style="margin:0 14px;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ reminders }}" as="r" hint-placeholder-count="2">
+<div style="background:var(--raised,#f9f4ed);border-radius:24px;padding:12px 14px 12px 18px;display:flex;align-items:center;gap:12px">
+<div style="flex:1;font:600 26px Figtree,system-ui;color:var(--tp,#201e1d);font-variant-numeric:tabular-nums">{{ r.time }}</div>
+<div style="font:500 13px Figtree,system-ui;color:var(--tt,#82796a)">{{ r.note }}</div>
+<div style="width:38px;height:38px;border-radius:50%;background:var(--dangerFill,#f7ddd6);display:flex;align-items:center;justify-content:center;flex:none"><div style="width:14px;height:2.5px;border-radius:2px;background:var(--danger,#9c3b28)"></div></div>
+</div>
+</sc-for>
+<div style="border:1.5px dashed var(--line,rgba(32,30,29,.18));border-radius:24px;padding:16px;display:flex;align-items:center;justify-content:center;gap:8px;font:600 15px Figtree,system-ui;color:var(--accText,#8c491a)">
+<span style="font-weight:300;font-size:22px;line-height:1">+</span> Add a time
+</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div>
+<div style="font:var(--fhw,400) 23px var(--fh,Georgia,serif);color:#201e1d;margin-bottom:4px">Watch</div>
+<div style="font:400 13px/1.5 Figtree,system-ui;color:#645c50;margin:0 0 18px;max-width:58ch">On a 44mm face the trough becomes the whole screen: the fill is the breath, the number is secondary. Edge band stays.</div>
+<div style="display:flex;gap:28px;flex-wrap:wrap">
+<sc-for list="{{ themes }}" as="t" hint-placeholder-count="2">
+<div style="{{ t.vars }}">
+<div style="font:600 10px ui-monospace,monospace;letter-spacing:1.2px;color:#82796a;margin-bottom:8px">{{ t.name }}</div>
+<div style="display:flex;gap:16px">
+<div style="width:198px;height:242px;background:var(--surface,#ebddc5);border-radius:46px;position:relative;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="position:absolute;left:0;right:0;bottom:0;height:{{ fillH }};background:var(--phaseSoft,#eaddcd);transition:height var(--fillDur,1s) linear">
+<svg viewBox="0 0 240 20" preserveAspectRatio="none" style="position:absolute;top:-13px;left:0;width:200%;height:14px;animation:drift 5s linear infinite"><path d="M0 20 V10 C15 2 30 2 45 10 S75 18 90 10 S120 2 135 10 S165 18 180 10 S210 2 225 10 L240 14 V20 Z" fill="var(--phase,#c67139)" opacity=".55"/></svg>
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--phase,#c67139);opacity:.8"></div>
+</div>
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px">
+<div style="font:300 58px/1 Figtree,system-ui;color:var(--tp,#201e1d);font-variant-numeric:tabular-nums">{{ beat }}</div>
+<div style="font:700 10px Figtree,system-ui;letter-spacing:2.6px;color:var(--phaseText,#8c491a)">{{ phaseLabel }}</div>
+</div>
+<div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font:600 12px Figtree,system-ui;color:var(--ts,#645c50)">{{ methodLabel }}</div>
+<div style="position:absolute;inset:0;border:5px solid var(--phase,#c67139);border-radius:46px;pointer-events:none;transition:border-color .5s linear"></div>
+</div>
+<div style="width:198px;height:242px;border-radius:46px;position:relative;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<img src="assets/photo.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.62) contrast(.92)">
+</div>
+<div style="width:198px;height:242px;background:var(--bg,#f5ead8);border-radius:46px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+<div style="width:60px;height:60px;border-radius:50%;background:var(--sageDeep,#56633f);display:flex;align-items:center;justify-content:center;font:700 21px Figtree,system-ui;color:var(--sageOn,#f0fae1)">MR</div>
+<div style="font:600 17px Figtree,system-ui;color:var(--tp,#201e1d)">Maya R.</div>
+<div style="padding:8px 20px;border-radius:999px;background:var(--acc,#c67139);font:600 13px Figtree,system-ui;color:var(--accOn,#f9f4ed)">Call</div>
+</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+</div>
+
+<div style="margin-top:52px;padding-top:24px;border-top:1px solid rgba(32,30,29,.14);font:400 13px/1.6 Figtree,system-ui;color:#645c50;max-width:64ch">
+Open questions for you: the destructive red (<span style="color:#9c3b28;font-weight:600">#9c3b28</span>) is the one colour not already in the system — say the word and I'll pull it back to a deep terracotta. You also mentioned the app icon colours are open; if you want, I can propose a cream-ground version of the icon so it sits in the same family as the light scheme.
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:900,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { mid: "box", pi: 0, beat: 4, running: true, fillH: "10%", fillDur: "1s", headline: "instrument", order: [0, 1, 2], dragIdx: null };
+
+  fonts = {
+    instrument: { id: "1a", name: "Instrument Serif", family: '"Instrument Serif",Georgia,serif', weight: 400, note: "A quiet editorial serif — high contrast, narrow, almost no personality of its own. It lets the mark do the talking." },
+    bricolage: { id: "1b", name: "Bricolage Grotesque", family: '"Bricolage Grotesque",system-ui,sans-serif', weight: 600, note: "A contemporary grotesque with slightly soft joints. Reads as a modern health app rather than a book." },
+    petrona: { id: "1c", name: "Petrona", family: '"Petrona",Georgia,serif', weight: 600, note: "Low-contrast warm serif — closest in temperature to the cream ground, and the gentlest of the three at small sizes." }
+  };
+
+  applyFont() {
+    const f = this.fonts[this.state.headline] || this.fonts.instrument;
+    document.documentElement.style.setProperty("--fh", f.family);
+    document.documentElement.style.setProperty("--fhw", String(f.weight));
+  }
+
+  componentDidUpdate() { this.applyFont(); }
+
+  reorder(to) {
+    const { dragIdx, order } = this.state;
+    if (dragIdx === null || dragIdx === to) return;
+    const o = order.slice();
+    const [moved] = o.splice(dragIdx, 1);
+    o.splice(to, 0, moved);
+    this.setState({ order: o, dragIdx: to });
+  }
+
+  patterns = {
+    box:      { label: "Box breathing",   phases: [["INHALE",4,"in"],["HOLD",4,"hold"],["EXHALE",4,"out"],["HOLD",4,"rest"]] },
+    p478:     { label: "4-7-8",           phases: [["INHALE",4,"in"],["HOLD",7,"hold"],["EXHALE",8,"out"]] },
+    resonant: { label: "Resonant",        phases: [["INHALE",5,"in"],["EXHALE",5,"out"]] },
+    extended: { label: "Extended exhale", phases: [["INHALE",4,"in"],["EXHALE",8,"out"]] }
+  };
+
+  componentDidMount() {
+    this.applyFont();
+    this.begin(0);
+    this.timer = setInterval(() => this.tick(), 1000);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+
+  phases() { return this.patterns[this.state.mid].phases; }
+
+  begin(i) {
+    const [, beats, type] = this.phases()[i];
+    const top = type === "in" || type === "hold";
+    this.setState({
+      pi: i, beat: beats,
+      fillH: top ? "100%" : "10%",
+      fillDur: (type === "hold" || type === "rest") ? "0.4s" : beats + "s"
+    });
+  }
+
+  tick() {
+    if (!this.state.running) return;
+    if (this.state.beat > 1) this.setState(s => ({ beat: s.beat - 1 }));
+    else this.begin((this.state.pi + 1) % this.phases().length);
+  }
+
+  pick(id) {
+    this.setState({ mid: id }, () => this.begin(0));
+  }
+
+  renderVals() {
+    const [label, , type] = this.phases()[this.state.pi];
+    const p = this.patterns[this.state.mid];
+
+    const light = {
+      "--bg": "#f5ead8", "--surface": "#ebddc5", "--raised": "#f9f4ed", "--tint": "#eee7db",
+      "--line": "rgba(32,30,29,.14)", "--tp": "#201e1d", "--ts": "#645c50", "--tt": "#82796a",
+      "--acc": "#c67139", "--accOn": "#f9f4ed", "--accText": "#8c491a", "--accFill": "#ffe1d0",
+      "--sageFill": "#e1eecc", "--sageDeep": "#56633f", "--sageOn": "#f0fae1", "--sageText": "#3d472b",
+      "--danger": "#9c3b28", "--dangerFill": "#f7ddd6",
+      "--scrim": "rgba(249,244,237,.86)", "--scrimHeavy": "rgba(46,43,37,.58)",
+      "--wash": "rgba(245,234,216,.22)", "--onMedia": "#f9f4ed", "--onMediaLine": "rgba(249,244,237,.75)",
+      "--iconImg": "url(uploads/assets-1787537623130-hjqc.png)",
+      phase: { in: "#c67139", hold: "#8fa073", out: "#4a6f82", rest: "#a19786" },
+      soft:  { in: "#ffe1d0", hold: "#e1eecc", out: "#dbe6ec", rest: "#eee7db" },
+      text:  { in: "#8c491a", hold: "#56633f", out: "#33566a", rest: "#645c50" }
+    };
+    const dark = {
+      "--bg": "#17130f", "--surface": "#221c17", "--raised": "#2c251e", "--tint": "#3a3129",
+      "--line": "rgba(245,234,216,.14)", "--tp": "#f5ead8", "--ts": "#a19786", "--tt": "#82796a",
+      "--acc": "#f6a06b", "--accOn": "#2e2b25", "--accText": "#f6a06b", "--accFill": "#4a3325",
+      "--sageFill": "#333a28", "--sageDeep": "#aebf92", "--sageOn": "#272e1b", "--sageText": "#ccdbb2",
+      "--danger": "#e0836f", "--dangerFill": "#48281f",
+      "--scrim": "rgba(44,37,30,.88)", "--scrimHeavy": "rgba(10,8,6,.68)",
+      "--wash": "rgba(23,19,15,.34)", "--onMedia": "#f5ead8", "--onMediaLine": "rgba(245,234,216,.6)",
+      "--iconImg": "url(uploads/assets-1787537623032-t5so.png)",
+      phase: { in: "#f6a06b", hold: "#aebf92", out: "#8fb3c4", rest: "#82796a" },
+      soft:  { in: "#3f2c1f", hold: "#2f3626", out: "#26333a", rest: "#3a3129" },
+      text:  { in: "#f6a06b", hold: "#ccdbb2", out: "#a9cad8", rest: "#a19786" }
+    };
+
+    const themeVars = (t) => {
+      const { phase, soft, text, ...rest } = t;
+      const kinds = {};
+      Object.keys(soft).forEach(k => { kinds["--soft-" + k] = soft[k]; kinds["--text-" + k] = text[k]; });
+      return { ...rest, ...kinds, "--phase": phase[type], "--phaseSoft": soft[type], "--phaseText": text[type], "--fillDur": this.state.fillDur };
+    };
+
+    const mkBars = (id) => this.patterns[id].phases.map(([, n, k]) => ({ n: String(n), flex: n, bg: "var(--soft-" + k + ")", fg: "var(--text-" + k + ")" }));
+
+    const modalities = Object.entries(this.patterns).map(([id, pat]) => ({
+      label: pat.label,
+      description: {
+        box: "Even on all four sides. Steadies the nervous system when everything feels lopsided.",
+        p478: "The long exhale does the work. Fastest route out of a spike.",
+        resonant: "A slow, even rhythm. Good for staying calm rather than getting calm.",
+        extended: "Twice as long out as in. Simple to follow when you can't concentrate."
+      }[id],
+      bars: mkBars(id),
+      ring: id === this.state.mid ? "var(--acc,#c67139)" : "transparent",
+      dotBg: id === this.state.mid ? "var(--acc,#c67139)" : "var(--tint,#eee7db)",
+      dotFg: id === this.state.mid ? "var(--accOn,#f9f4ed)" : "transparent"
+    }));
+
+    const people = [
+      { initials: "MR", name: "Maya R.", phone: "(415) 555-0132" },
+      { initials: "DK", name: "Dad", phone: "(415) 555-0198" },
+      { initials: "SS", name: "Sponsor — Sam", phone: "(628) 555-0114" }
+    ];
+
+    return {
+      themes: [
+        { name: "LIGHT", vars: themeVars(light) },
+        { name: "DARK",  vars: themeVars(dark) }
+      ],
+      beat: this.state.beat,
+      phaseLabel: this.state.running ? label : "PAUSED",
+      fillH: this.state.fillH,
+      methodLabel: p.label,
+      methodHint: p.phases.map(([, n, k]) => n + "s " + ({ in: "in", out: "out", hold: "hold", rest: "hold" })[k]).join(" · "),
+      runLabel: this.state.running ? "Pause" : "Resume",
+      toggleRun: () => this.setState(s => ({ running: !s.running })),
+      methods: Object.entries(this.patterns).map(([id, pat]) => ({
+        label: pat.label,
+        pick: () => this.pick(id),
+        bg: id === this.state.mid ? "#c67139" : "#eee7db",
+        fg: id === this.state.mid ? "#f9f4ed" : "#474238"
+      })),
+      modalities,
+      lifelines: [{ initials: "MR", name: "Maya R." }, { initials: "DK", name: "Dad" }],
+      lifelineRows: this.state.order.map((src, pos) => ({
+        ...people[src],
+        opacity: this.state.dragIdx === pos ? ".45" : "1",
+        shadow: this.state.dragIdx === pos ? "0 12px 28px rgba(46,43,37,.3)" : "none",
+        dragStart: () => this.setState({ dragIdx: pos }),
+        dragEnter: () => this.reorder(pos)
+      })),
+      allowDrop: (e) => e.preventDefault(),
+      dragEnd: () => this.setState({ dragIdx: null }),
+      fontOptions: Object.entries(this.fonts).map(([key, f]) => ({
+        id: f.id, name: f.name, note: f.note, family: f.family, weight: String(f.weight),
+        pick: () => this.setState({ headline: key }),
+        ring: key === this.state.headline ? "#c67139" : "rgba(32,30,29,.12)",
+        badgeBg: key === this.state.headline ? "#c67139" : "rgba(32,30,29,.08)",
+        badgeFg: key === this.state.headline ? "#f9f4ed" : "#201e1d"
+      })),
+      reminders: [{ time: "8:30 AM", note: "before work" }, { time: "9:45 PM", note: "wind down" }]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

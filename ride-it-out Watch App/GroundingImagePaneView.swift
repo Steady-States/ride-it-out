@@ -11,7 +11,10 @@ struct GroundingImagePaneView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
+                    .saturation(0.62)
+                    .contrast(0.92)
                     .ignoresSafeArea()
+                    .overlay(Color.mediaWash.ignoresSafeArea())
             } else {
                 VStack(spacing: 8) {
                     Image(systemName: "photo.on.rectangle.angled")

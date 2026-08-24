@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><style>body{margin:0;background:#f5ead8;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif}a{color:#8c491a}a:hover{color:#b2622d}</style></helmet>
+
+<div style="padding:44px 48px 60px;font-family:-apple-system,system-ui,sans-serif">
+<div style="max-width:760px;margin-bottom:40px">
+<div style="font:600 11px ui-monospace,Menlo,monospace;letter-spacing:1.5px;color:#8c491a;margin-bottom:10px">BASELINE · RECREATED FROM SOURCE</div>
+<h1 style="font:400 34px/1.15 Caprasimo,Georgia,serif;color:#201e1d;margin:0 0 14px">Ride It Out — the build as it stands today</h1>
+<p style="font:400 15px/1.6 system-ui,sans-serif;color:#474238;margin:0 0 10px;max-width:62ch;text-wrap:pretty">Every screen below is rebuilt from the SwiftUI in <code style="font:12px ui-monospace,monospace;background:#eee7db;padding:1px 5px;border-radius:5px">Steady-States/ride-it-out</code> at the values in the source — <code style="font:12px ui-monospace,monospace;background:#eee7db;padding:1px 5px;border-radius:5px">Colors.swift</code>, the 1/6 · 3/6 · 2/6 zone split in <code style="font:12px ui-monospace,monospace;background:#eee7db;padding:1px 5px;border-radius:5px">MainView</code>, and each view's own font sizes, paddings and radii. This is the reference I'll design against, not a proposal.</p>
+<p style="font:400 13px/1.6 system-ui,sans-serif;color:#645c50;margin:0;max-width:62ch">Two things I could not copy: SF Symbols (drawn here as plain geometric stand-ins) and your grounding media (shown as the empty state, which is what a new user actually sees).</p>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start">
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">WelcomeView</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;position:relative;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="position:absolute;inset:0;border:20px solid #4FC3F7;filter:blur(40px);opacity:.05;pointer-events:none"></div>
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end">
+<div style="padding:0 24px 48px">
+<div style="font:700 40px/1.1 -apple-system,system-ui;letter-spacing:-1.2px;color:#F0F2FF;margin-bottom:10px">Ride It Out</div>
+<div style="font:400 20px/1.4 -apple-system,system-ui;color:#8A8FAD;white-space:pre-line">Your partner in
+serenity.</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:0 24px">
+<div style="height:54px;background:#4FC3F7;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 17px -apple-system,system-ui;color:#0D0F1A">Get Help Now</div>
+<div style="height:54px;border:1.5px solid #4FC3F7;border-radius:12px;display:flex;align-items:center;justify-content:center;font:600 17px -apple-system,system-ui;color:#4FC3F7">Set Up My Ride</div>
+</div>
+<div style="height:1px;background:#2A2D45;margin:16px 24px"></div>
+<div style="padding:0 24px 44px;display:flex;flex-direction:column;gap:6px;text-align:center">
+<div style="font:400 14px -apple-system,system-ui;color:#8A8FAD">Breathe. Ground yourself. Call someone.</div>
+<div style="font:400 12px -apple-system,system-ui;color:#555875">* No account required. All data stays on your device.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">MainView — no media set</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;position:relative;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="height:140.67px;background:#141729;display:flex;border-bottom:.5px solid #2A2D45;box-sizing:border-box">
+<div style="flex:1;display:flex;flex-direction:column;gap:3px;justify-content:center;padding-left:14px">
+<div style="display:flex;align-items:center;gap:10px">
+<div style="font:600 11px -apple-system,system-ui;letter-spacing:3px;color:#8A8FAD">INHALE</div>
+<div style="width:20px;height:20px;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 11 11"><rect width="11" height="11" rx="1.5" fill="#8A8FAD"/></svg></div>
+</div>
+<div style="font:200 72px/1 -apple-system,system-ui;color:#F0F2FF;font-variant-numeric:tabular-nums">3</div>
+</div>
+<div style="width:1px;background:#2A2D45;margin:12px 0"></div>
+<div style="flex:1;display:flex;flex-direction:column;gap:5px;justify-content:center;padding-left:16px;padding-right:10px">
+<div style="font:600 10px -apple-system,system-ui;letter-spacing:2px;color:#555875">METHOD</div>
+<div style="display:flex;align-items:center;gap:5px">
+<div style="font:600 14px -apple-system,system-ui;color:#F0F2FF">Box Breathing</div>
+<svg width="10" height="7" viewBox="0 0 10 7"><path d="M1 1l4 4 4-4" stroke="#8A8FAD" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+</div>
+<div style="font:400 11px -apple-system,system-ui;color:#555875">4s in · 4s hold · 4s out · 4s hold</div>
+</div>
+</div>
+<div style="height:422px;background:#0D0F1A;position:relative;display:flex;align-items:center;justify-content:center">
+<div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+<svg width="42" height="34" viewBox="0 0 42 34" style="opacity:.5"><rect x="7" y="7" width="30" height="23" rx="3" stroke="#8A8FAD" stroke-width="2" fill="none"/><path d="M10 26l8-8 6 5 5-4 6 7" stroke="#8A8FAD" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M2 10l4-4" stroke="#8A8FAD" stroke-width="2" stroke-linecap="round"/></svg>
+<div style="font:500 15px -apple-system,system-ui;color:rgba(138,143,173,.6)">Add something that grounds you</div>
+</div>
+<div style="position:absolute;right:12px;bottom:12px;padding:5px 12px;background:rgba(28,32,56,.87);border:1px solid #2A2D45;border-radius:999px;font:400 12px -apple-system,system-ui;color:#555875">Take tour</div>
+</div>
+<div style="height:281.33px;padding:8px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="background:#2E7D8C;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px">
+<div style="width:38px;height:38px;border-radius:50%;background:#3D6B8C;display:flex;align-items:center;justify-content:center;font:700 15px -apple-system,system-ui;color:#F0F2FF">MR</div>
+<div style="font:600 14px -apple-system,system-ui;color:#F0F2FF">Maya R.</div>
+</div>
+<div style="background:#2E7D8C;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px">
+<div style="width:38px;height:38px;border-radius:50%;background:#2E7D5C;display:flex;align-items:center;justify-content:center;font:700 15px -apple-system,system-ui;color:#F0F2FF">DK</div>
+<div style="font:600 14px -apple-system,system-ui;color:#F0F2FF">Dad</div>
+</div>
+<div style="background:#1C2A30;border:1.5px dashed #2A2D45;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+<div style="font:400 20px -apple-system,system-ui;color:#555875">+</div>
+<div style="font:500 12px -apple-system,system-ui;color:#555875">Add a Contact</div>
+</div>
+<div style="background:#1C2A30;border:1.5px dashed #2A2D45;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+<div style="font:400 20px -apple-system,system-ui;color:#555875">+</div>
+<div style="font:500 12px -apple-system,system-ui;color:#555875">Customize My App</div>
+</div>
+</div>
+<div style="position:absolute;inset:0;border:16px solid #FFB347;filter:blur(24px);opacity:.49;pointer-events:none"></div>
+<div style="position:absolute;inset:0;border:8px solid #FFB347;filter:blur(12px);opacity:.74;pointer-events:none"></div>
+<div style="position:absolute;inset:0;border:3px solid #FFB347;filter:blur(4px);opacity:.82;pointer-events:none"></div>
+<div style="position:absolute;top:0;right:4px;width:44px;height:44px;display:flex;align-items:center;justify-content:center">
+<svg width="17" height="17" viewBox="0 0 17 17"><circle cx="8.5" cy="8.5" r="3" stroke="#555875" stroke-width="1.6" fill="none"/><circle cx="8.5" cy="8.5" r="7" stroke="#555875" stroke-width="1.6" fill="none" stroke-dasharray="2.5 2.2"/></svg>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">TourOverlayView — stop 3 of 3</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;position:relative;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="height:140.67px;background:#141729;border-bottom:.5px solid #2A2D45;box-sizing:border-box;display:flex;align-items:center;padding-left:14px">
+<div><div style="font:600 11px -apple-system,system-ui;letter-spacing:3px;color:#8A8FAD">EXHALE</div><div style="font:200 72px/1 -apple-system,system-ui;color:#F0F2FF">2</div></div>
+</div>
+<div style="height:422px;background:#0D0F1A"></div>
+<div style="height:281.33px;padding:8px;box-sizing:border-box;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="background:#2E7D8C;border-radius:12px"></div><div style="background:#2E7D8C;border-radius:12px"></div>
+<div style="background:#1C2A30;border:1.5px dashed #2A2D45;border-radius:12px"></div><div style="background:#1C2A30;border:1.5px dashed #2A2D45;border-radius:12px"></div>
+</div>
+<div style="position:absolute;top:0;left:0;right:0;height:562.67px;background:rgba(0,0,0,.68)"></div>
+<div style="position:absolute;top:562.67px;left:0;right:0;height:281.33px;border:1px solid rgba(79,195,247,.25);box-sizing:border-box"></div>
+<div style="position:absolute;left:16px;right:16px;bottom:293.33px;background:#1C2038;border:1px solid #2A2D45;border-radius:16px;padding:16px 18px 14px;box-shadow:0 8px 20px rgba(0,0,0,.65)">
+<div style="display:flex;gap:5px;margin-bottom:12px">
+<div style="width:8px;height:3px;border-radius:2px;background:#4FC3F7"></div>
+<div style="width:8px;height:3px;border-radius:2px;background:#4FC3F7"></div>
+<div style="width:20px;height:3px;border-radius:2px;background:#4FC3F7"></div>
+</div>
+<div style="font:700 16px -apple-system,system-ui;color:#F0F2FF;margin-bottom:6px">Your lifelines</div>
+<div style="font:400 13px/1.32 -apple-system,system-ui;color:#8A8FAD;margin-bottom:14px">These are the people who will pick up. Add them in settings and you can call them directly from here, any time, in seconds.</div>
+<div style="display:flex;align-items:center;gap:10px">
+<div style="flex:1;height:40px;background:#4FC3F7;border-radius:10px;display:flex;align-items:center;justify-content:center;font:600 14px -apple-system,system-ui;color:#0D0F1A">Got it</div>
+<div style="font:400 13px -apple-system,system-ui;color:#555875">Skip</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">SettingsView</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);display:flex;flex-direction:column">
+<div style="font:800 30px -apple-system,system-ui;color:#F0F2FF;padding:10px 20px">Settings</div>
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">CUSTOMIZE</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><path d="M2 6h9a2.5 2.5 0 10-2.5-2.5M2 12h11a2.5 2.5 0 11-2.5 2.5M2 9h14" stroke="#4FC3F7" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg><div style="flex:1;font:500 14px -apple-system,system-ui;color:#4FC3F7">Customize Breathing</div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+<div style="height:1px;background:#2A2D45"></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><rect x="3" y="4" width="13" height="10" rx="2" stroke="#4FC3F7" stroke-width="1.5" fill="none"/><path d="M5 12l4-4 3 2.5 2-1.8 2 3.3" stroke="#4FC3F7" stroke-width="1.5" fill="none"/></svg><div style="flex:1;font:500 14px -apple-system,system-ui;color:#4FC3F7">Grounding Media</div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+<div style="height:1px;background:#2A2D45"></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="6.5" cy="6" r="3" fill="#4FC3F7"/><circle cx="12.5" cy="7" r="2.4" fill="#4FC3F7"/><path d="M1 15c.6-3 2.8-4.5 5.5-4.5S11.4 12 12 15z" fill="#4FC3F7"/></svg><div style="flex:1;font:500 14px -apple-system,system-ui;color:#4FC3F7">Customize Lifelines</div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+</div>
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">REMINDERS</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px"><div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><path d="M4 12V8a5 5 0 0110 0v4l1.5 2h-13z" stroke="#4FC3F7" stroke-width="1.5" fill="none"/><path d="M7.5 15a1.7 1.7 0 003 0" stroke="#4FC3F7" stroke-width="1.5" fill="none"/></svg><div style="flex:1;font:500 14px -apple-system,system-ui;color:#4FC3F7">Reminders</div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div></div>
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">HELP</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><circle cx="9" cy="9" r="7.2" stroke="#4FC3F7" stroke-width="1.5" fill="none"/><path d="M7.2 5.8l5 3.2-5 3.2z" fill="#4FC3F7"/></svg><div style="flex:1;font:500 14px -apple-system,system-ui;color:#4FC3F7">Guided Tour</div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+<div style="height:1px;background:#2A2D45"></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="#4FC3F7" stroke-width="1.5" fill="none"/><path d="M2.5 5l6.5 5 6.5-5" stroke="#4FC3F7" stroke-width="1.5" fill="none"/></svg><div style="flex:1"><div style="font:500 14px -apple-system,system-ui;color:#4FC3F7">Send Feedback</div><div style="font:400 11px -apple-system,system-ui;color:#555875">Feedback is always welcome!</div></div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+<div style="height:1px;background:#2A2D45"></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><rect x="1" y="3" width="11" height="8" rx="2.5" fill="#4FC3F7"/><rect x="7" y="8" width="10" height="7" rx="2.5" fill="#4FC3F7"/></svg><div style="flex:1"><div style="font:500 14px -apple-system,system-ui;color:#4FC3F7">Join our Discord</div><div style="font:400 11px -apple-system,system-ui;color:#555875">Community, support &amp; updates</div></div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+</div>
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">DATA</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;overflow:hidden">
+<div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><rect x="4" y="8" width="10" height="7" rx="1.6" fill="#4FC3F7"/><path d="M6.3 8V5.8a2.7 2.7 0 015.4 0V8" stroke="#4FC3F7" stroke-width="1.5" fill="none"/></svg><div style="flex:1;font:500 14px -apple-system,system-ui;color:#4FC3F7">Privacy &amp; Data</div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+<div style="height:1px;background:#2A2D45"></div>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18" style="flex:none"><path d="M3.5 5h11M6 5V3.4h6V5M5 5l.8 10h6.4L13 5z" stroke="#E05252" stroke-width="1.5" fill="none" stroke-linejoin="round"/></svg><div style="flex:1;font:500 14px -apple-system,system-ui;color:#E05252">Reset all data</div><svg width="8" height="13" viewBox="0 0 8 13"><path d="M1.5 1.5L6 6.5l-4.5 5" stroke="#E05252" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+</div>
+<div style="font:400 12px/1.35 -apple-system,system-ui;color:#8A8FAD;padding:4px 24px 8px">Add the Ride It Out widget to your home screen or lock screen for instant access. Long press your home screen and tap the + button to get started.</div>
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">SUPPORT</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px">
+<div style="font:400 12px/1.35 -apple-system,system-ui;color:#8A8FAD">This app will always be fully-functional, free, and private. Support development with an optional one-time tip.</div>
+<div style="min-height:36px;background:#4FC3F7;border-radius:10px;display:flex;align-items:center;justify-content:center;font:700 13px -apple-system,system-ui;color:#0D0F1A">Support Ride It Out</div>
+</div>
+<div style="text-align:center;padding:4px 0 12px;display:flex;flex-direction:column;gap:2px">
+<div style="font:400 11px -apple-system,system-ui;color:#555875">Ride It Out 1.0.0</div>
+<div style="font:400 11px -apple-system,system-ui;color:#555875">© 2026 Steady States</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">CustomizeBreathingView</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:12px;box-sizing:border-box">
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">BREATHING PATTERN</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;overflow:hidden">
+<sc-for list="{{ modalities }}" as="m" hint-placeholder-count="4">
+<div style="padding:10px 14px;display:flex;gap:14px;align-items:flex-start">
+<div style="flex:1;display:flex;flex-direction:column;gap:4px">
+<div style="font:600 15px -apple-system,system-ui;color:#F0F2FF">{{ m.label }}</div>
+<div style="font:400 12px/1.35 -apple-system,system-ui;color:#8A8FAD">{{ m.description }}</div>
+<div style="display:flex;gap:6px;padding-top:4px">
+<sc-for list="{{ m.chips }}" as="c" hint-placeholder-count="4">
+<div style="padding:2px 6px;border-radius:999px;font:500 11px ui-monospace,monospace;background:{{ c.bg }};color:{{ c.fg }}">{{ c.n }}</div>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ m.selected }}" hint-placeholder-val="{{ false }}">
+<svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="9" fill="#4FC3F7"/><path d="M5 9.2l2.7 2.6L13 6.4" stroke="#0D0F1A" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+</sc-if>
+</div>
+<div style="height:1px;background:#2A2D45"></div>
+</sc-for>
+</div>
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">HAPTICS</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;align-items:center"><div style="flex:1;font:500 14px -apple-system,system-ui;color:#F0F2FF">Haptic Feedback</div><div style="width:51px;height:31px;border-radius:999px;background:#4FC3F7;position:relative"><div style="position:absolute;top:2px;right:2px;width:27px;height:27px;border-radius:50%;background:#fff"></div></div></div>
+<div style="font:400 12px/1.35 -apple-system,system-ui;color:#8A8FAD">Gentle vibrations guide your inhale and exhale. Best experienced on a physical device.</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">GroundingMediaSettingsView</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:12px;box-sizing:border-box">
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">MEDIA TYPE</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;padding:10px 14px">
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(120,120,128,.24);border-radius:9px;padding:2px">
+<div style="background:#636366;border-radius:7px;text-align:center;padding:6px 0;font:500 13px -apple-system,system-ui;color:#F0F2FF">Photo / Video</div>
+<div style="text-align:center;padding:6px 0;font:400 13px -apple-system,system-ui;color:#F0F2FF">Video File</div>
+<div style="text-align:center;padding:6px 0;font:400 13px -apple-system,system-ui;color:#F0F2FF">Text</div>
+<div style="text-align:center;padding:6px 0;font:400 13px -apple-system,system-ui;color:#F0F2FF">None</div>
+</div>
+</div>
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">PLACEMENT</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;padding:10px 14px;display:flex;flex-direction:column;gap:10px">
+<div style="font:400 12px/1.35 -apple-system,system-ui;color:#8A8FAD">Pinch to scale, drag to move. This is how it will appear in your grounding zone.</div>
+<div style="aspect-ratio:390/422;background:#0F1220;border-radius:12px;position:relative;display:flex;align-items:center;justify-content:center">
+<div style="position:absolute;inset:0;border:1.5px dashed #2A2D45;border-radius:12px"></div>
+<div style="font:400 13px -apple-system,system-ui;color:#555875">Choose a photo or video to position it.</div>
+</div>
+<div style="display:flex;justify-content:space-between"><div style="font:500 13px -apple-system,system-ui;color:#4FC3F7">Reset Placement</div><div style="font:500 13px -apple-system,system-ui;color:#4FC3F7">Change</div></div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">CustomizeLifelinesView</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:12px;box-sizing:border-box">
+<div style="font:700 11px -apple-system,system-ui;letter-spacing:1px;color:#555875;padding:0 20px 4px">LIFELINES</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;overflow:hidden">
+<sc-for list="{{ lifelines }}" as="l" hint-placeholder-count="3">
+<div style="display:flex;align-items:center;gap:8px;padding:6px 10px">
+<div style="width:20px;display:flex;flex-direction:column;align-items:center;gap:2px">
+<svg width="11" height="7" viewBox="0 0 11 7"><path d="M1.5 5.5L5.5 1.5l4 4" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+<svg width="11" height="7" viewBox="0 0 11 7"><path d="M1.5 1.5l4 4 4-4" stroke="#555875" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+</div>
+<div style="width:18px;font:700 12px -apple-system,system-ui;color:#555875">{{ l.rank }}</div>
+<div style="width:36px;height:36px;border-radius:50%;background:#2E7D8C;display:flex;align-items:center;justify-content:center;font:700 13px -apple-system,system-ui;color:#F0F2FF">{{ l.initials }}</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:2px">
+<div style="font:500 14px -apple-system,system-ui;color:#F0F2FF">{{ l.name }}</div>
+<div style="font:400 12px -apple-system,system-ui;color:#8A8FAD">{{ l.phone }}</div>
+</div>
+<div style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 15 15"><path d="M2 3.2c0 5.4 4.4 9.8 9.8 9.8l1.4-2.6-3-1.4-1.3 1.3a9 9 0 01-3.4-3.4l1.3-1.3-1.4-3z" fill="#4FC3F7"/></svg></div>
+<div style="width:30px;height:30px;display:flex;align-items:center;justify-content:center"><svg width="15" height="15" viewBox="0 0 15 15"><path d="M1.4 6.6C1.4 3.9 4.1 2 7.5 2s6.1 1.9 6.1 4.6-2.7 4.6-6.1 4.6c-.7 0-1.4-.1-2-.2L2.3 12.5l.7-2.3a4.6 4.6 0 01-1.6-3.6z" fill="#4FC3F7"/></svg></div>
+</div>
+<div style="height:1px;background:#2A2D45"></div>
+</sc-for>
+</div>
+<div style="font:400 12px/1.35 -apple-system,system-ui;color:#8A8FAD;padding:0 24px 8px">The top lifeline is #1 and appears first on the home screen. Use the arrows to reorder, tap a lifeline to edit it, or use the call/text icons to reach out right away.</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px"><div style="display:flex;align-items:center;gap:10px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7.2" stroke="#4FC3F7" stroke-width="1.5" fill="none"/><path d="M9 5.6v6.8M5.6 9h6.8" stroke="#4FC3F7" stroke-width="1.5" stroke-linecap="round"/></svg><div style="font:500 14px -apple-system,system-ui;color:#4FC3F7">Add Lifeline</div></div></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">RemindersView</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);padding-top:12px;box-sizing:border-box">
+<div style="margin:0 12px 18px;background:#1C2038;border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;align-items:center"><div style="flex:1;font:400 16px -apple-system,system-ui;color:#F0F2FF">Daily Reminders</div><div style="width:51px;height:31px;border-radius:999px;background:#4FC3F7;position:relative"><div style="position:absolute;top:2px;right:2px;width:27px;height:27px;border-radius:50%;background:#fff"></div></div></div>
+<div style="font:400 13px/1.35 -apple-system,system-ui;color:#8A8FAD">Ride It Out would like to send you gentle reminders to check in. You control when and how often.</div>
+</div>
+<div style="font:400 13px -apple-system,system-ui;color:#8A8FAD;padding:0 26px 6px;text-transform:uppercase;letter-spacing:.4px">Reminder Times</div>
+<div style="margin:0 12px 8px;background:#1C2038;border-radius:12px;overflow:hidden">
+<sc-for list="{{ reminders }}" as="t" hint-placeholder-count="2">
+<div style="display:flex;align-items:center;padding:8px 14px">
+<div style="background:rgba(120,120,128,.24);border-radius:8px;padding:6px 11px;font:400 17px -apple-system,system-ui;color:#F0F2FF">{{ t }}</div>
+<div style="flex:1"></div>
+<svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#E05252"/><rect x="5" y="9" width="10" height="2" rx="1" fill="#0D0F1A"/></svg>
+</div>
+<div style="height:1px;background:#2A2D45"></div>
+</sc-for>
+<div style="display:flex;align-items:center;gap:8px;padding:9px 14px"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7.2" stroke="#4FC3F7" stroke-width="1.5" fill="none"/><path d="M9 5.6v6.8M5.6 9h6.8" stroke="#4FC3F7" stroke-width="1.5" stroke-linecap="round"/></svg><div style="font:400 16px -apple-system,system-ui;color:#4FC3F7">Add Reminder</div></div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">PrivacyView</div>
+<div style="width:390px;height:844px;background:#0D0F1A;border-radius:38px;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22);display:flex;align-items:center;justify-content:center;padding:0 28px;box-sizing:border-box">
+<div style="display:flex;flex-direction:column;align-items:center;gap:24px;max-width:320px;text-align:center">
+<svg width="52" height="52" viewBox="0 0 18 18"><rect x="4" y="8" width="10" height="7" rx="1.6" fill="#4FC3F7"/><path d="M6.3 8V5.8a2.7 2.7 0 015.4 0V8" stroke="#4FC3F7" stroke-width="1.5" fill="none"/></svg>
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="font:400 17px/1.45 -apple-system,system-ui;color:#F0F2FF">Ride It Out stores all your data on this device only.</div>
+<div style="font:400 15px/1.45 -apple-system,system-ui;color:#8A8FAD">No account is required. Nothing you enter — your contacts, your media, your patterns — is ever sent anywhere. When you delete the app, it's gone completely.</div>
+<div style="font:400 15px/1.45 -apple-system,system-ui;color:#8A8FAD">We don't want your data. We want you to be okay.</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="font:600 11px ui-monospace,monospace;color:#645c50;letter-spacing:.5px">Watch App — vertical page tabs</div>
+<div style="display:flex;gap:16px">
+<div style="width:198px;height:242px;background:#0D0F1A;border-radius:44px;position:relative;overflow:hidden;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="position:absolute;inset:0;border:10px solid #FFB347;filter:blur(16px);opacity:.5"></div>
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0">
+<div style="font:200 48px -apple-system,system-ui;color:#F0F2FF">3</div>
+</div>
+<div style="position:absolute;bottom:6px;left:0;right:0;text-align:center;font:600 13px -apple-system,system-ui;color:#8A8FAD">Box Breathing</div>
+</div>
+<div style="width:198px;height:242px;background:#0F1220;border-radius:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:0 16px;text-align:center">
+<svg width="24" height="20" viewBox="0 0 42 34" style="opacity:.6"><rect x="7" y="7" width="30" height="23" rx="3" stroke="#8A8FAD" stroke-width="2.6" fill="none"/><path d="M10 26l8-8 6 5 5-4 6 7" stroke="#8A8FAD" stroke-width="2.6" fill="none"/></svg>
+<div style="font:500 13px/1.3 -apple-system,system-ui;color:rgba(138,143,173,.7)">Set a grounding image on iPhone</div>
+</div>
+</div>
+<div style="width:198px;height:242px;background:#0D0F1A;border-radius:44px;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(46,43,37,.22)">
+<div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+<div style="width:50px;height:50px;border-radius:50%;background:#2E7D8C;display:flex;align-items:center;justify-content:center;font:700 18px -apple-system,system-ui;color:#F0F2FF">MR</div>
+<div style="font:600 16px -apple-system,system-ui;color:#F0F2FF">Maya R.</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const cyan = "#4FC3F7", green = "#80CC99", grey = "#8A8FAD";
+    const chip = (n, c) => ({ n: String(n), fg: c, bg: c + "26" });
+    return {
+      modalities: [
+        { label: "Box Breathing", description: "A balanced pattern used to calm the nervous system and restore focus.", selected: true, chips: [chip(4, cyan), chip(4, grey), chip(4, green), chip(4, grey)] },
+        { label: "4-7-8 Breathing", description: "A powerful pattern for rapid anxiety relief. The extended exhale activates your body's natural calming response.", selected: false, chips: [chip(4, cyan), chip(7, grey), chip(8, green)] },
+        { label: "Resonant Breathing", description: "A steady, even rhythm shown to reduce stress and improve heart rate variability.", selected: false, chips: [chip(5, cyan), chip(5, green)] },
+        { label: "Extended Exhale", description: "Doubling the exhale length quickly engages the parasympathetic nervous system.", selected: false, chips: [chip(4, cyan), chip(8, green)] }
+      ],
+      lifelines: [
+        { rank: "#1", initials: "MR", name: "Maya R.", phone: "(415) 555-0132" },
+        { rank: "#2", initials: "DK", name: "Dad", phone: "(415) 555-0198" },
+        { rank: "#3", initials: "SL", name: "Sponsor — Sam", phone: "(628) 555-0114" }
+      ],
+      reminders: ["8:30 AM", "9:45 PM"]
+    };
+  }
+}
+
+</script>
+</body>
+</html>

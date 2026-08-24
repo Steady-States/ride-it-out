@@ -18,24 +18,36 @@ struct GroundingMediaSettingsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
+                Text("Your anchor")
+                    .font(.displaySerif(size: 30))
+                    .foregroundColor(.textPrimary)
+                    .padding(.horizontal, 22)
+                    .padding(.top, 10)
+
+                Text("One thing that pulls you back. A face, a place, or a sentence you need to hear.")
+                    .font(.system(size: 13))
+                    .foregroundColor(.textSecondary)
+                    .padding(.horizontal, 22)
+                    .padding(.top, 4)
+                    .padding(.bottom, 13)
+
                 SectionLabel("MEDIA TYPE")
-                SettingsCard {
-                    Picker("Source", selection: $selectedSource) {
-                        Text("Photo / Video").tag(GroundingMediaType.photo)
-                        Text("Video File").tag(GroundingMediaType.video)
-                        Text("Text").tag(GroundingMediaType.text)
-                        Text("None").tag(GroundingMediaType.none)
-                    }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
-                    .onChange(of: selectedSource) { _, newValue in
-                        #if os(iOS)
-                        if newValue == .photo { showPhotoPicker = true }
-                        #endif
-                        if newValue == .video { showFilePicker = true }
-                    }
-                }
+                SegmentedPicker(
+                    options: GroundingMediaType.allCases,
+                    selection: Binding(
+                        get: { selectedSource },
+                        set: { newValue in
+                            selectedSource = newValue
+                            #if os(iOS)
+                            if newValue == .photo { showPhotoPicker = true }
+                            #endif
+                            if newValue == .video { showFilePicker = true }
+                        }
+                    ),
+                    label: \.segmentLabel
+                )
+                .padding(.horizontal, 14)
+                .padding(.bottom, 9)
 
                 if selectedSource == .photo || selectedSource == .video {
                     SectionLabel("PLACEMENT")
@@ -54,15 +66,15 @@ struct GroundingMediaSettingsView: View {
                             }
 
                             HStack {
-                                Button("Reset Placement") {
+                                Button("Reset placement") {
                                     settingsVM.saveGroundingMediaTransform(scale: 1, offsetXFraction: 0, offsetYFraction: 0)
                                 }
-                                .foregroundColor(.accentCyan)
+                                .foregroundColor(.accentText)
                                 .font(.system(size: 13, weight: .medium))
 
                                 Spacer()
 
-                                Button("Change") {
+                                Button {
                                     #if os(iOS)
                                     if selectedSource == .photo {
                                         showPhotoPicker = true
@@ -72,13 +84,19 @@ struct GroundingMediaSettingsView: View {
                                     #else
                                     showFilePicker = true
                                     #endif
+                                } label: {
+                                    Text("Change")
+                                        .font(.system(size: 13, weight: .semibold))
+                                        .foregroundColor(.accentText)
+                                        .padding(.horizontal, 16)
+                                        .frame(height: 32)
+                                        .background(Color.accentFill)
+                                        .clipShape(Capsule())
                                 }
-                                .foregroundColor(.accentCyan)
-                                .font(.system(size: 13, weight: .medium))
                             }
                         }
                         .padding(.horizontal, 14)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 12)
                     }
 
                     if selectedSource == .video {
@@ -88,7 +106,7 @@ struct GroundingMediaSettingsView: View {
                                 get: { settingsVM.groundingVideoSound },
                                 set: { settingsVM.saveGroundingVideoSound($0) }
                             ))
-                            .tint(.accentCyan)
+                            .tint(.accent)
                             .foregroundColor(.textPrimary)
                             .font(.system(size: 14, weight: .medium))
                             .padding(.horizontal, 14)
@@ -117,7 +135,7 @@ struct GroundingMediaSettingsView: View {
                             Button("Save Text") {
                                 settingsVM.saveGroundingMedia(type: .text, ref: textContent)
                             }
-                            .foregroundColor(.accentCyan)
+                            .foregroundColor(.accentText)
                             .font(.system(size: 14, weight: .medium))
                         }
                         .padding(.horizontal, 14)
@@ -128,8 +146,8 @@ struct GroundingMediaSettingsView: View {
             .padding(.top, 12)
         }
         .background(Color.background.ignoresSafeArea())
-        .navigationTitle("Grounding Media")
-        .preferredColorScheme(.dark)
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             selectedSource = settingsVM.groundingMediaType
             if settingsVM.groundingMediaType == .text {
@@ -179,22 +197,17 @@ private struct MediaPlacementEditor: View {
     @State private var player: AVQueuePlayer?
     @State private var looper: AVPlayerLooper?
 
-    private var boxAspectRatio: CGFloat {
-        #if os(iOS)
-        let screen = UIScreen.main.bounds
-        return screen.width / (screen.height / 2)
-        #else
-        return 1.6
-        #endif
-    }
+    private let boxAspectRatio: CGFloat = 390.0 / 422.0
 
     var body: some View {
         GeometryReader { geo in
             let boxSize = geo.size
             ZStack {
-                Color.groundingBackground
+                Color.background
 
                 mediaContent
+                    .saturation(0.62)
+                    .contrast(0.92)
                     .scaleEffect(scale * gestureScale)
                     .offset(
                         x: (offsetFraction.width + gestureOffset.width) * boxSize.width,
@@ -202,10 +215,11 @@ private struct MediaPlacementEditor: View {
                     )
                     .frame(width: boxSize.width, height: boxSize.height)
                     .clipped()
+                    .overlay(Color.mediaWash)
 
-                Rectangle()
+                RoundedRectangle(cornerRadius: 20)
                     .strokeBorder(style: StrokeStyle(lineWidth: 1.5, dash: [6]))
-                    .foregroundColor(.borderColor)
+                    .foregroundColor(.onMedia.opacity(0.5))
             }
             .contentShape(Rectangle())
             .gesture(
@@ -235,7 +249,7 @@ private struct MediaPlacementEditor: View {
         }
         .aspectRatio(boxAspectRatio, contentMode: .fit)
         .frame(maxWidth: .infinity)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .onAppear {
             scale = settingsVM.groundingMediaScale
             offsetFraction = CGSize(

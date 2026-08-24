@@ -19,11 +19,36 @@
     {
       "layers" : [
         {
+          "hidden" : true,
+          "image-name" : "Surf App Icon-scaled.png",
+          "name" : "Surf App Icon-scaled",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              -57,
+              107.25
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.6
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.2
+      }
+    },
+    {
+      "layers" : [
+        {
           "image-name" : "Surf App Icon-spray dark 2.png",
           "name" : "Surf App Icon-spray dark 2",
           "opacity" : 0
         },
         {
+          "hidden" : false,
           "image-name" : "Surf App Icon-foreground dark 2.png",
           "name" : "Surf App Icon-foreground dark 2",
           "opacity-specializations" : [

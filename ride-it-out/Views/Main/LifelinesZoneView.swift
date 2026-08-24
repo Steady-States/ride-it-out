@@ -7,14 +7,14 @@ struct LifelinesZoneView: View {
 
     var body: some View {
         LazyVGrid(
-            columns: [GridItem(.flexible()), GridItem(.flexible())],
-            spacing: 8
+            columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible())],
+            spacing: 10
         ) {
             ForEach(0..<4, id: \.self) { index in
                 cell(at: index)
             }
         }
-        .padding(8)
+        .padding(10)
     }
 
     @ViewBuilder
@@ -22,9 +22,9 @@ struct LifelinesZoneView: View {
         if index < vm.lifelines.count {
             LifelineButton(lifeline: vm.lifelines[index])
         } else if index == 3 {
-            EmptySlotButton(label: "Customize My App", action: onCustomize)
+            EmptySlotButton(label: "Make it mine", action: onCustomize)
         } else {
-            EmptySlotButton(label: "Add a Contact", action: onAddContact)
+            EmptySlotButton(label: "Add someone", action: onAddContact)
         }
     }
 }

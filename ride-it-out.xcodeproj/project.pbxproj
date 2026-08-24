@@ -7,48 +7,72 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96C6C8EE3039D84B005F5E8B /* ride-it-out Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		96C6C8FA3039D84D005F5E8B /* ride-it-out Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 96C6C8E83039D84B005F5E8B /* ride-it-out Watch App.app */; };
+		968D0DFE303C70B6004D5BEF /* InstrumentSerif-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 968D0DFD303C70B6004D5BEF /* InstrumentSerif-Regular.ttf */; };
+		968D0DFF303C70B6004D5BEF /* InstrumentSerif-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 968D0DFD303C70B6004D5BEF /* InstrumentSerif-Regular.ttf */; };
+		968D0E00303C70B6004D5BEF /* InstrumentSerif-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 968D0DFD303C70B6004D5BEF /* InstrumentSerif-Regular.ttf */; };
+		96993CB1303B6C6B00F6C3F0 /* ride-it-out Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		96993CBB303B94DB00F6C3F0 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96993CBA303B94DB00F6C3F0 /* WidgetKit.framework */; };
+		96993CBD303B94DB00F6C3F0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96993CBC303B94DB00F6C3F0 /* SwiftUI.framework */; };
+		96993CC8303B94DD00F6C3F0 /* RideItOutWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 96993CB8303B94DB00F6C3F0 /* RideItOutWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		96C6C9213039F160005F5E8B /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 96C6C9203039F160005F5E8B /* AppIcon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		96C6C8EF3039D84B005F5E8B /* PBXContainerItemProxy */ = {
+		96993CB2303B6D7700F6C3F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 000000000000000000000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 96C6C8EC3039D84B005F5E8B;
-			remoteInfo = "ride-it-out Watch App Watch App";
+			remoteInfo = "ride-it-out Watch App";
 		};
-		96C6C8F83039D84D005F5E8B /* PBXContainerItemProxy */ = {
+		96993CC6303B94DD00F6C3F0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 000000000000000000000000 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 96C6C8E73039D84B005F5E8B;
-			remoteInfo = "ride-it-out Watch App";
+			remoteGlobalIDString = 96993CB7303B94DB00F6C3F0;
+			remoteInfo = RideItOutWidgetExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		96C6C8FE3039D84D005F5E8B /* Embed Watch Content */ = {
+		96993CAF303B6BBC00F6C3F0 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolder = Product;
 			files = (
-				96C6C8EE3039D84B005F5E8B /* ride-it-out Watch App Watch App.app in Embed Watch Content */,
+				96993CB1303B6C6B00F6C3F0 /* ride-it-out Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
+		};
+		96993CCD303B94DD00F6C3F0 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			dstPath = "";
+			dstSubfolder = PlugIns;
+			files = (
+				96993CC8303B94DD00F6C3F0 /* RideItOutWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		000000000000000000000120 /* ride-it-out.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ride-it-out.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		96C6C8E83039D84B005F5E8B /* ride-it-out Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ride-it-out Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ride-it-out Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		968D0DFD303C70B6004D5BEF /* InstrumentSerif-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InstrumentSerif-Regular.ttf"; sourceTree = "<group>"; };
+		96993CB8303B94DB00F6C3F0 /* RideItOutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RideItOutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		96993CBA303B94DB00F6C3F0 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = /System/Library/Frameworks/WidgetKit.framework; sourceTree = "<absolute>"; };
+		96993CBC303B94DB00F6C3F0 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = /System/Library/Frameworks/SwiftUI.framework; sourceTree = "<absolute>"; };
+		96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ride-it-out Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96C6C9203039F160005F5E8B /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		96993CCC303B94DD00F6C3F0 /* Exceptions for "RideItOutWidget" folder in "RideItOutWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 96993CB7303B94DB00F6C3F0 /* RideItOutWidgetExtension */;
+		};
 		96C6C91D3039E90B005F5E8B /* Exceptions for "ride-it-out" folder in "ride-it-out" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -67,6 +91,19 @@
 			path = "ride-it-out";
 			sourceTree = "<group>";
 		};
+		96993CBE303B94DB00F6C3F0 /* RideItOutWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				96993CCC303B94DD00F6C3F0 /* Exceptions for "RideItOutWidget" folder in "RideItOutWidgetExtension" target */,
+			);
+			path = RideItOutWidget;
+			sourceTree = "<group>";
+		};
+		96993CE7303C66E100F6C3F0 /* design_handoff_light_dark_schemes */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = design_handoff_light_dark_schemes;
+			sourceTree = "<group>";
+		};
 		96C6C8F13039D84B005F5E8B /* ride-it-out Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "ride-it-out Watch App";
@@ -80,6 +117,13 @@
 			files = (
 			);
 		};
+		96993CB5303B94DB00F6C3F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				96993CBD303B94DB00F6C3F0 /* SwiftUI.framework in Frameworks */,
+				96993CBB303B94DB00F6C3F0 /* WidgetKit.framework in Frameworks */,
+			);
+		};
 		96C6C8EA3039D84B005F5E8B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
@@ -91,9 +135,13 @@
 		000000000000000000000001 = {
 			isa = PBXGroup;
 			children = (
+				968D0DFD303C70B6004D5BEF /* InstrumentSerif-Regular.ttf */,
 				96C6C9203039F160005F5E8B /* AppIcon.icon */,
+				96993CE7303C66E100F6C3F0 /* design_handoff_light_dark_schemes */,
 				000000000000000000000010 /* ride-it-out */,
 				96C6C8F13039D84B005F5E8B /* ride-it-out Watch App */,
+				96993CBE303B94DB00F6C3F0 /* RideItOutWidget */,
+				96993CB9303B94DB00F6C3F0 /* Frameworks */,
 				000000000000000000000020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,10 +150,19 @@
 			isa = PBXGroup;
 			children = (
 				000000000000000000000120 /* ride-it-out.app */,
-				96C6C8E83039D84B005F5E8B /* ride-it-out Watch App.app */,
-				96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App Watch App.app */,
+				96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App.app */,
+				96993CB8303B94DB00F6C3F0 /* RideItOutWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		96993CB9303B94DB00F6C3F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96993CBA303B94DB00F6C3F0 /* WidgetKit.framework */,
+				96993CBC303B94DB00F6C3F0 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,11 +175,14 @@
 				000000000000000120000000 /* Sources */,
 				000000000000000130000000 /* Frameworks */,
 				000000000000000140000000 /* Resources */,
+				96993CAF303B6BBC00F6C3F0 /* Embed Watch Content */,
+				96993CCD303B94DD00F6C3F0 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				96C6C8F93039D84D005F5E8B /* PBXTargetDependency */,
+				96993CB3303B6D7700F6C3F0 /* PBXTargetDependency */,
+				96993CC7303B94DD00F6C3F0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				000000000000000000000010 /* ride-it-out */,
@@ -132,26 +192,27 @@
 			productReference = 000000000000000000000120 /* ride-it-out.app */;
 			productType = "com.apple.product-type.application";
 		};
-		96C6C8E73039D84B005F5E8B /* ride-it-out Watch App */ = {
+		96993CB7303B94DB00F6C3F0 /* RideItOutWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96C6C8FF3039D84D005F5E8B /* Build configuration list for PBXNativeTarget "ride-it-out Watch App" */;
+			buildConfigurationList = 96993CC9303B94DD00F6C3F0 /* Build configuration list for PBXNativeTarget "RideItOutWidgetExtension" */;
 			buildPhases = (
-				96C6C8E63039D84B005F5E8B /* Resources */,
-				96C6C8FE3039D84D005F5E8B /* Embed Watch Content */,
+				96993CB4303B94DB00F6C3F0 /* Sources */,
+				96993CB5303B94DB00F6C3F0 /* Frameworks */,
+				96993CB6303B94DB00F6C3F0 /* Resources */,
 			);
 			buildRules = (
 			);
-			dependencies = (
-				96C6C8F03039D84B005F5E8B /* PBXTargetDependency */,
+			fileSystemSynchronizedGroups = (
+				96993CBE303B94DB00F6C3F0 /* RideItOutWidget */,
 			);
-			name = "ride-it-out Watch App";
-			productName = "ride-it-out Watch App";
-			productReference = 96C6C8E83039D84B005F5E8B /* ride-it-out Watch App.app */;
-			productType = "com.apple.product-type.application.watchapp2-container";
+			name = RideItOutWidgetExtension;
+			productName = RideItOutWidgetExtension;
+			productReference = 96993CB8303B94DB00F6C3F0 /* RideItOutWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
-		96C6C8EC3039D84B005F5E8B /* ride-it-out Watch App Watch App */ = {
+		96C6C8EC3039D84B005F5E8B /* ride-it-out Watch App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96C6C8FB3039D84D005F5E8B /* Build configuration list for PBXNativeTarget "ride-it-out Watch App Watch App" */;
+			buildConfigurationList = 96C6C8FB3039D84D005F5E8B /* Build configuration list for PBXNativeTarget "ride-it-out Watch App" */;
 			buildPhases = (
 				96C6C8E93039D84B005F5E8B /* Sources */,
 				96C6C8EA3039D84B005F5E8B /* Frameworks */,
@@ -162,9 +223,9 @@
 			fileSystemSynchronizedGroups = (
 				96C6C8F13039D84B005F5E8B /* ride-it-out Watch App */,
 			);
-			name = "ride-it-out Watch App Watch App";
+			name = "ride-it-out Watch App";
 			productName = "ride-it-out Watch App Watch App";
-			productReference = 96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App Watch App.app */;
+			productReference = 96C6C8ED3039D84B005F5E8B /* ride-it-out Watch App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -180,7 +241,7 @@
 					000000000000000100000000 = {
 						CreatedOnToolsVersion = 26.3;
 					};
-					96C6C8E73039D84B005F5E8B = {
+					96993CB7303B94DB00F6C3F0 = {
 						CreatedOnToolsVersion = 27.0;
 					};
 					96C6C8EC3039D84B005F5E8B = {
@@ -203,8 +264,8 @@
 			projectRoot = "";
 			targets = (
 				000000000000000100000000 /* ride-it-out */,
-				96C6C8E73039D84B005F5E8B /* ride-it-out Watch App */,
-				96C6C8EC3039D84B005F5E8B /* ride-it-out Watch App Watch App */,
+				96C6C8EC3039D84B005F5E8B /* ride-it-out Watch App */,
+				96993CB7303B94DB00F6C3F0 /* RideItOutWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -213,24 +274,31 @@
 		000000000000000140000000 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
-				96C6C8FA3039D84D005F5E8B /* ride-it-out Watch App.app in Resources */,
+				968D0E00303C70B6004D5BEF /* InstrumentSerif-Regular.ttf in Resources */,
 				96C6C9213039F160005F5E8B /* AppIcon.icon in Resources */,
 			);
 		};
-		96C6C8E63039D84B005F5E8B /* Resources */ = {
+		96993CB6303B94DB00F6C3F0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				968D0DFE303C70B6004D5BEF /* InstrumentSerif-Regular.ttf in Resources */,
 			);
 		};
 		96C6C8EB3039D84B005F5E8B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				968D0DFF303C70B6004D5BEF /* InstrumentSerif-Regular.ttf in Resources */,
 			);
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		000000000000000120000000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
+		96993CB4303B94DB00F6C3F0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
 			);
@@ -243,15 +311,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		96C6C8F03039D84B005F5E8B /* PBXTargetDependency */ = {
+		96993CB3303B6D7700F6C3F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 96C6C8EC3039D84B005F5E8B /* ride-it-out Watch App Watch App */;
-			targetProxy = 96C6C8EF3039D84B005F5E8B /* PBXContainerItemProxy */;
+			target = 96C6C8EC3039D84B005F5E8B /* ride-it-out Watch App */;
+			targetProxy = 96993CB2303B6D7700F6C3F0 /* PBXContainerItemProxy */;
 		};
-		96C6C8F93039D84D005F5E8B /* PBXTargetDependency */ = {
+		96993CC7303B94DD00F6C3F0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 96C6C8E73039D84B005F5E8B /* ride-it-out Watch App */;
-			targetProxy = 96C6C8F83039D84D005F5E8B /* PBXContainerItemProxy */;
+			target = 96993CB7303B94DB00F6C3F0 /* RideItOutWidgetExtension */;
+			targetProxy = 96993CC6303B94DD00F6C3F0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -486,104 +554,151 @@
 			};
 			name = Release;
 		};
-		96C6C8FC3039D84D005F5E8B /* Debug configuration for PBXNativeTarget "ride-it-out Watch App Watch App" */ = {
+		96993CCA303B94DD00F6C3F0 /* Debug configuration for PBXNativeTarget "RideItOutWidgetExtension" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XU62R2K6UT;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_APP_SANDBOX = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Ride It OutWatch App";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.steadystates.ride-it-out";
-				INFOPLIST_KEY_WKWatchOnly = NO;
+				INFOPLIST_FILE = RideItOutWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RideItOutWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.steadystates.ride-it-out.ride-it-out-Watch-App.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.steadystates.ride-it-out.RideItOutWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 27.0;
 			};
 			name = Debug;
 		};
-		96C6C8FD3039D84D005F5E8B /* Release configuration for PBXNativeTarget "ride-it-out Watch App Watch App" */ = {
+		96993CCB303B94DD00F6C3F0 /* Release configuration for PBXNativeTarget "RideItOutWidgetExtension" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XU62R2K6UT;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_APP_SANDBOX = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Ride It OutWatch App";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.steadystates.ride-it-out";
-				INFOPLIST_KEY_WKWatchOnly = NO;
+				INFOPLIST_FILE = RideItOutWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RideItOutWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
 				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.steadystates.ride-it-out.ride-it-out-Watch-App.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.steadystates.ride-it-out.RideItOutWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
+				SDKROOT = auto;
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 27.0;
 			};
 			name = Release;
 		};
-		96C6C9003039D84D005F5E8B /* Debug configuration for PBXNativeTarget "ride-it-out Watch App" */ = {
+		96C6C8FC3039D84D005F5E8B /* Debug configuration for PBXNativeTarget "ride-it-out Watch App" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XU62R2K6UT;
-				INFOPLIST_KEY_CFBundleDisplayName = "Ride It Out Watch App";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ride It OutWatch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.steadystates.ride-it-out";
+				INFOPLIST_KEY_WKWatchOnly = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.steadystates.ride-it-out.ride-it-out-Watch-App";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.steadystates.ride-it-out.ride-it-out-Watch-App.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
 			};
 			name = Debug;
 		};
-		96C6C9013039D84D005F5E8B /* Release configuration for PBXNativeTarget "ride-it-out Watch App" */ = {
+		96C6C8FD3039D84D005F5E8B /* Release configuration for PBXNativeTarget "ride-it-out Watch App" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XU62R2K6UT;
-				INFOPLIST_KEY_CFBundleDisplayName = "Ride It Out Watch App";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ride It OutWatch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "com.steadystates.ride-it-out";
+				INFOPLIST_KEY_WKWatchOnly = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.steadystates.ride-it-out.ride-it-out-Watch-App";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.steadystates.ride-it-out.ride-it-out-Watch-App.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -607,19 +722,19 @@
 			);
 			defaultConfigurationName = Release;
 		};
-		96C6C8FB3039D84D005F5E8B /* Build configuration list for PBXNativeTarget "ride-it-out Watch App Watch App" */ = {
+		96993CC9303B94DD00F6C3F0 /* Build configuration list for PBXNativeTarget "RideItOutWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				96C6C8FC3039D84D005F5E8B /* Debug configuration for PBXNativeTarget "ride-it-out Watch App Watch App" */,
-				96C6C8FD3039D84D005F5E8B /* Release configuration for PBXNativeTarget "ride-it-out Watch App Watch App" */,
+				96993CCA303B94DD00F6C3F0 /* Debug configuration for PBXNativeTarget "RideItOutWidgetExtension" */,
+				96993CCB303B94DD00F6C3F0 /* Release configuration for PBXNativeTarget "RideItOutWidgetExtension" */,
 			);
 			defaultConfigurationName = Release;
 		};
-		96C6C8FF3039D84D005F5E8B /* Build configuration list for PBXNativeTarget "ride-it-out Watch App" */ = {
+		96C6C8FB3039D84D005F5E8B /* Build configuration list for PBXNativeTarget "ride-it-out Watch App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				96C6C9003039D84D005F5E8B /* Debug configuration for PBXNativeTarget "ride-it-out Watch App" */,
-				96C6C9013039D84D005F5E8B /* Release configuration for PBXNativeTarget "ride-it-out Watch App" */,
+				96C6C8FC3039D84D005F5E8B /* Debug configuration for PBXNativeTarget "ride-it-out Watch App" */,
+				96C6C8FD3039D84D005F5E8B /* Release configuration for PBXNativeTarget "ride-it-out Watch App" */,
 			);
 			defaultConfigurationName = Release;
 		};

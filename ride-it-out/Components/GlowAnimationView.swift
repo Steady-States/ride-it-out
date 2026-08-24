@@ -1,31 +1,22 @@
 import SwiftUI
 
+/// Edge band — a solid inset border that recolors with the breath phase.
+/// No blur, no opacity pulsing; only color crossfades on phase change.
 struct GlowAnimationView: View {
     @ObservedObject var breathingVM: BreathingViewModel
 
     var body: some View {
         ZStack {
-            // Outer glow — wider, softer diffusion at edge
-            Rectangle()
-                .stroke(breathingVM.glowColor, lineWidth: 16)
-                .blur(radius: 24)
-                .opacity(breathingVM.glowIntensity * 0.6)
-                .ignoresSafeArea()
+            RoundedRectangle(cornerRadius: 40)
+                .inset(by: 3.5)
+                .stroke(breathingVM.bandColor, lineWidth: 7)
 
-            // Inner glow — tighter, more intense at edge
-            Rectangle()
-                .stroke(breathingVM.glowColor, lineWidth: 8)
-                .blur(radius: 12)
-                .opacity(breathingVM.glowIntensity * 0.9)
-                .ignoresSafeArea()
-
-            // Core edge line — sharpest, most defined
-            Rectangle()
-                .stroke(breathingVM.glowColor, lineWidth: 3)
-                .blur(radius: 4)
-                .opacity(breathingVM.glowIntensity)
-                .ignoresSafeArea()
+            RoundedRectangle(cornerRadius: 33)
+                .inset(by: 7.75)
+                .stroke(breathingVM.bandColor.opacity(0.35), lineWidth: 1.5)
         }
+        .animation(.linear(duration: 0.5), value: breathingVM.bandColor)
+        .ignoresSafeArea()
         .allowsHitTesting(false)
     }
 }

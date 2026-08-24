@@ -10,6 +10,24 @@ struct MainView: View {
 
     var startWithTour: Bool = false
 
+    private struct SyncSnapshot: Equatable {
+        var modalityID: String
+        var hapticsEnabled: Bool
+        var groundingMediaType: GroundingMediaType
+        var groundingMediaRef: String?
+        var lifelines: [Lifeline]
+    }
+
+    private var syncSnapshot: SyncSnapshot {
+        SyncSnapshot(
+            modalityID: settingsVM.selectedModalityID,
+            hapticsEnabled: settingsVM.hapticsEnabled,
+            groundingMediaType: settingsVM.groundingMediaType,
+            groundingMediaRef: settingsVM.groundingMediaRef,
+            lifelines: lifelinesVM.lifelines
+        )
+    }
+
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
@@ -96,22 +114,9 @@ struct MainView: View {
                 }
             }
         }
-        .onChange(of: settingsVM.selectedModalityID) {
+        .onChange(of: syncSnapshot) {
             WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
         }
-        .onChange(of: settingsVM.hapticsEnabled) {
-            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
-        }
-        .onChange(of: settingsVM.groundingMediaType) {
-            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
-        }
-        .onChange(of: settingsVM.groundingMediaRef) {
-            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
-        }
-        .onChange(of: lifelinesVM.lifelines) {
-            WatchSyncService.shared.sync(settings: settingsVM, lifelines: lifelinesVM)
-        }
-        .preferredColorScheme(.dark)
     }
 }
 

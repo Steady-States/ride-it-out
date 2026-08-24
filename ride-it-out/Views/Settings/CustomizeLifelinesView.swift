@@ -14,51 +14,41 @@ struct CustomizeLifelinesView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 10) {
                 SectionLabel("LIFELINES")
-                SettingsCard {
-                    ForEach(Array(vm.lifelines.enumerated()), id: \.element.id) { index, lifeline in
-                        row(for: lifeline, index: index)
-                        if index < vm.lifelines.count - 1 {
-                            Divider().background(Color.borderColor)
-                        }
-                    }
+                    .padding(.bottom, 0)
+
+                ForEach(vm.lifelines) { lifeline in
+                    row(for: lifeline)
                 }
 
-                Text("The top lifeline is #1 and appears first on the home screen. Drag the handle to reorder, tap a lifeline to edit it, or use the call/text icons to reach out right away.")
+                Text("Press and hold a row, then drag it into the order you'd actually reach for. Tap a name to edit, or call and text straight from here.")
                     .font(.system(size: 12))
                     .foregroundColor(.textSecondary)
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 8)
+                    .padding(.horizontal, 8)
 
                 if vm.lifelines.count < maxLifelines {
-                    SettingsCard {
-                        Button {
-                            showAddSheet = true
-                        } label: {
-                            HStack(spacing: 10) {
-                                Image(systemName: "plus.circle")
-                                    .font(.system(size: 18))
-                                    .foregroundColor(.accentCyan)
-                                    .frame(width: 22)
-                                Text("Add Lifeline")
-                                    .font(.system(size: 14, weight: .medium))
-                                    .foregroundColor(.accentCyan)
-                                Spacer()
-                            }
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 9)
-                            .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
+                    Button {
+                        showAddSheet = true
+                    } label: {
+                        Text("Add a lifeline")
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundColor(.accentText)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 54)
                     }
+                    .background(
+                        RoundedRectangle(cornerRadius: 24)
+                            .strokeBorder(style: StrokeStyle(lineWidth: 1.5, dash: [6]))
+                            .foregroundColor(.borderColor)
+                    )
                 }
             }
+            .padding(.horizontal, 14)
             .padding(.top, 12)
         }
         .background(Color.background.ignoresSafeArea())
         .navigationTitle("Lifelines")
-        .preferredColorScheme(.dark)
         .sheet(item: $editingLifeline) { lifeline in
             NavigationStack {
                 LifelineEditView(vm: vm, originalLifeline: lifeline)
@@ -72,33 +62,27 @@ struct CustomizeLifelinesView: View {
     }
 
     @ViewBuilder
-    private func row(for lifeline: Lifeline, index: Int) -> some View {
-        HStack(spacing: 8) {
-            Image(systemName: "line.3.horizontal")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(.textTertiary)
-                .frame(width: 20)
+    private func row(for lifeline: Lifeline) -> some View {
+        let isDragging = draggedLifeline?.id == lifeline.id
+
+        HStack(spacing: 12) {
+            GripDots()
 
             Button {
                 editingLifeline = lifeline
             } label: {
-                HStack(spacing: 10) {
-                    Text("#\(index + 1)")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundColor(.textTertiary)
-                        .frame(width: 18, alignment: .leading)
-
-                    LifelineAvatar(lifeline: lifeline, size: 36)
+                HStack(spacing: 12) {
+                    LifelineAvatar(lifeline: lifeline, size: 46)
 
                     VStack(alignment: .leading, spacing: 2) {
                         Text(lifeline.name.isEmpty ? lifeline.phone : lifeline.name)
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(.textPrimary)
                             .lineLimit(1)
                         if !lifeline.name.isEmpty && !lifeline.phone.isEmpty {
                             Text(lifeline.phone)
-                                .font(.system(size: 12))
-                                .foregroundColor(.textSecondary)
+                                .font(.system(size: 13))
+                                .foregroundColor(.textTertiary)
                         }
                     }
                     Spacer(minLength: 0)
@@ -111,23 +95,33 @@ struct CustomizeLifelinesView: View {
                     if let url = lifeline.callURL { openURL(url) }
                 } label: {
                     Image(systemName: "phone.fill")
-                        .font(.system(size: 15))
-                        .foregroundColor(.accentCyan)
-                        .frame(width: 30, height: 30)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.accentOn)
+                        .frame(width: 44, height: 44)
+                        .background(Color.accent)
+                        .clipShape(Circle())
                 }
                 Button {
                     if let url = lifeline.textURL { openURL(url) }
                 } label: {
                     Image(systemName: "message.fill")
-                        .font(.system(size: 15))
-                        .foregroundColor(.accentCyan)
-                        .frame(width: 30, height: 30)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.accentText)
+                        .frame(width: 44, height: 44)
+                        .background(Color.accentFill)
+                        .clipShape(Circle())
                 }
             }
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 6)
-        .contentShape(Rectangle())
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background(Color.surfaceRaised)
+        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .opacity(isDragging ? 0.45 : 1)
+        .shadow(
+            color: isDragging ? Color(hex: 0x2E2B25, alpha: 0.3) : .clear,
+            radius: isDragging ? 28 : 0, x: 0, y: isDragging ? 12 : 0
+        )
         .onDrag {
             draggedLifeline = lifeline
             return NSItemProvider(object: lifeline.id.uuidString as NSString)
@@ -136,6 +130,25 @@ struct CustomizeLifelinesView: View {
             of: [.text],
             delegate: LifelineDropDelegate(item: lifeline, vm: vm, draggedLifeline: $draggedLifeline)
         )
+    }
+}
+
+// MARK: - Grip handle
+
+private struct GripDots: View {
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<2, id: \.self) { _ in
+                VStack(spacing: 4) {
+                    ForEach(0..<3, id: \.self) { _ in
+                        Circle()
+                            .fill(Color.textTertiary)
+                            .frame(width: 4, height: 4)
+                    }
+                }
+            }
+        }
+        .frame(width: 20)
     }
 }
 
@@ -178,23 +191,16 @@ struct LifelineAvatar: View {
                     .scaledToFill()
             } else {
                 Circle()
-                    .fill(Color.lifeline)
+                    .fill(Color.sageDeep)
                     .overlay(
-                        Text(initials)
+                        Text(lifeline.initials)
                             .font(.system(size: size * 0.36, weight: .bold))
-                            .foregroundColor(.textPrimary)
+                            .foregroundColor(.sageOn)
                     )
             }
         }
         .frame(width: size, height: size)
         .clipShape(Circle())
-    }
-
-    private var initials: String {
-        let source = lifeline.name.isEmpty ? lifeline.phone : lifeline.name
-        let words = source.split(separator: " ").filter { $0.first?.isLetter == true }
-        let result = String(words.prefix(2).compactMap(\.first)).uppercased()
-        return result.isEmpty ? "#" : result
     }
 }
 
@@ -268,7 +274,7 @@ private struct LifelineEditView: View {
                     Button("Choose from Contacts") {
                         requestContactsAccess()
                     }
-                    .foregroundColor(.accentCyan)
+                    .foregroundColor(.accentText)
 
                     if photoData != nil {
                         Button("Remove Photo", role: .destructive) {
@@ -294,7 +300,6 @@ private struct LifelineEditView: View {
             }
         }
         .navigationTitle(originalLifeline == nil ? "Add Lifeline" : "Edit Lifeline")
-        .preferredColorScheme(.dark)
         .onAppear {
             if originalLifeline == nil {
                 requestContactsAccess()
@@ -337,7 +342,7 @@ private struct LifelineEditView: View {
             Spacer()
             Image(systemName: "person.crop.circle.badge.plus")
                 .font(.system(size: 48))
-                .foregroundColor(.accentCyan)
+                .foregroundColor(.accentText)
             Text("Access Your Contacts")
                 .font(.system(size: 20, weight: .bold))
                 .foregroundColor(.textPrimary)
@@ -357,10 +362,10 @@ private struct LifelineEditView: View {
                 }
             }
             .font(.system(size: 17, weight: .semibold))
-            .foregroundColor(.background)
+            .foregroundColor(.accentOn)
             .frame(maxWidth: .infinity)
             .frame(height: 52)
-            .background(Color.accentCyan)
+            .background(Color.accent)
             .clipShape(RoundedRectangle(cornerRadius: 14))
             .padding(.horizontal, 32)
             Button("Not Now") { showContactsExplanation = false }
@@ -368,7 +373,6 @@ private struct LifelineEditView: View {
             Spacer()
         }
         .background(Color.background.ignoresSafeArea())
-        .preferredColorScheme(.dark)
     }
 
     private func requestContactsAccess() {

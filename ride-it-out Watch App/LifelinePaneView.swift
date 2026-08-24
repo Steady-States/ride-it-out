@@ -12,10 +12,23 @@ struct LifelinePaneView: View {
             VStack(spacing: 10) {
                 avatar
                 Text(lifeline.name.isEmpty ? lifeline.phone : lifeline.name)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(.textPrimary)
                     .multilineTextAlignment(.center)
                     .lineLimit(2)
+
+                Button {
+                    call()
+                } label: {
+                    Text("Call")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.accentOn)
+                        .padding(.horizontal, 20)
+                        .frame(height: 32)
+                        .background(Color.accent)
+                        .clipShape(Capsule())
+                }
+                .buttonStyle(.plain)
             }
             .padding(.horizontal, 16)
         }
@@ -38,16 +51,16 @@ struct LifelinePaneView: View {
             Image(uiImage: uiImage)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 50, height: 50)
+                .frame(width: 60, height: 60)
                 .clipShape(Circle())
         } else {
             Circle()
-                .fill(Color.lifeline)
-                .frame(width: 50, height: 50)
+                .fill(Color.sageDeep)
+                .frame(width: 60, height: 60)
                 .overlay(
                     Text(initials)
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(.textPrimary)
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.sageOn)
                 )
         }
     }

@@ -6,94 +6,91 @@ struct WelcomeView: View {
     @State private var startWithTour = false
 
     var body: some View {
-        ZStack {
-            Color.background.ignoresSafeArea()
+        GeometryReader { geo in
+            ZStack(alignment: .topTrailing) {
+                Color.background.ignoresSafeArea()
 
-            // Ambient edge glow — subtle hint of what's on the main screen
-            Rectangle()
-                .stroke(Color.accentCyan, lineWidth: 20)
-                .blur(radius: 40)
-                .opacity(0.05)
-                .ignoresSafeArea()
-                .allowsHitTesting(false)
+                Circle()
+                    .fill(Color.tint)
+                    .frame(width: 340, height: 340)
+                    .offset(x: 100, y: -120)
+                    .allowsHitTesting(false)
 
-            VStack(spacing: 0) {
-                Spacer()
+                VStack(alignment: .leading, spacing: 0) {
+                    Spacer()
 
-                // Title + tagline
-                VStack(alignment: .leading, spacing: 10) {
+                    RoundedRectangle(cornerRadius: 24)
+                        .fill(Color.accentFill)
+                        .frame(width: 100, height: 100)
+                        .overlay(
+                            Image(systemName: "water.waves")
+                                .font(.system(size: 34, weight: .semibold))
+                                .foregroundColor(.accentText)
+                        )
+                        .shadow(color: Color(hex: 0x2E2B25, alpha: 0.16), radius: 10, x: 0, y: 3)
+
                     Text("Ride It Out")
-                        .font(.system(size: 40, weight: .bold))
+                        .font(.displaySerif(size: 46))
                         .foregroundColor(.textPrimary)
-                        .tracking(-1.2)
+                        .padding(.top, 28)
 
-                    Text("Your partner in\nserenity.")
+                    Text("You don't have to fight the wave. You just have to stay on it.")
                         .font(.system(size: 20, weight: .regular))
                         .foregroundColor(.textSecondary)
-                        .lineSpacing(4)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 48)
+                        .lineSpacing(8)
+                        .frame(maxWidth: 220, alignment: .leading)
+                        .padding(.top, 14)
 
-                // Buttons
-                VStack(spacing: 10) {
-                    Button {
-                        onboardingComplete = true
-                        startWithTour = false
-                        navigateToMain = true
-                    } label: {
-                        Text("Get Help Now")
-                            .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(.background)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 54)
-                            .background(Color.accentCyan)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    VStack(spacing: 12) {
+                        Button {
+                            onboardingComplete = true
+                            startWithTour = false
+                            navigateToMain = true
+                        } label: {
+                            Text("I need help right now")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(.accentOn)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 60)
+                                .background(Color.accent)
+                                .clipShape(Capsule())
+                        }
+
+                        Button {
+                            onboardingComplete = true
+                            startWithTour = true
+                            navigateToMain = true
+                        } label: {
+                            Text("Set up my ride")
+                                .font(.system(size: 17, weight: .semibold))
+                                .foregroundColor(.accentText)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 60)
+                                .background(Color.clear)
+                                .clipShape(Capsule())
+                                .overlay(
+                                    Capsule().stroke(Color.accent, lineWidth: 1.5)
+                                )
+                        }
                     }
+                    .padding(.top, 40)
 
-                    Button {
-                        onboardingComplete = true
-                        startWithTour = true
-                        navigateToMain = true
-                    } label: {
-                        Text("Set Up My Ride")
-                            .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(.accentCyan)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 54)
-                            .background(Color.clear)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.accentCyan, lineWidth: 1.5)
-                            )
+                    VStack(spacing: 7) {
+                        Text("Breathe. Ground yourself. Call someone.")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(.textSecondary)
+
+                        Text("No account. Nothing ever leaves this phone.")
+                            .font(.system(size: 12, weight: .regular))
+                            .foregroundColor(.textTertiary)
                     }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 26)
                 }
-                .padding(.horizontal, 24)
-
-                // Divider + footer text
-                Color.borderColor
-                    .frame(height: 1)
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 16)
-
-                VStack(spacing: 6) {
-                    Text("Breathe. Ground yourself. Call someone.")
-                        .font(.system(size: 14))
-                        .foregroundColor(.textSecondary)
-                        .multilineTextAlignment(.center)
-
-                    Text("* No account required. All data stays on your device.")
-                        .font(.system(size: 12))
-                        .foregroundColor(.textTertiary)
-                        .multilineTextAlignment(.center)
-                }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 44)
+                .padding(.horizontal, 28)
+                .padding(.bottom, 46)
             }
         }
-        .preferredColorScheme(.dark)
         .sheet(isPresented: $navigateToMain) {
             MainView(startWithTour: startWithTour)
                 .interactiveDismissDisabled(true)

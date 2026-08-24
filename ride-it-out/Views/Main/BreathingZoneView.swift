@@ -6,47 +6,15 @@ struct BreathingZoneView: View {
     var onPatternChange: (BreathingModality) -> Void
 
     var body: some View {
-        HStack(spacing: 0) {
-            // Left half — phase label + play/stop + beat counter
-            VStack(alignment: .leading, spacing: 3) {
-                HStack(spacing: 10) {
-                    Text(vm.isRunning ? vm.currentPhase.label : "· · ·")
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundColor(.textSecondary)
-                        .tracking(3)
+        HStack(spacing: 14) {
+            WaveTroughView(vm: vm)
+                .frame(width: 132, height: 104)
 
-                    Button {
-                        vm.isRunning ? vm.stop() : vm.restart()
-                    } label: {
-                        Image(systemName: vm.isRunning ? "stop.fill" : "play.fill")
-                            .font(.system(size: 11))
-                            .foregroundColor(.textSecondary)
-                            .frame(width: 20, height: 20)
-                    }
-                }
-
-                Text(vm.isRunning ? "\(vm.currentBeat)" : "—")
-                    .font(.system(size: 72, weight: .thin))
-                    .foregroundColor(.textPrimary)
-                    .opacity(vm.isRunning ? 1 : 0.4)
-                    .monospacedDigit()
-                    .contentTransition(.numericText())
-                    .animation(.easeInOut(duration: 0.2), value: vm.currentBeat)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 14)
-
-            Rectangle()
-                .fill(Color.borderColor)
-                .frame(width: 1)
-                .padding(.vertical, 12)
-
-            // Right half — breathing method selector
-            VStack(alignment: .leading, spacing: 5) {
-                Text("METHOD")
-                    .font(.system(size: 10, weight: .semibold))
-                    .foregroundColor(.textTertiary)
-                    .tracking(2)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(vm.isRunning ? vm.currentPhase.label : "READY")
+                    .font(.system(size: 11, weight: .bold))
+                    .tracking(3)
+                    .foregroundColor(vm.isRunning ? vm.currentPhase.type.labelColor : .textTertiary)
 
                 Menu {
                     ForEach(BreathingModalities.all) { modality in
@@ -61,24 +29,37 @@ struct BreathingZoneView: View {
                         }
                     }
                 } label: {
-                    HStack(spacing: 5) {
+                    HStack(spacing: 4) {
                         Text(selectedModality.label)
-                            .font(.system(size: 14, weight: .semibold))
+                            .font(.system(size: 17, weight: .semibold))
                             .foregroundColor(.textPrimary)
                         Image(systemName: "chevron.down")
-                            .font(.system(size: 10))
+                            .font(.system(size: 11, weight: .semibold))
                             .foregroundColor(.textSecondary)
                     }
                 }
 
                 Text(timingHint)
-                    .font(.system(size: 11))
+                    .font(.system(size: 12))
                     .foregroundColor(.textTertiary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.leading, 16)
-            .padding(.trailing, 10)
+
+            Button {
+                vm.isRunning ? vm.stop() : vm.restart()
+            } label: {
+                Image(systemName: vm.isRunning ? "stop.fill" : "play.fill")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.textPrimary)
+                    .frame(width: 48, height: 48)
+                    .background(Color.surfaceRaised)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.borderColor, lineWidth: 1))
+            }
         }
+        .padding(.horizontal, 18)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.surface)
         .overlay(alignment: .bottom) {

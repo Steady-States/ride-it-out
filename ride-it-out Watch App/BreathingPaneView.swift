@@ -19,20 +19,27 @@ struct BreathingPaneView: View {
 
     private func breathingPage(for modality: BreathingModality) -> some View {
         ZStack {
-            Color.background.ignoresSafeArea()
+            WatchWaveTroughView(vm: vm)
             WatchGlowView(breathingVM: vm)
 
             VStack {
                 Spacer()
-                Text(vm.isRunning && vm.currentModality.id == modality.id ? "\(vm.currentBeat)" : "—")
-                    .font(.system(size: 48, weight: .thin))
-                    .foregroundColor(.textPrimary)
-                    .monospacedDigit()
-                    .contentTransition(.numericText())
-                    .animation(.easeInOut(duration: 0.2), value: vm.currentBeat)
+                VStack(spacing: 4) {
+                    Text(vm.isRunning && vm.currentModality.id == modality.id ? "\(vm.currentBeat)" : "—")
+                        .font(.system(size: 58, weight: .light))
+                        .foregroundColor(.textPrimary)
+                        .monospacedDigit()
+                        .contentTransition(.numericText())
+                        .animation(.easeInOut(duration: 0.2), value: vm.currentBeat)
+
+                    Text(vm.isRunning ? vm.currentPhase.label : "READY")
+                        .font(.system(size: 10, weight: .bold))
+                        .tracking(2.6)
+                        .foregroundColor(vm.isRunning ? vm.currentPhase.type.labelColor : .textTertiary)
+                }
                 Spacer()
                 Text(modality.label)
-                    .font(.system(size: 13, weight: .semibold))
+                    .font(.system(size: 12, weight: .semibold))
                     .foregroundColor(.textSecondary)
                     .padding(.bottom, 6)
             }

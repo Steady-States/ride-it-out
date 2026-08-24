@@ -1,5 +1,29 @@
 import SwiftUI
 
+private struct PressableStyle: ViewModifier {
+    @Binding var pressed: Bool
+    var brighten: Bool = true
+
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(pressed ? 0.96 : 1.0)
+            .brightness(brighten && pressed ? 0.08 : 0)
+            .animation(.spring(response: 0.15, dampingFraction: 0.7), value: pressed)
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { _ in pressed = true }
+                    .onEnded { _ in pressed = false }
+            )
+            .frame(minWidth: 44, minHeight: 44)
+    }
+}
+
+private extension View {
+    func pressable(_ pressed: Binding<Bool>, brighten: Bool = true) -> some View {
+        modifier(PressableStyle(pressed: pressed, brighten: brighten))
+    }
+}
+
 struct LifelineButton: View {
     let lifeline: Lifeline
     @Environment(\.openURL) private var openURL
@@ -11,15 +35,15 @@ struct LifelineButton: View {
             showActionSheet = true
         } label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.lifeline)
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(Color.sageFill)
 
-                VStack(spacing: 6) {
+                VStack(spacing: 8) {
                     avatar
 
                     Text(lifeline.name.isEmpty ? lifeline.phone : lifeline.name)
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(.textPrimary)
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(.sageText)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .minimumScaleFactor(0.8)
@@ -27,15 +51,7 @@ struct LifelineButton: View {
                 .padding(12)
             }
         }
-        .scaleEffect(pressed ? 0.96 : 1.0)
-        .brightness(pressed ? 0.08 : 0)
-        .animation(.spring(response: 0.15, dampingFraction: 0.7), value: pressed)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in pressed = true }
-                .onEnded { _ in pressed = false }
-        )
-        .frame(minWidth: 44, minHeight: 44)
+        .pressable($pressed)
         .confirmationDialog(
             lifeline.name.isEmpty ? lifeline.phone : lifeline.name,
             isPresented: $showActionSheet,
@@ -54,7 +70,7 @@ struct LifelineButton: View {
             Image(uiImage: uiImage)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 38, height: 38)
+                .frame(width: 46, height: 46)
                 .clipShape(Circle())
         } else {
             initialsAvatar
@@ -66,31 +82,13 @@ struct LifelineButton: View {
 
     private var initialsAvatar: some View {
         Circle()
-            .fill(avatarColor)
-            .frame(width: 38, height: 38)
+            .fill(Color.sageDeep)
+            .frame(width: 46, height: 46)
             .overlay(
-                Text(initials)
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.textPrimary)
+                Text(lifeline.initials)
+                    .font(.system(size: 17, weight: .bold))
+                    .foregroundColor(.sageOn)
             )
-    }
-
-    private var initials: String {
-        let source = lifeline.name.isEmpty ? lifeline.phone : lifeline.name
-        let words = source.split(separator: " ").filter { $0.first?.isLetter == true }
-        let result = String(words.prefix(2).compactMap(\.first)).uppercased()
-        return result.isEmpty ? "#" : result
-    }
-
-    private var avatarColor: Color {
-        let palette: [Color] = [
-            Color(red: 0.239, green: 0.420, blue: 0.549), // #3D6B8C
-            Color(red: 0.180, green: 0.490, blue: 0.361), // #2E7D5C
-            Color(red: 0.231, green: 0.329, blue: 0.569), // #3B548F
-            Color(red: 0.404, green: 0.286, blue: 0.573), // #674992
-            Color(red: 0.569, green: 0.349, blue: 0.259), // #915943
-        ]
-        return palette[abs(lifeline.name.hashValue) % palette.count]
     }
 
     private func call() {
@@ -114,10 +112,10 @@ struct EmptySlotButton: View {
     var body: some View {
         Button(action: action) {
             ZStack {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.lifelineEmpty)
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(Color.clear)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 12)
+                        RoundedRectangle(cornerRadius: 24)
                             .strokeBorder(
                                 style: StrokeStyle(lineWidth: 1.5, dash: [6])
                             )
@@ -126,23 +124,16 @@ struct EmptySlotButton: View {
 
                 VStack(spacing: 6) {
                     Text("+")
-                        .font(.system(size: 20))
+                        .font(.system(size: 26, weight: .light))
                         .foregroundColor(.textTertiary)
                     Text(label)
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.system(size: 13, weight: .medium))
                         .foregroundColor(.textTertiary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 10)
                 }
             }
         }
-        .scaleEffect(pressed ? 0.96 : 1.0)
-        .animation(.spring(response: 0.15, dampingFraction: 0.7), value: pressed)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in pressed = true }
-                .onEnded { _ in pressed = false }
-        )
-        .frame(minWidth: 44, minHeight: 44)
+        .pressable($pressed, brighten: false)
     }
 }

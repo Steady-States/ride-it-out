@@ -6,92 +6,104 @@ struct CustomizeBreathingView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 10) {
                 SectionLabel("BREATHING PATTERN")
-                SettingsCard {
-                    ForEach(Array(BreathingModalities.all.enumerated()), id: \.element.id) { index, modality in
-                        Button {
-                            settingsVM.saveModalityID(modality.id)
-                            breathingVM.restart()
-                        } label: {
-                            modalityRow(modality)
-                        }
-                        .buttonStyle(.plain)
+                    .padding(.bottom, 0)
 
-                        if index < BreathingModalities.all.count - 1 {
-                            Divider().background(Color.borderColor)
-                        }
+                ForEach(BreathingModalities.all) { modality in
+                    Button {
+                        settingsVM.saveModalityID(modality.id)
+                        breathingVM.restart()
+                    } label: {
+                        modalityCard(modality)
                     }
+                    .buttonStyle(.plain)
                 }
 
                 SectionLabel("HAPTICS")
-                SettingsCard {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Toggle("Haptic Feedback", isOn: Binding(
-                            get: { settingsVM.hapticsEnabled },
-                            set: { settingsVM.saveHapticsEnabled($0) }
-                        ))
-                        .tint(.accentCyan)
-                        .foregroundColor(.textPrimary)
-                        .font(.system(size: 14, weight: .medium))
+                    .padding(.top, 4)
+                VStack(alignment: .leading, spacing: 8) {
+                    Toggle("Haptic Feedback", isOn: Binding(
+                        get: { settingsVM.hapticsEnabled },
+                        set: { settingsVM.saveHapticsEnabled($0) }
+                    ))
+                    .tint(.accent)
+                    .foregroundColor(.textPrimary)
+                    .font(.system(size: 16, weight: .medium))
 
-                        Text("Gentle vibrations guide your inhale and exhale. Best experienced on a physical device.")
-                            .font(.system(size: 12))
-                            .foregroundColor(.textSecondary)
-                    }
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
+                    Text("A soft pulse on every beat, so you can follow the pattern with the phone in your pocket or face-down.")
+                        .font(.system(size: 12))
+                        .foregroundColor(.textSecondary)
                 }
+                .padding(16)
+                .background(Color.surfaceRaised)
+                .clipShape(RoundedRectangle(cornerRadius: 24))
             }
+            .padding(.horizontal, 14)
             .padding(.top, 12)
         }
         .background(Color.background.ignoresSafeArea())
         .navigationTitle("Breathing")
-        .preferredColorScheme(.dark)
     }
 
     @ViewBuilder
-    private func modalityRow(_ modality: BreathingModality) -> some View {
-        HStack(alignment: .top, spacing: 14) {
-            VStack(alignment: .leading, spacing: 4) {
+    private func modalityCard(_ modality: BreathingModality) -> some View {
+        let isSelected = settingsVM.selectedModalityID == modality.id
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .center, spacing: 10) {
                 Text(modality.label)
-                    .font(.system(size: 15, weight: .semibold))
+                    .font(.system(size: 17, weight: .semibold))
                     .foregroundColor(.textPrimary)
-                Text(modality.description)
-                    .font(.system(size: 12))
-                    .foregroundColor(.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+                Circle()
+                    .fill(isSelected ? Color.accent : Color.tint)
+                    .frame(width: 22, height: 22)
+                    .overlay(
+                        Image(systemName: "checkmark")
+                            .font(.system(size: 11, weight: .bold))
+                            .foregroundColor(.accentOn)
+                            .opacity(isSelected ? 1 : 0)
+                    )
+            }
 
-                HStack(spacing: 6) {
-                    ForEach(modality.phases, id: \.label) { phase in
-                        Text("\(phase.beats)")
-                            .font(.system(size: 11, weight: .medium, design: .monospaced))
-                            .foregroundColor(phaseColor(phase.type))
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(phaseColor(phase.type).opacity(0.15))
-                            .clipShape(Capsule())
-                    }
-                }
-                .padding(.top, 4)
-            }
-            Spacer()
-            if settingsVM.selectedModalityID == modality.id {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.accentCyan)
-                    .font(.system(size: 18))
-            }
+            Text(modality.description)
+                .font(.system(size: 13))
+                .foregroundColor(.textSecondary)
+                .lineSpacing(6.5)
+                .fixedSize(horizontal: false, vertical: true)
+
+            proportionalTimeline(modality)
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 10)
-        .contentShape(Rectangle())
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background(Color.surfaceRaised)
+        .clipShape(RoundedRectangle(cornerRadius: 24))
+        .overlay(
+            RoundedRectangle(cornerRadius: 24)
+                .stroke(isSelected ? Color.accent : Color.clear, lineWidth: 1.5)
+        )
     }
 
-    private func phaseColor(_ type: PhaseType) -> Color {
-        switch type {
-        case .inhale: return .accentCyan
-        case .exhale: return Color(red: 0.5, green: 0.8, blue: 0.6)
-        case .holdAfterInhale, .holdAfterExhale: return .textSecondary
+    private func proportionalTimeline(_ modality: BreathingModality) -> some View {
+        let gapWidth: CGFloat = 3
+        let totalBeats = CGFloat(modality.phases.reduce(0) { $0 + $1.beats })
+        let gapCount = CGFloat(modality.phases.count - 1)
+
+        return GeometryReader { geo in
+            let availableWidth = max(0, geo.size.width - gapCount * gapWidth)
+            HStack(spacing: gapWidth) {
+                ForEach(Array(modality.phases.enumerated()), id: \.offset) { _, phase in
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(phase.type.fillColor)
+                        .frame(width: availableWidth * CGFloat(phase.beats) / totalBeats)
+                        .overlay(
+                            Text("\(phase.beats)")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundColor(phase.type.labelColor)
+                        )
+                }
+            }
         }
+        .frame(height: 26)
     }
 }

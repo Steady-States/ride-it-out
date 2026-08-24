@@ -15,14 +15,14 @@ struct GroundingMediaView: View {
     @State private var looper: AVPlayerLooper?
 
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
+        ZStack(alignment: .topTrailing) {
             Color.background
 
             switch mediaType {
             case .photo:
-                photoView
+                washed { photoView }
             case .video:
-                videoView
+                washed { videoView }
             case .text:
                 textView
             case .none:
@@ -31,21 +31,28 @@ struct GroundingMediaView: View {
 
             if showTourButton, let onStartTour {
                 Button(action: onStartTour) {
-                    Text("Take tour")
-                        .font(.system(size: 12))
-                        .foregroundColor(.textTertiary)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 5)
-                        .background(Color.surfaceRaised.opacity(0.87))
+                    Text("Take the tour")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.textSecondary)
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 7)
+                        .background(Color.scrim)
                         .clipShape(Capsule())
-                        .overlay(
-                            Capsule().stroke(Color.borderColor, lineWidth: 1)
-                        )
                 }
-                .padding(12)
+                .padding(14)
             }
         }
         .clipped()
+    }
+
+    /// Saturation 0.62 / contrast 0.92 wash plus the mediaWash overlay — the
+    /// treatment that keeps grounding photos from shouting over the rest of the screen.
+    @ViewBuilder
+    private func washed<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
+        content()
+            .saturation(0.62)
+            .contrast(0.92)
+            .overlay(Color.mediaWash)
     }
 
     @ViewBuilder
@@ -99,14 +106,15 @@ struct GroundingMediaView: View {
     }
 
     private var textView: some View {
-        ZStack {
-            Color.groundingBackground
+        ZStack(alignment: .bottomLeading) {
+            Color.surface
             if let ref = mediaRef, !ref.isEmpty {
                 Text(ref)
-                    .font(.system(size: 22, weight: .light))
-                    .foregroundColor(.accentWarm)
-                    .multilineTextAlignment(.center)
-                    .padding(32)
+                    .font(.system(size: 23, weight: .regular))
+                    .foregroundColor(.textPrimary)
+                    .lineSpacing(23 * 0.35)
+                    .multilineTextAlignment(.leading)
+                    .padding(24)
             }
         }
     }
@@ -130,7 +138,7 @@ struct GroundingMediaView: View {
         VStack(spacing: 16) {
             Image(systemName: "exclamationmark.triangle")
                 .font(.system(size: 30))
-                .foregroundColor(.accentWarm.opacity(0.7))
+                .foregroundColor(.accent.opacity(0.7))
             Text("Your grounding media can't be found. Would you like to choose something new?")
                 .font(.system(size: 14))
                 .foregroundColor(.textSecondary)
@@ -138,7 +146,7 @@ struct GroundingMediaView: View {
                 .padding(.horizontal, 40)
             Button("Choose New") { onAddMedia() }
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundColor(.accentCyan)
+                .foregroundColor(.accentText)
         }
     }
 

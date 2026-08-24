@@ -1,34 +1,77 @@
 import SwiftUI
 
 extension Color {
+    init(hex: UInt32, alpha: Double = 1) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xFF) / 255,
+            green: Double((hex >> 8) & 0xFF) / 255,
+            blue: Double(hex & 0xFF) / 255,
+            opacity: alpha
+        )
+    }
+
+    // watchOS has no Appearance control of its own, so the watch app uses the
+    // dark palette values directly rather than the light/dark scheme() helper
+    // the iOS target uses (UIColor's dynamic-provider trait API isn't
+    // available on watchOS).
+
     // Core backgrounds
-    static let background    = Color(red: 0.051, green: 0.059, blue: 0.102) // #0D0F1A
-    static let surface       = Color(red: 0.078, green: 0.090, blue: 0.161) // #141729
-    static let surfaceRaised = Color(red: 0.110, green: 0.125, blue: 0.220) // #1C2038
-    static let borderColor   = Color(red: 0.165, green: 0.176, blue: 0.271) // #2A2D45
+    static let background    = Color(hex: 0x17130F)
+    static let surface       = Color(hex: 0x221C17)
+    static let surfaceRaised = Color(hex: 0x2C251E)
+    static let borderColor   = Color(hex: 0xF5EAD8, alpha: 0.14)
 
     // Text
-    static let textPrimary   = Color(red: 0.941, green: 0.949, blue: 1.000) // #F0F2FF
-    static let textSecondary = Color(red: 0.541, green: 0.561, blue: 0.678) // #8A8FAD
-    static let textTertiary  = Color(red: 0.333, green: 0.345, blue: 0.459) // #555875
+    static let textPrimary   = Color(hex: 0xF5EAD8)
+    static let textSecondary = Color(hex: 0xA19786)
+    static let textTertiary  = Color(hex: 0x82796A)
 
     // Accent
-    static let accentCyan    = Color(red: 0.310, green: 0.765, blue: 0.969) // #4FC3F7
-    static let accentWarm    = Color(red: 1.000, green: 0.702, blue: 0.278) // #FFB347
+    static let accent     = Color(hex: 0xF6A06B)
+    static let accentOn   = Color(hex: 0x2E2B25)
+    static let accentText = Color(hex: 0xF6A06B)
 
-    // Lifelines
-    static let lifeline      = Color(red: 0.180, green: 0.490, blue: 0.549) // #2E7D8C
-    static let lifelineEmpty = Color(red: 0.110, green: 0.165, blue: 0.188) // #1C2A30
+    // Sage — lifelines
+    static let sageDeep = Color(hex: 0xAEBF92)
+    static let sageOn   = Color(hex: 0x272E1B)
 
     // Status
-    static let destructiveRed = Color(red: 0.878, green: 0.322, blue: 0.322) // #E05252
+    static let destructiveRed = Color(hex: 0xE0836F)
 
     // Grounding zone background
-    static let groundingBackground = Color(red: 0.059, green: 0.071, blue: 0.125) // #0F1220
+    static let groundingBackground = Color(hex: 0x221C17)
 
-    // Glow — per breathing phase
-    static let glowInhale   = accentWarm                                           // #FFB347 warm amber
-    static let glowHoldIn   = Color(red: 0.627, green: 0.745, blue: 0.784)        // #A0BEC8 muted blue
-    static let glowExhale   = accentCyan                                           // #4FC3F7 cool blue
-    static let glowHoldOut  = Color(red: 0.376, green: 0.565, blue: 0.627)        // #6090A0 darker muted
+    // Overlay over grounding media
+    static let mediaWash = Color(hex: 0x17130F, alpha: 0.34)
+}
+
+/// Breath-phase colors — band (solid edge), fill (soft trough), label (phase text).
+extension PhaseType {
+    var bandColor: Color {
+        switch self {
+        case .inhale:          return Color(hex: 0xF6A06B)
+        case .holdAfterInhale: return Color(hex: 0xAEBF92)
+        case .exhale:          return Color(hex: 0x8FB3C4)
+        case .holdAfterExhale: return Color(hex: 0x82796A)
+        }
+    }
+
+    var fillColor: Color {
+        switch self {
+        case .inhale:          return Color(hex: 0x3F2C1F)
+        case .holdAfterInhale: return Color(hex: 0x2F3626)
+        case .exhale:          return Color(hex: 0x26333A)
+        case .holdAfterExhale: return Color(hex: 0x3A3129)
+        }
+    }
+
+    var labelColor: Color {
+        switch self {
+        case .inhale:          return Color(hex: 0xF6A06B)
+        case .holdAfterInhale: return Color(hex: 0xCCDBB2)
+        case .exhale:          return Color(hex: 0xA9CAD8)
+        case .holdAfterExhale: return Color(hex: 0xA19786)
+        }
+    }
 }
