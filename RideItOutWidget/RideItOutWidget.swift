@@ -8,10 +8,36 @@
 import WidgetKit
 import SwiftUI
 
+// The widget runs in its own extension bundle and can't import the app
+// target's Colors.swift / Font+Display.swift, so the app's palette and
+// wordmark font are mirrored here to match the rest of the app.
 private extension Color {
-    static let widgetBackground  = Color(red: 0.051, green: 0.059, blue: 0.102) // #0D0F1A
-    static let widgetAccentCyan  = Color(red: 0.310, green: 0.765, blue: 0.969) // #4FC3F7
-    static let widgetTextPrimary = Color(red: 0.941, green: 0.949, blue: 1.000) // #F0F2FF
+    static func scheme(_ light: Color, _ dark: Color) -> Color {
+        Color(UIColor { $0.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light) })
+    }
+
+    static let widgetBackground = scheme(Color(hex: 0xF5EAD8), Color(hex: 0x17130F))
+    static let widgetTextPrimary = scheme(Color(hex: 0x201E1D), Color(hex: 0xF5EAD8))
+    static let widgetAccent = scheme(Color(hex: 0xC67139), Color(hex: 0xF6A06B))
+
+    init(hex: UInt32) {
+        self.init(
+            .sRGB,
+            red: Double((hex >> 16) & 0xFF) / 255,
+            green: Double((hex >> 8) & 0xFF) / 255,
+            blue: Double(hex & 0xFF) / 255,
+            opacity: 1
+        )
+    }
+}
+
+private extension Font {
+    static func displaySerif(size: CGFloat) -> Font {
+        if UIFont(name: "InstrumentSerif-Regular", size: size) != nil {
+            return .custom("InstrumentSerif-Regular", size: size)
+        }
+        return .system(size: size, weight: .regular, design: .serif)
+    }
 }
 
 struct Provider: TimelineProvider {
@@ -36,19 +62,27 @@ struct RideItOutWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            // Ambient cyan glow, echoing the app's launch screen
-            Rectangle()
-                .stroke(Color.widgetAccentCyan, lineWidth: 10)
-                .blur(radius: 18)
-                .opacity(0.18)
+        VStack(alignment: .leading, spacing: 0) {
+            Image("AppIconMark")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 40)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
-            Text("Ride It\nOut")
-                .font(.system(size: 22, weight: .bold))
+            Spacer()
+
+            Text("Ride It Out")
+                .font(.displaySerif(size: 22))
                 .foregroundColor(.widgetTextPrimary)
-                .multilineTextAlignment(.center)
-                .tracking(-0.5)
+                .lineLimit(2)
+
+            Rectangle()
+                .fill(Color.widgetAccent)
+                .frame(width: 22, height: 3)
+                .padding(.top, 6)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        .padding(16)
         .containerBackground(Color.widgetBackground, for: .widget)
     }
 }
